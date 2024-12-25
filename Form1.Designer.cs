@@ -28,13 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.AdminUI = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // AdminUI
+            // 
+            this.AdminUI.Location = new System.Drawing.Point(319, 131);
+            this.AdminUI.Name = "AdminUI";
+            this.AdminUI.Size = new System.Drawing.Size(183, 124);
+            this.AdminUI.TabIndex = 0;
+            this.AdminUI.Text = "AdminUI";
+            this.AdminUI.UseVisualStyleBackColor = true;
+            this.AdminUI.Click += new System.EventHandler(this.AdminUI_Click);
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.AdminUI);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button AdminUI;
     }
 }
 

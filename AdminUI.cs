@@ -10,16 +10,16 @@ using System.Windows.Forms;
 
 namespace FitnessApplication
 {
-    public partial class Form1 : Form
+    public partial class AdminUI : Form
     {
-        public Form1()
+        public AdminUI()
         {
             InitializeComponent();
         }
 
-        private void AdminUI_Click(object sender, EventArgs e)
+        private void CoachesAndMembers_Click(object sender, EventArgs e)
         {
-            Form F = new AdminUI();
+            Form F = new CoachMemManaging();
             F.Show();
         }
     }
