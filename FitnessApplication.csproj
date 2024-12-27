@@ -80,6 +80,7 @@
     <Reference Include="Syncfusion.SfDataGrid.WinForms, Version=28.1462.33.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.SfInput.WinForms, Version=28.1462.33.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89" />
     <Reference Include="Syncfusion.SfListView.WinForms, Version=28.1462.33.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
+    <Reference Include="Syncfusion.SfInput.WinForms, Version=28.1462.33.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.Shared.Base, Version=28.1462.36.0, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>packages\Syncfusion.Shared.Base.28.1.36\lib\net462\Syncfusion.Shared.Base.dll</HintPath>
     </Reference>
@@ -252,6 +253,13 @@
     <Compile Include="PostMeals.Designer.cs">
       <DependentUpon>PostMeals.cs</DependentUpon>
     </Compile>
+    <Compile Include="DBManager.cs" />
+    <Compile Include="Logging.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Logging.Designer.cs">
+      <DependentUpon>Logging.cs</DependentUpon>
+    </Compile>
     <Compile Include="Members.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -302,6 +310,12 @@
     <EmbeddedResource Include="ManageCoachReq.resx">
       <DependentUpon>ManageCoachReq.cs</DependentUpon>
     </EmbeddedResource>
+    <Compile Include="ViewStreak1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewStreak1.Designer.cs">
+      <DependentUpon>ViewStreak1.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Academies.resx">
       <DependentUpon>Academies.cs</DependentUpon>
     </EmbeddedResource>
@@ -331,6 +345,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CoachProfile.resx">
       <DependentUpon>CoachProfile.cs</DependentUpon>
+    <EmbeddedResource Include="Logging.resx">
+      <DependentUpon>Logging.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Members.resx">
+      <DependentUpon>Members.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PostMeals.resx">
       <DependentUpon>PostMeals.cs</DependentUpon>
@@ -339,6 +358,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ViewStreak1.resx">
+      <DependentUpon>ViewStreak1.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

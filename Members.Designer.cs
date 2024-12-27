@@ -64,6 +64,7 @@
             this.memberlogbutton.Size = new System.Drawing.Size(172, 60);
             this.memberlogbutton.TabIndex = 4;
             this.memberlogbutton.Text = "Log now!";
+            this.memberlogbutton.Click += new System.EventHandler(this.memberlogbutton_Click);
             // 
             // membercoachesbutton
             // 
@@ -88,7 +89,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.ClientSize = new System.Drawing.Size(772, 586);
+            this.ClientSize = new System.Drawing.Size(839, 583);
             this.Controls.Add(this.memberchallengesbutton);
             this.Controls.Add(this.membercoachesbutton);
             this.Controls.Add(this.memberlogbutton);

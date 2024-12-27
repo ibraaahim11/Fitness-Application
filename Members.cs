@@ -17,6 +17,7 @@ namespace FitnessApplication
     {
         Controller controller;
         MembersProfile ProfileForm;
+        Logging logform;
 
         int ID;
         // For now as there is no login screen
@@ -59,6 +60,15 @@ namespace FitnessApplication
           
 
             ProfileForm.Show();
+        }
+
+        private void memberlogbutton_Click(object sender, EventArgs e)
+        {
+            logform = new Logging(ID, Username, this);
+
+
+
+            logform.Show();
         }
     }
 }

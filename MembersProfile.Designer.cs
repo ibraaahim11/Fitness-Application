@@ -47,7 +47,9 @@
             this.membergendertextbox = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             this.memberconfirmbutton = new Syncfusion.WinForms.Controls.SfButton();
             this.memberdeletebutton = new Syncfusion.WinForms.Controls.SfButton();
-            this.membershowpasswordcheckbox = new Syncfusion.Windows.Forms.Tools.CheckBoxAdv();
+            this.membershowPasswordcheckbox = new System.Windows.Forms.CheckBox();
+            this.memberfitnessgoalcombo = new System.Windows.Forms.ComboBox();
+            this.autoLabel9 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             ((System.ComponentModel.ISupportInitialize)(this.memberusernametextbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memberfirstnametextbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memberlastnametextbox)).BeginInit();
@@ -56,7 +58,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.memberheighttextbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.memberpasswordtextbox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.membergendertextbox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.membershowpasswordcheckbox)).BeginInit();
             this.SuspendLayout();
             // 
             // memberusernametextbox
@@ -184,12 +185,12 @@
             // 
             // memberpasswordtextbox
             // 
-            this.memberpasswordtextbox.BeforeTouchSize = new System.Drawing.Size(152, 26);
+            this.memberpasswordtextbox.BeforeTouchSize = new System.Drawing.Size(133, 26);
             this.memberpasswordtextbox.Location = new System.Drawing.Point(583, 65);
             this.memberpasswordtextbox.Name = "memberpasswordtextbox";
-            this.memberpasswordtextbox.PasswordChar = '*';
             this.memberpasswordtextbox.Size = new System.Drawing.Size(152, 26);
             this.memberpasswordtextbox.TabIndex = 19;
+            this.memberpasswordtextbox.TextChanged += new System.EventHandler(this.memberpasswordtextbox_TextChanged);
             // 
             // membergendertextbox
             // 
@@ -207,6 +208,7 @@
             this.memberconfirmbutton.Size = new System.Drawing.Size(123, 38);
             this.memberconfirmbutton.TabIndex = 21;
             this.memberconfirmbutton.Text = "Confirm";
+            this.memberconfirmbutton.Click += new System.EventHandler(this.memberconfirmbutton_Click);
             // 
             // memberdeletebutton
             // 
@@ -217,25 +219,41 @@
             this.memberdeletebutton.TabIndex = 22;
             this.memberdeletebutton.Text = "Delete Account";
             // 
-            // membershowpasswordcheckbox
+            // membershowPasswordcheckbox
             // 
-            this.membershowpasswordcheckbox.AccessibilityEnabled = true;
-            this.membershowpasswordcheckbox.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.membershowpasswordcheckbox.ImageCheckBoxSize = new System.Drawing.Size(19, 19);
-            this.membershowpasswordcheckbox.Location = new System.Drawing.Point(585, 106);
-            this.membershowpasswordcheckbox.Name = "membershowpasswordcheckbox";
-            this.membershowpasswordcheckbox.Size = new System.Drawing.Size(150, 21);
-            this.membershowpasswordcheckbox.TabIndex = 23;
-            this.membershowpasswordcheckbox.Text = "Show Password";
-            this.membershowpasswordcheckbox.ThemeName = "Default";
-            this.membershowpasswordcheckbox.CheckStateChanged += new System.EventHandler(this.membershowpasswordcheckbox_CheckStateChanged);
+            this.membershowPasswordcheckbox.AutoSize = true;
+            this.membershowPasswordcheckbox.Location = new System.Drawing.Point(587, 97);
+            this.membershowPasswordcheckbox.Name = "membershowPasswordcheckbox";
+            this.membershowPasswordcheckbox.Size = new System.Drawing.Size(148, 24);
+            this.membershowPasswordcheckbox.TabIndex = 24;
+            this.membershowPasswordcheckbox.Text = "Show Password";
+            this.membershowPasswordcheckbox.UseVisualStyleBackColor = true;
+            this.membershowPasswordcheckbox.CheckedChanged += new System.EventHandler(this.membershowPasswordcheckbox_CheckedChanged);
+            // 
+            // memberfitnessgoalcombo
+            // 
+            this.memberfitnessgoalcombo.FormattingEnabled = true;
+            this.memberfitnessgoalcombo.Location = new System.Drawing.Point(583, 358);
+            this.memberfitnessgoalcombo.Name = "memberfitnessgoalcombo";
+            this.memberfitnessgoalcombo.Size = new System.Drawing.Size(152, 28);
+            this.memberfitnessgoalcombo.TabIndex = 25;
+            // 
+            // autoLabel9
+            // 
+            this.autoLabel9.Location = new System.Drawing.Point(450, 366);
+            this.autoLabel9.Name = "autoLabel9";
+            this.autoLabel9.Size = new System.Drawing.Size(99, 20);
+            this.autoLabel9.TabIndex = 26;
+            this.autoLabel9.Text = "Fitness Goal";
             // 
             // MembersProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(801, 582);
-            this.Controls.Add(this.membershowpasswordcheckbox);
+            this.Controls.Add(this.autoLabel9);
+            this.Controls.Add(this.memberfitnessgoalcombo);
+            this.Controls.Add(this.membershowPasswordcheckbox);
             this.Controls.Add(this.memberdeletebutton);
             this.Controls.Add(this.memberconfirmbutton);
             this.Controls.Add(this.membergendertextbox);
@@ -268,7 +286,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.memberheighttextbox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.memberpasswordtextbox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.membergendertextbox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.membershowpasswordcheckbox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -295,6 +312,8 @@
         private Syncfusion.Windows.Forms.Tools.TextBoxExt membergendertextbox;
         private Syncfusion.WinForms.Controls.SfButton memberconfirmbutton;
         private Syncfusion.WinForms.Controls.SfButton memberdeletebutton;
-        private Syncfusion.Windows.Forms.Tools.CheckBoxAdv membershowpasswordcheckbox;
+        private System.Windows.Forms.CheckBox membershowPasswordcheckbox;
+        private System.Windows.Forms.ComboBox memberfitnessgoalcombo;
+        private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel9;
     }
 }
