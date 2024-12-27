@@ -45,6 +45,20 @@ namespace FitnessApplication
 
         private void Coach_Load(object sender, EventArgs e)
         {
+            Style.TitleBar.BackColor = Color.DodgerBlue;
+            Style.TitleBar.ForeColor = Color.White;
+
+            Style.TitleBar.CloseButtonForeColor = Color.White;
+            Style.TitleBar.MinimizeButtonForeColor = Color.White;
+            Style.TitleBar.MaximizeButtonForeColor = Color.White;
+
+            Style.TitleBar.CloseButtonHoverBackColor = Color.CornflowerBlue;
+            Style.TitleBar.MinimizeButtonHoverBackColor = Color.CornflowerBlue;
+            Style.TitleBar.MaximizeButtonHoverBackColor = Color.CornflowerBlue;
+
+            Style.TitleBar.CloseButtonPressedBackColor = Color.RoyalBlue;
+            Style.TitleBar.MaximizeButtonPressedBackColor = Color.RoyalBlue;
+            Style.TitleBar.MinimizeButtonPressedBackColor = Color.RoyalBlue;
 
         }
 

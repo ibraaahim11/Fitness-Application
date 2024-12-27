@@ -10,7 +10,7 @@ namespace DBapplication
 {
     public class DBManager
     {
-        static string DB_Connection_String = @"Data Source=WX-5CG90208CJ;Initial Catalog=""Fitness Application"";Integrated Security=True;Encrypt=False;";
+        static string DB_Connection_String = "Data Source=IBRAHIMLAPTOP\\SQLEXPRESS;Initial Catalog=\"Fitness Application\";Integrated Security=True;Encrypt=False";
         SqlConnection myConnection;
 
         public DBManager()
