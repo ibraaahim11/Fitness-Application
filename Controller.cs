@@ -422,15 +422,15 @@ namespace DBapplication
             return Convert.ToInt32(dbMan.ExecuteScalar(query));
         }
         ////////////////////////////////////////////////////////////////////////////////////////for streak///////////////////////////////////////////////
-        public int GetSuggestedCalories(int ID)
-        {
-            string query = $"SELECT SuggestedCalories FROM Members WHERE MemberID = {ID}";
+        //public int GetSuggestedCalories(int ID)
+        //{
+        //    string query = $"SELECT SuggestedCalories FROM Members WHERE MemberID = {ID}";
 
-            return Convert.ToInt32(dbMan.ExecuteScalar(query));
-        }
+        //    return Convert.ToInt32(dbMan.ExecuteScalar(query));
+        //}
         public int GetAllowedCalories(int memberID)
         {
-            string query = $"SELECT AllowedCalories FROM Members WHERE MemberID = {memberID}";
+            string query = $"SELECT AllowedCalorieIntake FROM Members WHERE MemberID = {memberID}";
 
             return Convert.ToInt32(dbMan.ExecuteScalar(query));
         }
@@ -514,5 +514,14 @@ namespace DBapplication
 
             return dbMan.ExecuteNonQuery(query);
         }
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+        ///new but also fih fo2 new///////////////////////////////////////////////////////////
+        ///
+        public int GetMemberRankById(int memberId)
+        {
+            string query = $"SELECT 1 + (SELECT COUNT(*) FROM Members AS OtherMembers WHERE OtherMembers.Points > (SELECT Points FROM Members WHERE MemberID = {memberId}))";
+            return Convert.ToInt32(dbMan.ExecuteScalar(query));
+        }
+
     }
-    }
+}

@@ -49,7 +49,7 @@ namespace FitnessApplication
         {
             bool valid = true;
 
-            suggestedcalories = controller.GetSuggestedCalories(ID);
+            //suggestedcalories = controller.GetSuggestedCalories(ID);
             allowedcalories = controller.GetAllowedCalories(ID);
       
 
