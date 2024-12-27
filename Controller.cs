@@ -351,5 +351,24 @@ namespace DBapplication
         }
         ///////////////////////////////////////////////////////////////
 
+        public int CheckIfUserExist(string username, string password)
+        {
+            string query = $"SELECT COUNT(*) FROM Users WHERE Username = '{username}' AND Password = '{password}';";
+            return (int)dbMan.ExecuteScalar(query);
+        }
+
+        public DataRow GetTypeOfUser(string username)
+        {
+            string query = $"Select type_of_user from Users where username = '{username}'";
+            DataTable dt = dbMan.ExecuteReader(query);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                return dt.Rows[0];
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

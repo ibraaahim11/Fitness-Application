@@ -18,7 +18,7 @@ namespace FitnessApplication
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NMaF5cXmVCf0x0QHxbf1x1ZFNMYlpbQHBPMyBoS35RckRhW3lednFXQmZYUExx");
-            Application.Run(new AdminUI("admin2", "password122"));
+            Application.Run(new Login());
         }
     }
 }

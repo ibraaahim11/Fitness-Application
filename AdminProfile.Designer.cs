@@ -33,12 +33,11 @@
             this.autoLabel3 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.UsernameTBox = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             this.PasswordTBox = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
-            this.EditUsername = new System.Windows.Forms.CheckBox();
-            this.EditPassword = new System.Windows.Forms.CheckBox();
             this.ShowPassword = new System.Windows.Forms.CheckBox();
             this.EditProfile = new Syncfusion.WinForms.Controls.SfButton();
             this.EmptyAlert = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.autoLabel1 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
+            this.EditP = new Syncfusion.WinForms.Controls.SfButton();
             ((System.ComponentModel.ISupportInitialize)(this.UsernameTBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PasswordTBox)).BeginInit();
             this.SuspendLayout();
@@ -96,28 +95,6 @@
             this.PasswordTBox.TabIndex = 4;
             this.PasswordTBox.Text = "textBoxExt2";
             // 
-            // EditUsername
-            // 
-            this.EditUsername.AutoSize = true;
-            this.EditUsername.Location = new System.Drawing.Point(436, 152);
-            this.EditUsername.Name = "EditUsername";
-            this.EditUsername.Size = new System.Drawing.Size(170, 20);
-            this.EditUsername.TabIndex = 5;
-            this.EditUsername.Text = "Click To Edit Username";
-            this.EditUsername.UseVisualStyleBackColor = true;
-            this.EditUsername.CheckedChanged += new System.EventHandler(this.EditUsername_CheckedChanged);
-            // 
-            // EditPassword
-            // 
-            this.EditPassword.AutoSize = true;
-            this.EditPassword.Location = new System.Drawing.Point(436, 207);
-            this.EditPassword.Name = "EditPassword";
-            this.EditPassword.Size = new System.Drawing.Size(170, 20);
-            this.EditPassword.TabIndex = 6;
-            this.EditPassword.Text = "Click To Edit Password ";
-            this.EditPassword.UseVisualStyleBackColor = true;
-            this.EditPassword.CheckedChanged += new System.EventHandler(this.EditPassword_CheckedChanged);
-            // 
             // ShowPassword
             // 
             this.ShowPassword.AutoSize = true;
@@ -166,17 +143,31 @@
             this.autoLabel1.TabIndex = 10;
             this.autoLabel1.Text = "Updates only the checked Box";
             // 
+            // EditP
+            // 
+            this.EditP.BackColor = System.Drawing.Color.DarkGreen;
+            this.EditP.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditP.ForeColor = System.Drawing.Color.White;
+            this.EditP.Location = new System.Drawing.Point(459, 142);
+            this.EditP.Name = "EditP";
+            this.EditP.Size = new System.Drawing.Size(153, 28);
+            this.EditP.Style.BackColor = System.Drawing.Color.DarkGreen;
+            this.EditP.Style.ForeColor = System.Drawing.Color.White;
+            this.EditP.TabIndex = 11;
+            this.EditP.Text = "Edit Profile";
+            this.EditP.UseVisualStyleBackColor = false;
+            this.EditP.Click += new System.EventHandler(this.EditP_Click);
+            // 
             // AdminProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.EditP);
             this.Controls.Add(this.autoLabel1);
             this.Controls.Add(this.EmptyAlert);
             this.Controls.Add(this.EditProfile);
             this.Controls.Add(this.ShowPassword);
-            this.Controls.Add(this.EditPassword);
-            this.Controls.Add(this.EditUsername);
             this.Controls.Add(this.PasswordTBox);
             this.Controls.Add(this.UsernameTBox);
             this.Controls.Add(this.autoLabel3);
@@ -200,11 +191,10 @@
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel3;
         private Syncfusion.Windows.Forms.Tools.TextBoxExt UsernameTBox;
         private Syncfusion.Windows.Forms.Tools.TextBoxExt PasswordTBox;
-        private System.Windows.Forms.CheckBox EditUsername;
-        private System.Windows.Forms.CheckBox EditPassword;
         private System.Windows.Forms.CheckBox ShowPassword;
         private Syncfusion.WinForms.Controls.SfButton EditProfile;
         private Syncfusion.Windows.Forms.Tools.AutoLabel EmptyAlert;
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel1;
+        private Syncfusion.WinForms.Controls.SfButton EditP;
     }
 }
