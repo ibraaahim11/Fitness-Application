@@ -18,10 +18,21 @@ GO
 
 
 ------------Table Creation-----------------
+
+create table Users 
+(
+Username varchar(50) not null,
+[Password] varchar(50) not null,
+type_of_user VARCHAR(20) NOT NULL,
+PRIMARY KEY (Username),
+CONSTRAINT chk_type_of_user CHECK (type_of_user IN ('admin', 'member', 'coach', 'academy'))
+);
+
+
 create table FitnessGoals
 (  
 GoalName varchar(50) not null,
-GoalID int,
+GoalID int IDENTITY(1,1),
 Description TEXT,
 RecommendedBMI DECIMAL(5, 2),
 -- Exercise focus multivalued attribute to be added
@@ -30,16 +41,17 @@ primary key(GoalID),
 
 create table Diets
 (  
-DietID int,
+DietID int IDENTITY(1,1),
 Description TEXT,
 DietName varchar(50) not null,
 Primary Key(DietID)
 )
 create table Members
 (  
+
 Fname varchar(50) not null,
 Lname varchar(50) not null,
-MemberID int,
+MemberID int IDENTITY(1,1),
 Age int not null,
 Weight DECIMAL(5, 2) not null,
 Height DECIMAL(5, 2) not null,
@@ -49,6 +61,11 @@ Points int not null,
 Gender char(1) not null,
 FitnessGoalID int,
 DietID int,
+Username varchar(50) not null,
+
+Foreign Key (Username) References Users(Username)
+ON DELETE CASCADE
+ON UPDATE NO ACTION,
 
 Foreign Key (FitnessGoalID) References FitnessGoals(GoalID)
 ON DELETE SET NULL
@@ -58,6 +75,8 @@ Foreign Key (DietID) References Diets(DietID)
 ON DELETE SET NULL
 ON UPDATE CASCADE,
 
+
+
 primary key(MemberID)
 )
 
@@ -65,7 +84,7 @@ create table Coaches
 (  
 Fname varchar(50) not null,
 Lname varchar(50) not null,
-CoachID int,
+CoachID int IDENTITY(1,1),
 Age int not null,
 Gender char(1),
 MemberLimit int,
@@ -74,7 +93,12 @@ Accepted BIT not null, -- BIT as bool does not exist in sql. 1 = true, 0 = false
 CertificateTitle VARCHAR(100) not null,      
 CertificateDateOfIssue DATE not null,        
 CertificateExpirationDate DATE not null,     
-CertificateIssuingBody VARCHAR(100) not null
+CertificateIssuingBody VARCHAR(100) not null,
+Username varchar(50) not null,
+
+Foreign Key (Username) References Users(Username)
+ON DELETE NO ACTION
+ON UPDATE CASCADE,
 primary key(CoachID),
 )
 
@@ -87,7 +111,7 @@ CONSTRAINT chk_coachedby_rating CHECK (Rating >= 0 AND Rating <= 5), -- Look for
 Ongoing BIT not null,
 Foreign Key (MemberID) References Members(MemberID)
 ON DELETE CASCADE
-ON UPDATE CASCADE,
+ON UPDATE NO ACTION,
 Foreign Key (CoachID) References Coaches(CoachID)
 ON DELETE  CASCADE
 ON UPDATE CASCADE,
@@ -150,7 +174,7 @@ Primary Key(MealID, CoachID),
 create table Academies
 (  
 Name varchar(50) not null,
-AcademyID int,
+AcademyID int IDENTITY(1,1),
 Description TEXT not null,
 AreaOfExpertise VARCHAR(100) not null,
 Accepted BIT not null, -- BIT as bool does not exist in sql. 1 = true, 0 = false. 
@@ -158,7 +182,13 @@ Accepted BIT not null, -- BIT as bool does not exist in sql. 1 = true, 0 = false
 CertificateTitle VARCHAR(100) not null,      
 CertificateDateOfIssue DATE not null,        
 CertificateExpirationDate DATE not null,     
-CertificateIssuingBody VARCHAR(100) not null
+CertificateIssuingBody VARCHAR(100) not null,
+
+Username varchar(50) not null,
+
+Foreign Key (Username) References Users(Username)
+ON DELETE NO ACTION
+ON UPDATE  CASCADE,
 primary key(AcademyID),
 )
 
@@ -167,7 +197,7 @@ create table Sessions
 (  
 SessionID int,
 Description TEXT not null,
-Price int,
+Price float,
 Limit int not null,
 FullSession BIT not null,
 Duration TIME not null,
@@ -185,7 +215,7 @@ Primary Key(SessionID, AcademyID)
 
 CREATE TABLE Exercises (
     ExerciseName VARCHAR(50) NOT NULL,
-    ExerciseID INT,
+    ExerciseID INT IDENTITY(1,1),
     Description TEXT,
     CaloriesBurnedPerMin DECIMAL(7, 2) NOT NULL,
     PointsPerMin INT NOT NULL,
@@ -194,7 +224,7 @@ CREATE TABLE Exercises (
 
 create table HabitTypes
 (
-    TypeID int,
+    TypeID int IDENTITY(1,1),
     TypeName VARCHAR(20) not null,
     Primary key(TypeID)
 )
@@ -202,7 +232,7 @@ create table HabitTypes
 create table DailyHabits
 (  
 HabitName varchar(50) not null,
-HabitID int,
+HabitID int IDENTITY(1,1),
 Description TEXT,
 Points int not null,
 TypeID int,
@@ -217,7 +247,7 @@ primary key(HabitID),
 create table Badges
 (  
 BadgeName varchar(50) not null,
-BadgeID int,
+BadgeID int IDENTITY(1,1),
 Description TEXT,
 PointsNeeded int,
 primary key(BadgeID),
@@ -225,14 +255,14 @@ primary key(BadgeID),
 
 create table FeedbackTypes
 (
-TypeID int,
+TypeID int IDENTITY(1,1),
 TypeName varchar(20) not null,
 primary key(TypeID)
 
 )
 create table Feedback
 (  
-FeedbackID int,
+FeedbackID int IDENTITY(1,1),
 Comment TEXT not null,
 Rating DECIMAL(2, 1),
 FeedbackTypeID int,
@@ -379,7 +409,7 @@ Primary Key(GoalID, ExerciseID)
 -- For multivalued attribute
 create table TypesOfExercises
 (
-TypeID int,
+TypeID int IDENTITY(1,1),
 TypeName VARCHAR(20) not null,
 Primary key(TypeID)
 )
@@ -432,49 +462,139 @@ Primary Key(MemberID,DateTimeLogged)
 
 
 -----------------Inserting values into tables----------------
-INSERT INTO Coaches (Fname, Lname, CoachID, Age, Gender, MemberLimit, Accepted, CertificateTitle, CertificateDateOfIssue, CertificateExpirationDate, CertificateIssuingBody)
-VALUES
-('John', 'Doe', 1, 35, 'M', 15, 1, 'Certified Fitness Coach', '2018-06-15', '2023-06-15', 'International Fitness Federation'),
-('Jane', 'Smith', 2, 42, 'F', 10, 0, 'Certified Yoga Instructor', '2015-03-20', '2025-03-20', 'Yoga Alliance'),
-('Emily', 'Johnson', 3, 28, 'F', 20, 1, 'Strength Training Specialist', '2020-01-10', '2025-01-10', 'National Strength and Conditioning Association'),
-('Michael', 'Williams', 4, 50, 'M', 12, 1, 'Sports Nutrition Expert', '2019-07-25', '2024-07-25', 'Academy of Nutrition and Dietetics'),
-('Olivia', 'Brown', 5, 30, 'F', 18, 0, 'Certified Personal Trainer', '2017-08-05', '2027-08-05', 'American Council on Exercise'),
-('Liam', 'Davis', 6, 33, 'M', 25, 1, 'Pilates Instructor', '2021-11-10', '2026-11-10', 'Pilates Method Alliance'),
-('Sophia', 'Martinez', 7, 38, 'F', 10, 1, 'Dance Fitness Instructor', '2016-04-12', '2026-04-12', 'Zumba Fitness'),
-('Noah', 'Garcia', 8, 45, 'M', 30, 0, 'Rehabilitation Specialist', '2014-05-25', '2024-05-25', 'American Physical Therapy Association'),
-('Isabella', 'Rodriguez', 9, 40, 'F', 12, 1, 'CrossFit Level 1 Trainer', '2019-09-18', '2024-09-18', 'CrossFit Inc.'),
-('Ethan', 'Wilson', 10, 29, 'M', 14, 1, 'Kettlebell Instructor', '2021-03-05', '2026-03-05', 'Kettlebell Athletics'),
-('Mia', 'Lee', 11, 26, 'F', 22, 0, 'Swimming Coach', '2022-07-11', '2027-07-11', 'United States Swimming'),
-('James', 'Harris', 12, 37, 'M', 10, 1, 'Boxing Coach', '2018-11-02', '2023-11-02', 'USA Boxing'),
-('Charlotte', 'Clark', 13, 31, 'F', 8, 1, 'Outdoor Adventure Coach', '2020-06-22', '2025-06-22', 'Outdoor Educators'),
-('Alexander', 'Lewis', 14, 43, 'M', 20, 0, 'Running Coach', '2017-01-18', '2027-01-18', 'USA Track & Field'),
-('Amelia', 'Walker', 15, 50, 'F', 18, 1, 'Mindfulness Coach', '2015-12-01', '2025-12-01', 'International Mindfulness Teachers Association'),
-('Benjamin', 'Young', 16, 32, 'M', 14, 1, 'Cycling Coach', '2018-08-09', '2023-08-09', 'USA Cycling'),
-('Harper', 'Allen', 17, 27, 'F', 12, 0, 'Martial Arts Instructor', '2016-05-14', '2026-05-14', 'World Martial Arts Federation'),
-('Jack', 'King', 18, 34, 'M', 16, 1, 'Strength and Conditioning Coach', '2021-02-20', '2026-02-20', 'National Strength and Conditioning Association'),
-('Ella', 'Scott', 19, 41, 'F', 14, 1, 'Triathlon Coach', '2020-10-30', '2025-10-30', 'USA Triathlon'),
-('Lucas', 'Adams', 20, 28, 'M', 24, 1, 'Soccer Coach', '2019-04-16', '2024-04-16', 'United States Soccer Federation');
 
 
-INSERT INTO Badges (BadgeName, BadgeID, Description, PointsNeeded)
+-- Inserting coaches into Users
+INSERT INTO Users (Username, [Password], type_of_user)
 VALUES
-('Beginner', 1, 'Awarded to new members who have started using the system.', NULL),
-('Intermediate', 2, 'Awarded to members who have accumulated 500 points.', 500),
-('Advanced', 3, 'Awarded to members who have accumulated 1500 points.', 1500),
-('Elite', 4, 'Awarded to members who have accumulated 5000 points.', 5000),
-('Champion', 5, 'Awarded to members who have accumulated 10000 points.', 10000),
-('Fitness Enthusiast', 6, 'Awarded to members who show excellent dedication to their fitness journey.', NULL),
-('Overachiever', 7, 'Awarded to members who have reached a total of 25000 points.', 25000),
-('Superstar', 8, 'Awarded to members who have achieved 50000 points and above.', 50000),
-('Master', 9, 'Awarded to members who have accumulated 100000 points.', 100000),
-('Coach’s Choice', 10, 'Awarded to members for outstanding dedication and progress in fitness.', NULL),
-('Most Consistent', 11, 'Awarded to members who are consistent', NULL),
-('Stretch Master', 12, 'Awarded to members who regularly incorporate stretching into their fitness routine.', NULL),
-('Beast Mode', 13, 'Awarded to members who push their limits, consistently hitting their personal bests in workouts.', NULL),
-('Resilient Spirit', 14, 'Awarded to members who show significant improvement.', NULL),
-('Challenge Master', 15, 'Awarded to members who put in the most effort, whether during training or in completing assignments.', NULL),
-('Top Trainee', 16, 'Awarded to the member with the most visible improvements based on a coach’s assessment.', NULL),
-('Performance Excellence', 17, 'Awarded to members who consistently perform at their highest level during training, as evaluated by the coach.', NULL);
+('john_doe', 'password123', 'coach'),
+('jane_smith', 'password123', 'coach'),
+('emily_johnson', 'password123', 'coach'),
+('michael_williams', 'password123', 'coach'),
+('olivia_brown', 'password123', 'coach'),
+('liam_davis', 'password123', 'coach'),
+('sophia_martinez', 'password123', 'coach'),
+('noah_garcia', 'password123', 'coach'),
+('isabella_rodriguez', 'password123', 'coach'),
+('ethan_wilson', 'password123', 'coach'),
+('miaa_lee', 'password123', 'coach'),
+('james_harris', 'password123', 'coach'),
+('charlotte_clark', 'password123', 'coach'),
+('alexander_lewis', 'password123', 'coach'),
+('amelia_walker', 'password123', 'coach'),
+('benjamin_young', 'password123', 'coach'),
+('harper_allen', 'password123', 'coach'),
+('jack_king', 'password123', 'coach'),
+('ella_scott', 'password123', 'coach'),
+('lucas_adams', 'password123', 'coach');
+
+-- inserting members into users
+
+INSERT INTO Users (Username, [Password], type_of_user)
+VALUES
+('alice_johnson', 'password123', 'member'),
+('bob_smith', 'password123', 'member'),
+('clara_davis', 'password123', 'member'),
+('david_wilson', 'password123', 'member'),
+('eva_martinez', 'password123', 'member'),
+('frank_lopez', 'password123', 'member'),
+('grace_hernandez', 'password123', 'member'),
+('henry_gonzalez', 'password123', 'member'),
+('isla_rodriguez', 'password123', 'member'),
+('jack_brown', 'password123', 'member'),
+('kara_martinez', 'password123', 'member'),
+('liam_taylor', 'password123', 'member'),
+('mia_lee', 'password123', 'member'),
+('nina_scott', 'password123', 'member'),
+('oscar_walker', 'password123', 'member'),
+('penny_adams', 'password123', 'member'),
+('quinn_roberts', 'password123', 'member'),
+('rachel_green', 'password123', 'member'),
+('sam_baker', 'password123', 'member'),
+('tina_harris', 'password123', 'member');
+
+
+INSERT INTO Coaches (Username, Fname, Lname, Age, Gender, MemberLimit, Accepted, CertificateTitle, CertificateDateOfIssue, CertificateExpirationDate, CertificateIssuingBody)
+VALUES
+('john_doe', 'John', 'Doe', 35, 'M', 15, 1, 'Certified Fitness Coach', '2018-06-15', '2023-06-15', 'International Fitness Federation'),
+('jane_smith', 'Jane', 'Smith', 42, 'F', 10, 0, 'Certified Yoga Instructor', '2015-03-20', '2025-03-20', 'Yoga Alliance'),
+('emily_johnson', 'Emily', 'Johnson', 28, 'F', 20, 1, 'Strength Training Specialist', '2020-01-10', '2025-01-10', 'National Strength and Conditioning Association'),
+('michael_williams', 'Michael', 'Williams', 50, 'M', 12, 1, 'Sports Nutrition Expert', '2019-07-25', '2024-07-25', 'Academy of Nutrition and Dietetics'),
+('olivia_brown', 'Olivia', 'Brown', 30, 'F', 18, 0, 'Certified Personal Trainer', '2017-08-05', '2027-08-05', 'American Council on Exercise'),
+('liam_davis', 'Liam', 'Davis', 33, 'M', 25, 1, 'Pilates Instructor', '2021-11-10', '2026-11-10', 'Pilates Method Alliance'),
+('sophia_martinez', 'Sophia', 'Martinez', 38, 'F', 10, 1, 'Dance Fitness Instructor', '2016-04-12', '2026-04-12', 'Zumba Fitness'),
+('noah_garcia', 'Noah', 'Garcia', 45, 'M', 30, 0, 'Rehabilitation Specialist', '2014-05-25', '2024-05-25', 'American Physical Therapy Association'),
+('isabella_rodriguez', 'Isabella', 'Rodriguez', 40, 'F', 12, 1, 'CrossFit Level 1 Trainer', '2019-09-18', '2024-09-18', 'CrossFit Inc.'),
+('ethan_wilson', 'Ethan', 'Wilson', 29, 'M', 14, 1, 'Kettlebell Instructor', '2021-03-05', '2026-03-05', 'Kettlebell Athletics'),
+('miaa_lee', 'Mia', 'Lee', 26, 'F', 22, 0, 'Swimming Coach', '2022-07-11', '2027-07-11', 'United States Swimming'),
+('james_harris', 'James', 'Harris', 37, 'M', 10, 1, 'Boxing Coach', '2018-11-02', '2023-11-02', 'USA Boxing'),
+('charlotte_clark', 'Charlotte', 'Clark', 31, 'F', 8, 1, 'Outdoor Adventure Coach', '2020-06-22', '2025-06-22', 'Outdoor Educators'),
+('alexander_lewis', 'Alexander', 'Lewis', 43, 'M', 20, 0, 'Running Coach', '2017-01-18', '2027-01-18', 'USA Track & Field'),
+('amelia_walker', 'Amelia', 'Walker', 50, 'F', 18, 1, 'Mindfulness Coach', '2015-12-01', '2025-12-01', 'International Mindfulness Teachers Association'),
+('benjamin_young', 'Benjamin', 'Young', 32, 'M', 14, 1, 'Cycling Coach', '2018-08-09', '2023-08-09', 'USA Cycling'),
+('harper_allen', 'Harper', 'Allen', 27, 'F', 12, 0, 'Martial Arts Instructor', '2016-05-14', '2026-05-14', 'World Martial Arts Federation'),
+('jack_king', 'Jack', 'King', 34, 'M', 16, 1, 'Strength and Conditioning Coach', '2021-02-20', '2026-02-20', 'National Strength and Conditioning Association'),
+('ella_scott', 'Ella', 'Scott', 41, 'F', 14, 1, 'Triathlon Coach', '2020-10-30', '2025-10-30', 'USA Triathlon'),
+('lucas_adams', 'Lucas', 'Adams', 28, 'M', 24, 1, 'Soccer Coach', '2019-04-16', '2024-04-16', 'United States Soccer Federation');
+
+
+
+-- Inserting academies into users
+INSERT INTO Users (Username, [Password], type_of_user)
+VALUES
+('KickFitAcademy', 'password123', 'academy'),
+('ZenYogaAcademy', 'password123', 'academy'),
+('RockClimbProAcademy', 'password123', 'academy'),
+('StrengthXAcademy', 'password123', 'academy'),
+('FlexFitAcademy', 'password123', 'academy'),
+('TriathleteAcademy', 'password123', 'academy'),
+('CrossFitNationAcademy', 'password123', 'academy'),
+('PilatesCoreAcademy', 'password123', 'academy'),
+('BoxingProAcademy', 'password123', 'academy'),
+('EnduranceFitnessAcademy', 'password123', 'academy'),
+('YogaFlowAcademy', 'password123', 'academy'),
+('ClimbingEdgeAcademy', 'password123', 'academy'),
+('FitDanceAcademy', 'password123', 'academy'),
+('MindBodyAcademy', 'password123', 'academy'),
+('TrailRunnerAcademy', 'password123', 'academy'),
+('BikramYogaAcademy', 'password123', 'academy'),
+('MixedMartialArtsAcademy', 'password123', 'academy'),
+('PowerCycleAcademy', 'password123', 'academy'),
+('BeachFitAcademy', 'password123', 'academy'),
+('StrengthLabAcademy', 'password123', 'academy');
+
+-- Inserting our first admin
+INSERT INTO Users (Username, [Password], type_of_user)
+VALUES
+('admin1', 'password123', 'admin');
+
+-- Inserting generic users to be used for testing
+--INSERT INTO Users (Username, [Password], type_of_user)
+--VALUES
+--('generic_member', 'password123', 'member'),
+--('generic_coach', 'password123', 'coach'),
+--('generic_academy', 'password123', 'academy'),
+--('generic_coach', 'password123', 'coach'),
+
+INSERT INTO Badges (BadgeName, Description, PointsNeeded)
+VALUES
+('Beginner', 'Awarded to new members who have started using the system.', NULL),
+('Intermediate', 'Awarded to members who have accumulated 500 points.', 500),
+('Advanced', 'Awarded to members who have accumulated 1500 points.', 1500),
+('Elite', 'Awarded to members who have accumulated 5000 points.', 5000),
+('Champion', 'Awarded to members who have accumulated 10000 points.', 10000),
+('Fitness Enthusiast', 'Awarded to members who show excellent dedication to their fitness journey.', NULL),
+('Overachiever', 'Awarded to members who have reached a total of 25000 points.', 25000),
+('Superstar', 'Awarded to members who have achieved 50000 points and above.', 50000),
+('Master', 'Awarded to members who have accumulated 100000 points.', 100000),
+('Coach’s Choice', 'Awarded to members for outstanding dedication and progress in fitness.', NULL),
+('Most Consistent', 'Awarded to members who are consistent', NULL),
+('Stretch Master', 'Awarded to members who regularly incorporate stretching into their fitness routine.', NULL),
+('Beast Mode', 'Awarded to members who push their limits, consistently hitting their personal bests in workouts.', NULL),
+('Resilient Spirit', 'Awarded to members who show significant improvement.', NULL),
+('Challenge Master', 'Awarded to members who put in the most effort, whether during training or in completing assignments.', NULL),
+('Top Trainee', 'Awarded to the member with the most visible improvements based on a coach’s assessment.', NULL),
+('Performance Excellence', 'Awarded to members who consistently perform at their highest level during training, as evaluated by the coach.', NULL);
 
 
 
@@ -501,127 +621,127 @@ VALUES
 (19, 'Do 30 minutes of yoga or stretching.', 130, 'Yoga Flexibility', '2024-12-01', '2024-12-07', 19),
 (20, 'Complete a 5 km run each week for 2 weeks.', 300, '5 km Challenge', '2024-12-01', '2024-12-14', 20);
 
-INSERT INTO FitnessGoals (GoalID, GoalName, Description, RecommendedBMI)
+INSERT INTO FitnessGoals ( GoalName, Description, RecommendedBMI)
 VALUES
-(1, 'Lose Weight', 'Aimed at reducing body fat and achieving a healthier body composition.', 18.50),
-(2, 'Gain Muscle', 'Focuses on building lean muscle mass through strength training and nutrition.', 22.50),
-(3, 'Maintain Weight', 'Helps individuals maintain their current weight by balancing exercise and nutrition.', 22.00),
-(4, 'Improve Endurance', 'Improving cardiovascular and muscular endurance through consistent aerobic exercises.', NULL),
-(5, 'Increase Flexibility', 'Enhancing flexibility and range of motion through stretching and mobility exercises.', NULL);
+( 'Lose Weight', 'Aimed at reducing body fat and achieving a healthier body composition.', 18.50),
+( 'Gain Muscle', 'Focuses on building lean muscle mass through strength training and nutrition.', 22.50),
+( 'Maintain Weight', 'Helps individuals maintain their current weight by balancing exercise and nutrition.', 22.00),
+( 'Improve Endurance', 'Improving cardiovascular and muscular endurance through consistent aerobic exercises.', NULL),
+( 'Increase Flexibility', 'Enhancing flexibility and range of motion through stretching and mobility exercises.', NULL);
 
-INSERT INTO Diets (DietID, Description, DietName)
+INSERT INTO Diets ( Description, DietName)
 VALUES 
-(1, 'A plant-based diet excluding all animal products like meat, dairy, and eggs.', 'Vegan'),
-(2, 'A diet excluding meat, but includes dairy products and eggs.', 'Vegetarian'),
-(3, 'A diet that includes meat and animal products, but excludes dairy.', 'Pescetarian'),
-(4, 'A diet that includes all food groups, focusing on balance and moderation.', 'Omnivore'),
-(5, 'A diet with high fat, adequate protein, and low carbohydrates, promoting ketosis for weight loss.', 'Keto');
+( 'A plant-based diet excluding all animal products like meat, dairy, and eggs.', 'Vegan'),
+( 'A diet excluding meat, but includes dairy products and eggs.', 'Vegetarian'),
+( 'A diet that includes meat and animal products, but excludes dairy.', 'Pescetarian'),
+( 'A diet that includes all food groups, focusing on balance and moderation.', 'Omnivore'),
+( 'A diet with high fat, adequate protein, and low carbohydrates, promoting ketosis for weight loss.', 'Keto');
 
-
-INSERT INTO Members (Fname, Lname, MemberID, Age, Weight, Height, AllowedCalorieIntake, Streak, Points, Gender, FitnessGoalID, DietID)
+INSERT INTO Members (Username, Fname, Lname, Age, Weight, Height, AllowedCalorieIntake, Streak, Points, Gender, FitnessGoalID, DietID)
 VALUES
-('Alice', 'Johnson', 1, 25, 70.5, 165.3, 2000, 7, 150, 'F', 1, 1),  
-('Bob', 'Smith', 2, 32, 85.0, 178.0, 2500, 12, 200, 'M', 2, 2),  
-('Clara', 'Davis', 3, 28, 60.2, 160.5, 1800, 15, 180, 'F', 3, 3),  
-('David', 'Wilson', 4, 35, 92.3, 183.2, 2700, 8, 210, 'M', 4, 4),  
-('Eva', 'Martinez', 5, 26, 75.0, 167.0, 2200, 10, 170, 'F', 5, 5),  
-('Frank', 'Lopez', 6, 30, 78.5, 172.5, NULL, 0, 0, 'M', 2, 2),  
-('Grace', 'Hernandez', 7, 29, 64.0, 158.2, NULL, 0, 0, 'F', 3, 1),  
-('Henry', 'Gonzalez', 8, 27, 80.3, 175.8, 2600, 18, 250, 'M', 1, 4),
-('Isla', 'Rodriguez', 9, 24, 68.9, 162.0, 2100, 22, 180, 'F', 4, 5),
-('Jack', 'Brown', 10, 33, 85.2, 180.3, 2400, 9, 190, 'M', 2, 3),  
-('Kara', 'Martinez', 11, 22, 59.8, 155.5, 1850, 6, 140, 'F', 3, 1), 
-('Liam', 'Taylor', 12, 31, 95.0, 185.0, NULL, 0, 0, 'M', 2, 4),  
-('Mia', 'Lee', 13, 29, 70.2, 160.0, NULL, 0, 0, 'F', 5, 2),  
-('Nina', 'Scott', 14, 26, 63.5, 162.5, 1900, 5, 160, 'F', 3, 1), 
-('Oscar', 'Walker', 15, 33, 89.0, 176.5, NULL, 0, 0, 'M', 4, 3), 
-('Penny', 'Adams', 16, 24, 58.0, 154.5, 1800, 4, 130, 'F', 1, 5),  
-('Quinn', 'Roberts', 17, 28, 77.5, 169.0, 2200, 12, 190, 'M', 5, 4),
-('Rachel', 'Green', 18, 34, 85.5, 180.0, NULL, 0, 0, 'F', 2, 3),  
-('Sam', 'Baker', 19, 27, 80.0, 175.5, NULL, 0, 0, 'M', 1, 2),  
-('Tina', 'Harris', 20, 29, 66.0, 168.5, NULL, 0, 0, 'F', 4, 5); 
+('alice_johnson', 'Alice', 'Johnson', 25, 70.5, 165.3, 2000, 7, 150, 'F', 1, 1),
+('bob_smith', 'Bob', 'Smith', 32, 85.0, 178.0, 2500, 12, 200, 'M', 2, 2),
+('clara_davis', 'Clara', 'Davis', 28, 60.2, 160.5, 1800, 15, 180, 'F', 3, 3),
+('david_wilson', 'David', 'Wilson', 35, 92.3, 183.2, 2700, 8, 210, 'M', 4, 4),
+('eva_martinez', 'Eva', 'Martinez', 26, 75.0, 167.0, 2200, 10, 170, 'F', 5, 5),
+('frank_lopez', 'Frank', 'Lopez', 30, 78.5, 172.5, NULL, 0, 0, 'M', 2, 2),
+('grace_hernandez', 'Grace', 'Hernandez', 29, 64.0, 158.2, NULL, 0, 0, 'F', 3, 1),
+('henry_gonzalez', 'Henry', 'Gonzalez', 27, 80.3, 175.8, 2600, 18, 250, 'M', 1, 4),
+('isla_rodriguez', 'Isla', 'Rodriguez', 24, 68.9, 162.0, 2100, 22, 180, 'F', 4, 5),
+('jack_brown', 'Jack', 'Brown', 33, 85.2, 180.3, 2400, 9, 190, 'M', 2, 3),
+('kara_martinez', 'Kara', 'Martinez', 22, 59.8, 155.5, 1850, 6, 140, 'F', 3, 1),
+('liam_taylor', 'Liam', 'Taylor', 31, 95.0, 185.0, NULL, 0, 0, 'M', 2, 4),
+('mia_lee', 'Mia', 'Lee', 29, 70.2, 160.0, NULL, 0, 0, 'F', 5, 2),
+('nina_scott', 'Nina', 'Scott', 26, 63.5, 162.5, 1900, 5, 160, 'F', 3, 1),
+('oscar_walker', 'Oscar', 'Walker', 33, 89.0, 176.5, NULL, 0, 0, 'M', 4, 3),
+('penny_adams', 'Penny', 'Adams', 24, 58.0, 154.5, 1800, 4, 130, 'F', 1, 5),
+('quinn_roberts', 'Quinn', 'Roberts', 28, 77.5, 169.0, 2200, 12, 190, 'M', 5, 4),
+('rachel_green', 'Rachel', 'Green', 34, 85.5, 180.0, NULL, 0, 0, 'F', 2, 3),
+('sam_baker', 'Sam', 'Baker', 27, 80.0, 175.5, NULL, 0, 0, 'M', 1, 2),
+('tina_harris', 'Tina', 'Harris', 29, 66.0, 168.5, NULL, 0, 0, 'F', 4, 5);
 
 
-INSERT INTO HabitTypes (TypeID, TypeName)
+
+INSERT INTO HabitTypes ( TypeName)
 VALUES
-(1, 'Physical'),        -- Physical activities like exercise, walking, etc.
-(2, 'Mental'),          -- Activities focused on mental health, mindfulness, meditation
-(3, 'Dietary'),         -- Eating habits, calorie tracking, balanced nutrition
-(4, 'Sleep'),           -- Sleep hygiene, getting enough rest, sleep consistency
-(5, 'Hydration'),       -- Water intake, drinking adequate fluids
-(6, 'Stress Management'); -- Managing stress, using techniques like breathing exercises
+( 'Physical'),        -- Physical activities like exercise, walking, etc.
+( 'Mental'),          -- Activities focused on mental health, mindfulness, meditation
+( 'Dietary'),         -- Eating habits, calorie tracking, balanced nutrition
+( 'Sleep'),           -- Sleep hygiene, getting enough rest, sleep consistency
+( 'Hydration'),       -- Water intake, drinking adequate fluids
+( 'Stress Management'); -- Managing stress, using techniques like breathing exercises
 
 
-INSERT INTO DailyHabits (HabitID, HabitName, Description, Points, TypeID)
+INSERT INTO DailyHabits ( HabitName, Description, Points, TypeID)
 VALUES
-(1, 'Morning Stretch', 'A daily stretching routine to start the day and improve flexibility.', 5, 1), -- Physical
-(2, '30-Minute Walk', 'A walk around the block to get fresh air and stay active.', 7, 1), -- Physical
-(3, 'Meditation Session', 'A 10-minute daily meditation to improve mental clarity and reduce stress.', 10, 2), -- Mental
-(4, 'Journaling', 'Write down your thoughts and feelings to improve mental well-being.', 8, 2), -- Mental
-(5, 'Eat Vegetables', 'Include at least one serving of vegetables in your meals.', 6, 3), -- Dietary
-(6, 'Sleep by 10 PM', 'Go to bed before 10 PM for better sleep quality and consistency.', 12, 4), -- Sleep
-(7, 'Avoid Screen Time Before Bed', 'Refrain from using screens at least 30 minutes before bed.', 8, 4), -- Sleep
-(8, 'Drink 2L of Water', 'Drink at least 2 liters of water throughout the day to stay hydrated.', 6, 5), -- Hydration
-(9, 'Morning Hydration', 'Start your day by drinking a glass of water to rehydrate.', 4, 5), -- Hydration
-(10, 'Practice Deep Breathing', 'Take 5 minutes to focus on deep breathing to reduce stress.', 10, 6); -- Stress Management
+('Morning Stretch', 'A daily stretching routine to start the day and improve flexibility.', 5, 1), -- Physical
+('30-Minute Walk', 'A walk around the block to get fresh air and stay active.', 7, 1), -- Physical
+('Meditation Session', 'A 10-minute daily meditation to improve mental clarity and reduce stress.', 10, 2), -- Mental
+('Journaling', 'Write down your thoughts and feelings to improve mental well-being.', 8, 2), -- Mental
+('Eat Vegetables', 'Include at least one serving of vegetables in your meals.', 6, 3), -- Dietary
+('Sleep by 10 PM', 'Go to bed before 10 PM for better sleep quality and consistency.', 12, 4), -- Sleep
+('Avoid Screen Time Before Bed', 'Refrain from using screens at least 30 minutes before bed.', 8, 4), -- Sleep
+('Drink 2L of Water', 'Drink at least 2 liters of water throughout the day to stay hydrated.', 6, 5), -- Hydration
+('Morning Hydration', 'Start your day by drinking a glass of water to rehydrate.', 4, 5), -- Hydration
+( 'Practice Deep Breathing', 'Take 5 minutes to focus on deep breathing to reduce stress.', 10, 6); -- Stress Management
 
 
-INSERT INTO TypesOfExercises (TypeID, TypeName)
+INSERT INTO TypesOfExercises ( TypeName)
 VALUES
-(1, 'Cardio'),         -- Activities that increase heart rate (e.g., running, cycling, swimming)
-(2, 'Strength Training'), -- Exercises that build muscle strength (e.g., weightlifting, resistance training)
-(3, 'Flexibility'),    -- Exercises that improve flexibility and range of motion (e.g., yoga, stretching)
-(4, 'Balance & Stability'), -- Exercises focusing on balance, core strength, and stability (e.g., Pilates, stability ball)
-(5, 'Endurance'),      -- Activities that improve stamina and long-term physical performance (e.g., long-distance running, swimming)
-(6, 'HIIT'),           -- High-Intensity Interval Training, alternating between short intense bursts and rest
-(7, 'Sports'),         -- Exercise activities that include team or individual sports (e.g., soccer, tennis)
-(8, 'Functional Training'), -- Training that simulates real-life movements to improve overall strength and coordination (e.g., kettlebells, bodyweight exercises)
-(9, 'Aquatic Exercise'), -- Exercises done in water to reduce impact on joints (e.g., water aerobics, swimming)
-(10, 'Circuit Training'); -- A combination of strength and cardio exercises performed in a sequence (e.g., alternating squats, push-ups, and jump rope)
+('Cardio'),         -- Activities that increase heart rate (e.g., running, cycling, swimming)
+('Strength Training'), -- Exercises that build muscle strength (e.g., weightlifting, resistance training)
+('Flexibility'),    -- Exercises that improve flexibility and range of motion (e.g., yoga, stretching)
+('Balance & Stability'), -- Exercises focusing on balance, core strength, and stability (e.g., Pilates, stability ball)
+('Endurance'),      -- Activities that improve stamina and long-term physical performance (e.g., long-distance running, swimming)
+('HIIT'),           -- High-Intensity Interval Training, alternating between short intense bursts and rest
+('Sports'),         -- Exercise activities that include team or individual sports (e.g., soccer, tennis)
+('Functional Training'), -- Training that simulates real-life movements to improve overall strength and coordination (e.g., kettlebells, bodyweight exercises)
+('Aquatic Exercise'), -- Exercises done in water to reduce impact on joints (e.g., water aerobics, swimming)
+( 'Circuit Training'); -- A combination of strength and cardio exercises performed in a sequence (e.g., alternating squats, push-ups, and jump rope)
 
 
-INSERT INTO Exercises (ExerciseID, ExerciseName, Description, CaloriesBurnedPerMin, PointsPerMin)
+INSERT INTO Exercises ( ExerciseName, Description, CaloriesBurnedPerMin, PointsPerMin)
 VALUES
-(1, 'Running', 'Cardio workout that improves heart health and burns calories.', 10.0, 10),
-(2, 'Swimming', 'Full-body workout that improves endurance and is low impact.', 8.5, 8),
-(3, 'Cycling', 'Leg workout that builds strength and endurance.', 7.0, 7),
-(4, 'Jumping Rope', 'High-intensity cardio that works the whole body.', 12.0, 12),
-(5, 'Squats', 'Strengthens legs, glutes, and core muscles.', 5.5, 5),
-(6, 'Push-ups', 'Bodyweight exercise for chest, arms, and core strength.', 4.5, 5),
-(7, 'Pull-ups', 'Strengthens back, shoulders, and arms.', 6.0, 6),
-(8, 'Burpees', 'Full-body, high-intensity exercise for strength and cardio.', 15.0, 15),
-(9, 'Lunges', 'Targets legs and glutes, improves balance.', 6.0, 6),
-(10, 'Planks', 'Core exercise for building stability and strength.', 3.0, 3),
-(11, 'Deadlifts', 'Strength training for lower back, glutes, and hamstrings.', 7.5, 8),
-(12, 'Box Jumps', 'Plyometric exercise to build leg power and stamina.', 11.0, 11),
-(13, 'Mountain Climbers', 'Full-body exercise to improve core and cardiovascular fitness.', 8.0, 8),
-(14, 'Kettlebell Swings', 'Full-body exercise for strength and conditioning.', 9.0, 9),
-(15, 'Bicep Curls', 'Isolates biceps to build arm strength.', 2.5, 3),
-(16, 'Tricep Dips', 'Bodyweight exercise to strengthen triceps and chest.', 4.0, 4),
-(17, 'Leg Raises', 'Core exercise to strengthen lower abs.', 4.0, 4),
-(18, 'Sprints', 'High-intensity running for leg strength and fat loss.', 15.0, 15),
-(19, 'Treadmill Walking', 'Low-impact cardio for stamina and endurance.', 4.5, 4),
-(20, 'Rowing', 'Full-body workout for back, arms, and core endurance.', 6.5, 7),
-(21, 'Zumba', 'Dance workout for cardio, fun, and full-body toning.', 7.0, 7),
-(22, 'Yoga', 'Flexibility and relaxation workout focusing on breathing and movement.', 3.5, 4),
-(23, 'Pilates', 'Core strengthening and flexibility workout.', 4.0, 4),
-(24, 'Kickboxing', 'Cardio and strength workout involving punching and kicking movements.', 9.5, 10),
-(25, 'Tai Chi', 'Gentle martial art focusing on balance, coordination, and relaxation.', 3.0, 3),
-(26, 'Barbell Rows', 'Strength training for back and shoulders using a barbell.', 6.0, 6),
-(27, 'Chest Press', 'Strength training for chest and arms using weights.', 5.5, 5),
-(28, 'Leg Press', 'Strengthens quads, hamstrings, and glutes using a machine.', 5.0, 5),
-(29, 'Cable Machine Rows', 'Strengthens back, arms, and shoulders using cable machine.', 5.5, 6),
-(30, 'Medicine Ball Slams', 'Full-body workout with explosive movements for strength and power.', 12.0, 12),
-(31, 'Glute Bridges', 'Targets glutes and core, improves posture and strength.', 4.0, 4),
-(32, 'Seated Shoulder Press', 'Strengthens shoulders and arms using a seated position and weights.', 4.5, 5),
-(33, 'Tuck Jumps', 'Plyometric exercise for explosiveness and leg power.', 10.0, 10),
-(34, 'Russian Twists', 'Core exercise for obliques using a twist movement.', 5.5, 6),
-(35, 'Climbing Stairs', 'Cardio and strength workout for legs and cardiovascular health.', 7.5, 7),
-(36, 'Bodyweight Squats', 'Strengthens legs and glutes using only body weight.', 4.5, 4),
-(37, 'High Knees', 'Cardio workout that targets lower body and engages core.', 8.0, 8),
-(38, 'Side Lunges', 'Targets glutes, hamstrings, and quads with a side step movement.', 6.5, 6),
-(39, 'Trampoline Jumping', 'Fun, low-impact cardio that strengthens legs and improves cardiovascular health.', 9.0, 9),
-(40, 'Handstand Push-ups', 'Advanced bodyweight exercise for shoulder strength and stability.', 7.0, 7);
+('Running', 'Cardio workout that improves heart health and burns calories.', 10.0, 10),
+('Swimming', 'Full-body workout that improves endurance and is low impact.', 8.5, 8),
+('Cycling', 'Leg workout that builds strength and endurance.', 7.0, 7),
+('Jumping Rope', 'High-intensity cardio that works the whole body.', 12.0, 12),
+('Squats', 'Strengthens legs, glutes, and core muscles.', 5.5, 5),
+('Push-ups', 'Bodyweight exercise for chest, arms, and core strength.', 4.5, 5),
+('Pull-ups', 'Strengthens back, shoulders, and arms.', 6.0, 6),
+('Burpees', 'Full-body, high-intensity exercise for strength and cardio.', 15.0, 15),
+('Lunges', 'Targets legs and glutes, improves balance.', 6.0, 6),
+( 'Planks', 'Core exercise for building stability and strength.', 3.0, 3),
+( 'Deadlifts', 'Strength training for lower back, glutes, and hamstrings.', 7.5, 8),
+( 'Box Jumps', 'Plyometric exercise to build leg power and stamina.', 11.0, 11),
+( 'Mountain Climbers', 'Full-body exercise to improve core and cardiovascular fitness.', 8.0, 8),
+( 'Kettlebell Swings', 'Full-body exercise for strength and conditioning.', 9.0, 9),
+( 'Bicep Curls', 'Isolates biceps to build arm strength.', 2.5, 3),
+( 'Tricep Dips', 'Bodyweight exercise to strengthen triceps and chest.', 4.0, 4),
+( 'Leg Raises', 'Core exercise to strengthen lower abs.', 4.0, 4),
+( 'Sprints', 'High-intensity running for leg strength and fat loss.', 15.0, 15),
+( 'Treadmill Walking', 'Low-impact cardio for stamina and endurance.', 4.5, 4),
+( 'Rowing', 'Full-body workout for back, arms, and core endurance.', 6.5, 7),
+( 'Zumba', 'Dance workout for cardio, fun, and full-body toning.', 7.0, 7),
+( 'Yoga', 'Flexibility and relaxation workout focusing on breathing and movement.', 3.5, 4),
+( 'Pilates', 'Core strengthening and flexibility workout.', 4.0, 4),
+( 'Kickboxing', 'Cardio and strength workout involving punching and kicking movements.', 9.5, 10),
+( 'Tai Chi', 'Gentle martial art focusing on balance, coordination, and relaxation.', 3.0, 3),
+( 'Barbell Rows', 'Strength training for back and shoulders using a barbell.', 6.0, 6),
+( 'Chest Press', 'Strength training for chest and arms using weights.', 5.5, 5),
+( 'Leg Press', 'Strengthens quads, hamstrings, and glutes using a machine.', 5.0, 5),
+( 'Cable Machine Rows', 'Strengthens back, arms, and shoulders using cable machine.', 5.5, 6),
+( 'Medicine Ball Slams', 'Full-body workout with explosive movements for strength and power.', 12.0, 12),
+( 'Glute Bridges', 'Targets glutes and core, improves posture and strength.', 4.0, 4),
+( 'Seated Shoulder Press', 'Strengthens shoulders and arms using a seated position and weights.', 4.5, 5),
+( 'Tuck Jumps', 'Plyometric exercise for explosiveness and leg power.', 10.0, 10),
+( 'Russian Twists', 'Core exercise for obliques using a twist movement.', 5.5, 6),
+( 'Climbing Stairs', 'Cardio and strength workout for legs and cardiovascular health.', 7.5, 7),
+( 'Bodyweight Squats', 'Strengthens legs and glutes using only body weight.', 4.5, 4),
+( 'High Knees', 'Cardio workout that targets lower body and engages core.', 8.0, 8),
+( 'Side Lunges', 'Targets glutes, hamstrings, and quads with a side step movement.', 6.5, 6),
+( 'Trampoline Jumping', 'Fun, low-impact cardio that strengthens legs and improves cardiovascular health.', 9.0, 9),
+( 'Handstand Push-ups', 'Advanced bodyweight exercise for shoulder strength and stability.', 7.0, 7);
 
 
 
@@ -762,66 +882,50 @@ VALUES
 (10, '2024-12-01 13:15:00', 500);
 
 
-INSERT INTO Academies (Name, AcademyID, Description, AreaOfExpertise, Accepted, CertificateTitle, CertificateDateOfIssue, CertificateExpirationDate, CertificateIssuingBody)
+INSERT INTO Academies (Username, Name, Description, AreaOfExpertise, Accepted, CertificateTitle, CertificateDateOfIssue, CertificateExpirationDate, CertificateIssuingBody)
 VALUES
-('KickFit Academy', 1, 'A specialized academy for kickboxing and martial arts training', 'Kickboxing', 1, 'Kickboxing Instructor Certification', '2024-01-15', '2026-01-15', 'KickFit Certification Board'),
-('ZenYoga Academy', 2, 'Focused on yoga training and mindfulness practices', 'Yoga', 1, 'Certified Yoga Instructor', '2023-10-01', '2025-10-01', 'ZenYoga Certification Authority'),
-('RockClimb Pro Academy', 3, 'Rock climbing and bouldering expertise for all levels', 'Rock Climbing', 1, 'Rock Climbing Instructor Certificate', '2023-11-01', '2025-11-01', 'RockClimb Pro Institute'),
-('StrengthX Academy', 4, 'Strength and conditioning academy with focus on powerlifting', 'Powerlifting', 1, 'Certified Strength Coach', '2024-02-20', '2026-02-20', 'StrengthX Certifying Body'),
-('FlexFit Academy', 5, 'A fitness academy dedicated to flexibility and mobility', 'Flexibility & Mobility', 1, 'Mobility Specialist Certification', '2023-09-05', '2025-09-05', 'FlexFit Certification Authority'),
-('Triathlete Academy', 6, 'Training for triathlons, focusing on swimming, cycling, and running', 'Triathlon', 1, 'Certified Triathlon Coach', '2024-03-15', '2026-03-15', 'Triathlete Coaching Institute'),
-('CrossFit Nation Academy', 7, 'CrossFit training academy with dynamic fitness routines', 'CrossFit', 1, 'Certified CrossFit Trainer', '2024-04-10', '2026-04-10', 'CrossFit National Org'),
-('PilatesCore Academy', 8, 'Pilates training with a focus on core strength and posture', 'Pilates', 1, 'Certified Pilates Instructor', '2023-12-12', '2025-12-12', 'PilatesCore Certification Body'),
-('BoxingPro Academy', 9, 'Boxing skills academy for amateur and professional training', 'Boxing', 1, 'Certified Boxing Coach', '2024-05-30', '2026-05-30', 'BoxingPro Certification Authority'),
-('Endurance Fitness Academy', 10, 'Endurance training for marathon, ultra, and obstacle races', 'Endurance Sports', 1, 'Endurance Coach Certification', '2024-06-01', '2026-06-01', 'Endurance Fitness Institute'),
-('YogaFlow Academy', 11, 'Advanced yoga techniques for strength and mental clarity', 'Yoga', 0, 'Advanced Yoga Certification', '2023-08-20', '2025-08-20', 'YogaFlow Certification Body'),
-('ClimbingEdge Academy', 12, 'Outdoor and indoor rock climbing courses for all ages', 'Rock Climbing', 1, 'Certified Climbing Instructor', '2024-07-15', '2026-07-15', 'ClimbingEdge Institute'),
-('FitDance Academy', 13, 'Dance and fitness fusion academy for fun workouts', 'Dance Fitness', 0, 'Certified Dance Fitness Instructor', '2024-02-25', '2026-02-25', 'FitDance Academy Body'),
-('MindBody Academy', 14, 'Meditation and fitness combined for holistic wellness', 'Meditation & Fitness', 1, 'Holistic Fitness Coach', '2023-10-25', '2025-10-25', 'MindBody Wellness Council'),
-('TrailRunner Academy', 15, 'Training for trail running with a focus on endurance and technique', 'Trail Running', 1, 'Certified Trail Running Coach', '2024-01-05', '2026-01-05', 'TrailRunner Org'),
-('Bikram Yoga Academy', 16, 'Hot yoga training for strength and detoxification', 'Bikram Yoga', 1, 'Bikram Yoga Certification', '2023-11-25', '2025-11-25', 'Bikram Yoga Certifying Body'),
-('MixedMartialArts Academy', 17, 'MMA training and conditioning with a focus on combat sports', 'MMA', 0, 'Certified MMA Trainer', '2024-05-10', '2026-05-10', 'MixedMartialArts Certification Org'),
-('PowerCycle Academy', 18, 'Cycling academy for road and mountain biking enthusiasts', 'Cycling', 1, 'Certified Cycling Coach', '2023-09-10', '2025-09-10', 'PowerCycle Academy Body'),
-('BeachFit Academy', 19, 'Beach fitness programs combining bodyweight training and cardio', 'Beach Fitness', 1, 'Certified Beach Fitness Trainer', '2024-06-30', '2026-06-30', 'BeachFit Certification Authority'),
-('StrengthLab Academy', 20, 'Strength training and bodybuilding academy focused on hypertrophy', 'Bodybuilding', 1, 'Certified Bodybuilding Coach', '2024-04-22', '2026-04-22', 'StrengthLab Certification Body');
-
+('KickFitAcademy', 'KickFit Academy', 'A specialized academy for kickboxing and martial arts training', 'Kickboxing', 1, 'Kickboxing Instructor Certification', '2024-01-15', '2026-01-15', 'KickFit Certification Board'),
+('ZenYogaAcademy', 'ZenYoga Academy', 'Focused on yoga training and mindfulness practices', 'Yoga', 1, 'Certified Yoga Instructor', '2023-10-01', '2025-10-01', 'ZenYoga Certification Authority'),
+('RockClimbProAcademy', 'RockClimb Pro Academy', 'Rock climbing and bouldering expertise for all levels', 'Rock Climbing', 1, 'Rock Climbing Instructor Certificate', '2023-11-01', '2025-11-01', 'RockClimb Pro Institute'),
+('StrengthXAcademy', 'StrengthX Academy', 'Strength and conditioning academy with focus on powerlifting', 'Powerlifting', 1, 'Certified Strength Coach', '2024-02-20', '2026-02-20', 'StrengthX Certifying Body'),
+('FlexFitAcademy', 'FlexFit Academy', 'A fitness academy dedicated to flexibility and mobility', 'Flexibility & Mobility', 1, 'Mobility Specialist Certification', '2023-09-05', '2025-09-05', 'FlexFit Certification Authority'),
+('TriathleteAcademy', 'Triathlete Academy', 'Training for triathlons, focusing on swimming, cycling, and running', 'Triathlon', 1, 'Certified Triathlon Coach', '2024-03-15', '2026-03-15', 'Triathlete Coaching Institute'),
+('CrossFitNationAcademy', 'CrossFit Nation Academy', 'CrossFit training academy with dynamic fitness routines', 'CrossFit', 1, 'Certified CrossFit Trainer', '2024-04-10', '2026-04-10', 'CrossFit National Org'),
+('PilatesCoreAcademy', 'PilatesCore Academy', 'Pilates training with a focus on core strength and posture', 'Pilates', 1, 'Certified Pilates Instructor', '2023-12-12', '2025-12-12', 'PilatesCore Certification Body'),
+('BoxingProAcademy', 'BoxingPro Academy', 'Boxing skills academy for amateur and professional training', 'Boxing', 1, 'Certified Boxing Coach', '2024-05-30', '2026-05-30', 'BoxingPro Certification Authority'),
+('EnduranceFitnessAcademy', 'Endurance Fitness Academy', 'Endurance training for marathon, ultra, and obstacle races', 'Endurance Sports', 1, 'Endurance Coach Certification', '2024-06-01', '2026-06-01', 'Endurance Fitness Institute'),
+('YogaFlowAcademy', 'YogaFlow Academy', 'Advanced yoga techniques for strength and mental clarity', 'Yoga', 0, 'Advanced Yoga Certification', '2023-08-20', '2025-08-20', 'YogaFlow Certification Body'),
+('ClimbingEdgeAcademy', 'ClimbingEdge Academy', 'Outdoor and indoor rock climbing courses for all ages', 'Rock Climbing', 1, 'Certified Climbing Instructor', '2024-07-15', '2026-07-15', 'ClimbingEdge Institute'),
+('FitDanceAcademy', 'FitDance Academy', 'Dance and fitness fusion academy for fun workouts', 'Dance Fitness', 0, 'Certified Dance Fitness Instructor', '2024-02-25', '2026-02-25', 'FitDance Academy Body'),
+('MindBodyAcademy', 'MindBody Academy', 'Meditation and fitness combined for holistic wellness', 'Meditation & Fitness', 1, 'Holistic Fitness Coach', '2023-10-25', '2025-10-25', 'MindBody Wellness Council'),
+('TrailRunnerAcademy', 'TrailRunner Academy', 'Training for trail running with a focus on endurance and technique', 'Trail Running', 1, 'Certified Trail Running Coach', '2024-01-05', '2026-01-05', 'TrailRunner Org'),
+('BikramYogaAcademy', 'Bikram Yoga Academy', 'Hot yoga training for strength and detoxification', 'Bikram Yoga', 1, 'Bikram Yoga Certification', '2023-11-25', '2025-11-25', 'Bikram Yoga Certifying Body'),
+('MixedMartialArtsAcademy', 'MixedMartialArts Academy', 'MMA training and conditioning with a focus on combat sports', 'MMA', 0, 'Certified MMA Trainer', '2024-05-10', '2026-05-10', 'MixedMartialArts Certification Org'),
+('PowerCycleAcademy', 'PowerCycle Academy', 'Cycling academy for road and mountain biking enthusiasts', 'Cycling', 1, 'Certified Cycling Coach', '2023-09-10', '2025-09-10', 'PowerCycle Academy Body'),
+('BeachFitAcademy', 'BeachFit Academy', 'Beach fitness programs combining bodyweight training and cardio', 'Beach Fitness', 1, 'Certified Beach Fitness Trainer', '2024-06-30', '2026-06-30', 'BeachFit Certification Authority'),
+('StrengthLabAcademy', 'StrengthLab Academy', 'Strength training and bodybuilding academy focused on hypertrophy', 'Bodybuilding', 1, 'Certified Bodybuilding Coach', '2024-04-22', '2026-04-22', 'StrengthLab Certification Body');
 
 INSERT INTO Sessions (SessionID, Description, Price, Limit, FullSession, Duration, Location, Date, Time, AcademyID)
 VALUES
 (1, 'Kickboxing training session for beginners', 30, 20, 0, '01:30:00', 'KickFit Academy Main Hall', '2024-12-05', '10:00:00', 1),
 (2, 'Advanced kickboxing techniques for experienced practitioners', 50, 15, 0, '01:45:00', 'KickFit Academy Main Hall', '2024-12-06', '12:00:00', 1),
-(3, 'Relaxing yoga session focusing on flexibility', 20, 25, 0, '01:00:00', 'ZenYoga Academy Studio A', '2024-12-07', '09:00:00', 2),
-(4, 'Intense powerlifting workout with expert coaching', 40, 10, 1, '02:00:00', 'StrengthX Academy Gym', '2024-12-08', '14:00:00', 4),
-(5, 'Strength and endurance training session', 35, 15, 0, '01:30:00', 'StrengthX Academy Gym', '2024-12-09', '16:00:00', 4),
-(6, 'Rock climbing training for beginners', 45, 12, 0, '02:00:00', 'RockClimb Pro Academy Boulder Room', '2024-12-10', '11:00:00', 3),
-(7, 'Advanced rock climbing techniques for experienced climbers', 60, 8, 0, '02:30:00', 'RockClimb Pro Academy Boulder Room', '2024-12-11', '14:00:00', 3),
-(8, 'Hot yoga session for strength and detox', 30, 20, 1, '01:30:00', 'Bikram Yoga Academy Studio 1', '2024-12-12', '17:00:00', 16),
-(9, 'Cycling training session for endurance athletes', 25, 20, 0, '01:30:00', 'PowerCycle Academy Outdoor Track', '2024-12-13', '08:00:00', 18),
-(10, 'Advanced cycling techniques for competitive riders', 40, 10, 0, '02:00:00', 'PowerCycle Academy Outdoor Track', '2024-12-14', '11:00:00', 18);
+(1, 'Relaxing yoga session focusing on flexibility', 20, 25, 0, '01:00:00', 'ZenYoga Academy Studio A', '2024-12-07', '09:00:00', 2),
+(1, 'Intense powerlifting workout with expert coaching', 40, 10, 1, '02:00:00', 'StrengthX Academy Gym', '2024-12-08', '14:00:00', 4),
+(2, 'Strength and endurance training session', 35, 15, 0, '01:30:00', 'StrengthX Academy Gym', '2024-12-09', '16:00:00', 4),
+(1, 'Rock climbing training for beginners', 45, 12, 0, '02:00:00', 'RockClimb Pro Academy Boulder Room', '2024-12-10', '11:00:00', 3),
+(2, 'Advanced rock climbing techniques for experienced climbers', 60, 8, 0, '02:30:00', 'RockClimb Pro Academy Boulder Room', '2024-12-11', '14:00:00', 3),
+(1, 'Hot yoga session for strength and detox', 30, 20, 1, '01:30:00', 'Bikram Yoga Academy Studio 1', '2024-12-12', '17:00:00', 16),
+(1, 'Cycling training session for endurance athletes', 25, 20, 0, '01:30:00', 'PowerCycle Academy Outdoor Track', '2024-12-13', '08:00:00', 18),
+(2, 'Advanced cycling techniques for competitive riders', 40, 10, 0, '02:00:00', 'PowerCycle Academy Outdoor Track', '2024-12-14', '11:00:00', 18);
 
 
 INSERT INTO ReservedSession (MemberID, SessionID, AcademyID, NumberOfSeats)
 VALUES
 (1, 1, 1, 3),  -- Member 1 reserves 3 seats for Session 1 (Kickboxing training)
 (2, 2, 1, 2),  -- Member 2 reserves 2 seats for Session 2 (Advanced kickboxing)
-(11, 3, 2, 1),  -- Member 11 reserves 1 seat for Session 3 (Relaxing yoga)
-(4, 4, 4, 2),  -- Member 4 reserves 2 seats for Session 4 (Powerlifting workout)
-(5, 5, 4, 4),  -- Member 5 reserves 4 seats for Session 5 (Strength training)
-(6, 6, 3, 2),  -- Member 6 reserves 2 seats for Session 6 (Rock climbing training)
-(7, 7, 3, 1),  -- Member 7 reserves 1 seat for Session 7 (Advanced rock climbing)
-(8, 8, 16, 3), -- Member 8 reserves 3 seats for Session 8 (Hot yoga)
-(9, 9, 18, 1), -- Member 9 reserves 1 seat for Session 9 (Cycling training)
-(10, 10, 18, 2),-- Member 10 reserves 2 seats for Session 10 (Advanced cycling)
-(11, 1, 1, 1),  -- Member 11 reserves 1 seat for Session 1 (Kickboxing)
-(12, 3, 2, 2),  -- Member 12 reserves 2 seats for Session 3 (Relaxing yoga)
-(13, 4, 4, 3),  -- Member 13 reserves 3 seats for Session 4 (Powerlifting workout)
-(14, 6, 3, 3),  -- Member 14 reserves 3 seats for Session 6 (Rock climbing training)
-(15, 5, 4, 2),  -- Member 15 reserves 2 seats for Session 5 (Strength training)
-(16, 7, 3, 1),  -- Member 16 reserves 1 seat for Session 7 (Advanced rock climbing)
-(17, 9, 18, 4),  -- Member 17 reserves 4 seats for Session 9 (Cycling training)
-(14, 8, 16, 1),  -- Member 14 reserves 1 seat for Session 8 (Hot yoga)
-(19, 2, 1, 2),  -- Member 19 reserves 2 seats for Session 2 (Advanced kickboxing)
-(20, 10, 18, 3);  -- Member 20 reserves 3 seats for Session 10 (Advanced cycling)
+(11, 1, 2, 1),  -- Member 11 reserves 1 seat for Session 1 (Relaxing yoga)
+(4, 1, 4, 2) -- Member 4 reserves 2 seats for Session 1 (Powerlifting workout)
+
 
 
 INSERT INTO Meals 
@@ -883,18 +987,18 @@ VALUES
 (20, 3, 5); -- Zucchini Noodles with Pesto (Keto)
 
 
-INSERT INTO FeedbackTypes (TypeID, TypeName) VALUES
-(1, 'Recommendation'),       -- Suggesting new features or changes
-(2, 'Complaint'),            -- Complaints about services, coaches, or system issues
-(3, 'Positive Feedback'),    -- Praising the coach, service, or experience
-(4, 'Bug Report');          -- Reporting bugs in the system (app, website, etc.)
+INSERT INTO FeedbackTypes ( TypeName) VALUES
+( 'Recommendation'),       -- Suggesting new features or changes
+( 'Complaint'),            -- Complaints about services, coaches, or system issues
+( 'Positive Feedback'),    -- Praising the coach, service, or experience
+( 'Bug Report');          -- Reporting bugs in the system (app, website, etc.)
 
-INSERT INTO Feedback (FeedbackID, Comment, Rating, FeedbackTypeID, DatePosted) VALUES
-(1, 'The app could use a feature for saving favorite workouts.', 4.5, 1, '2024-12-01 10:30:00'),  -- Member Feedback: Recommendation
-(2, 'The coach was rude and didn’t explain the exercises well.', 1.0, 2, '2024-12-02 14:00:00'),  -- Member Feedback: Complaint
-(3, 'Great workout session, really enjoying the app!', 5.0, 3, '2024-12-02 15:15:00'),  -- Member Feedback: Positive Feedback
-(4, 'There’s a bug where the app crashes when trying to load my profile.', 2.5, 4, '2024-12-03 09:45:00'),  -- Member Feedback: Bug Report
-(5, 'I would suggest adding more flexibility in the workout plans.', 4.0, 1, '2024-12-04 16:00:00');  -- Coach Feedback: Recommendation
+INSERT INTO Feedback ( Comment, Rating, FeedbackTypeID, DatePosted) VALUES
+( 'The app could use a feature for saving favorite workouts.', 4.5, 1, '2024-12-01 10:30:00'),  -- Member Feedback: Recommendation
+( 'The coach was rude and didn’t explain the exercises well.', 1.0, 2, '2024-12-02 14:00:00'),  -- Member Feedback: Complaint
+( 'Great workout session, really enjoying the app!', 5.0, 3, '2024-12-02 15:15:00'),  -- Member Feedback: Positive Feedback
+( 'There’s a bug where the app crashes when trying to load my profile.', 2.5, 4, '2024-12-03 09:45:00'),  -- Member Feedback: Bug Report
+( 'I would suggest adding more flexibility in the workout plans.', 4.0, 1, '2024-12-04 16:00:00');  -- Coach Feedback: Recommendation
 
 INSERT INTO MemberFeedback (FeedbackID, MemberID) VALUES
 (1, 5),  
@@ -1165,5 +1269,45 @@ VALUES
 (5, 1, 19, '2024-01-15')  -- Treadmill Walking
 
 
+-- trigger that happens when user is deleted instead of cascading deletes
+GO
+CREATE TRIGGER trg_DeleteUser
+ON Users
+FOR DELETE
+AS
+BEGIN
 
+    DELETE FROM Members
+    WHERE Username IN (SELECT Username FROM DELETED);
+
+
+    DELETE FROM Coaches
+    WHERE Username IN (SELECT Username FROM DELETED);
+
+
+    DELETE FROM Academies
+    WHERE Username IN (SELECT Username FROM DELETED);
+END;
+
+---- Creating a trigger for sessions so that pk autoincrements
+--Go
+--CREATE TRIGGER trg_SessionID
+--ON Sessions
+--INSTEAD OF INSERT
+--AS
+--BEGIN
+--    DECLARE @NewSessionID INT, @AcademyID INT;
+--
+--    -- hageeb the academy id
+--    SELECT @AcademyID = AcademyID FROM inserted;
+--
+--    -- get the new session id
+--	-- is null -> incase there are no sessions from this academy
+--    SELECT @NewSessionID = ISNULL(MAX(SessionID), 0) + 1 FROM Sessions WHERE AcademyID = @AcademyID;
+--
+--
+--    INSERT INTO Sessions (SessionID, Description, Price, Limit, Duration, FullSession, Location, Date, Time, AcademyID)
+--    SELECT @NewSessionID, Description, Price, Limit, Duration, FullSession, Location, Date, Time, AcademyID
+--    FROM inserted;
+--END;
 
