@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.labelSession = new System.Windows.Forms.Label();
             this.labelDescription = new System.Windows.Forms.Label();
             this.labelPassword = new System.Windows.Forms.Label();
@@ -56,9 +57,9 @@
             this.labelSession.AutoSize = true;
             this.labelSession.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSession.ForeColor = System.Drawing.Color.IndianRed;
-            this.labelSession.Location = new System.Drawing.Point(21, 20);
+            this.labelSession.Location = new System.Drawing.Point(24, 25);
             this.labelSession.Name = "labelSession";
-            this.labelSession.Size = new System.Drawing.Size(162, 25);
+            this.labelSession.Size = new System.Drawing.Size(195, 29);
             this.labelSession.TabIndex = 10;
             this.labelSession.Text = "Session Details";
             // 
@@ -66,9 +67,9 @@
             // 
             this.labelDescription.AutoSize = true;
             this.labelDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDescription.Location = new System.Drawing.Point(25, 84);
+            this.labelDescription.Location = new System.Drawing.Point(28, 105);
             this.labelDescription.Name = "labelDescription";
-            this.labelDescription.Size = new System.Drawing.Size(105, 22);
+            this.labelDescription.Size = new System.Drawing.Size(127, 26);
             this.labelDescription.TabIndex = 22;
             this.labelDescription.Text = "Description:";
             // 
@@ -76,9 +77,9 @@
             // 
             this.labelPassword.AutoSize = true;
             this.labelPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPassword.Location = new System.Drawing.Point(26, 381);
+            this.labelPassword.Location = new System.Drawing.Point(29, 476);
             this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(56, 22);
+            this.labelPassword.Size = new System.Drawing.Size(68, 26);
             this.labelPassword.TabIndex = 25;
             this.labelPassword.Text = "Price:";
             // 
@@ -86,22 +87,23 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(26, 325);
+            this.label1.Location = new System.Drawing.Point(29, 406);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(130, 22);
+            this.label1.Size = new System.Drawing.Size(163, 26);
             this.label1.TabIndex = 27;
             this.label1.Text = "Limit members:";
             // 
             // numericUpDownLimit
             // 
-            this.numericUpDownLimit.Location = new System.Drawing.Point(175, 325);
+            this.numericUpDownLimit.Location = new System.Drawing.Point(197, 406);
+            this.numericUpDownLimit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.numericUpDownLimit.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.numericUpDownLimit.Name = "numericUpDownLimit";
-            this.numericUpDownLimit.Size = new System.Drawing.Size(120, 22);
+            this.numericUpDownLimit.Size = new System.Drawing.Size(135, 26);
             this.numericUpDownLimit.TabIndex = 28;
             this.numericUpDownLimit.Value = new decimal(new int[] {
             1,
@@ -114,9 +116,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(452, 86);
+            this.label2.Location = new System.Drawing.Point(508, 108);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 22);
+            this.label2.Size = new System.Drawing.Size(64, 26);
             this.label2.TabIndex = 29;
             this.label2.Text = "Date:";
             // 
@@ -124,19 +126,20 @@
             // 
             this.TimePicker.CustomFormat = "hh:mm tt";
             this.TimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.TimePicker.Location = new System.Drawing.Point(598, 147);
+            this.TimePicker.Location = new System.Drawing.Point(673, 184);
+            this.TimePicker.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TimePicker.Name = "TimePicker";
             this.TimePicker.ShowUpDown = true;
-            this.TimePicker.Size = new System.Drawing.Size(95, 22);
+            this.TimePicker.Size = new System.Drawing.Size(106, 26);
             this.TimePicker.TabIndex = 31;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(452, 147);
+            this.label3.Location = new System.Drawing.Point(508, 184);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 22);
+            this.label3.Size = new System.Drawing.Size(66, 26);
             this.label3.TabIndex = 32;
             this.label3.Text = "Time:";
             // 
@@ -144,9 +147,9 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(452, 202);
+            this.label4.Location = new System.Drawing.Point(508, 252);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(83, 22);
+            this.label4.Size = new System.Drawing.Size(100, 26);
             this.label4.TabIndex = 33;
             this.label4.Text = "Duration:";
             // 
@@ -154,19 +157,21 @@
             // 
             this.DurationPicker.CustomFormat = "hh:mm";
             this.DurationPicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.DurationPicker.Location = new System.Drawing.Point(598, 202);
+            this.DurationPicker.Location = new System.Drawing.Point(673, 252);
+            this.DurationPicker.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.DurationPicker.Name = "DurationPicker";
             this.DurationPicker.ShowUpDown = true;
-            this.DurationPicker.Size = new System.Drawing.Size(95, 22);
+            this.DurationPicker.Size = new System.Drawing.Size(106, 26);
             this.DurationPicker.TabIndex = 34;
+            this.DurationPicker.ValueChanged += new System.EventHandler(this.DurationPicker_ValueChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(26, 202);
+            this.label5.Location = new System.Drawing.Point(29, 252);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(81, 22);
+            this.label5.Size = new System.Drawing.Size(98, 26);
             this.label5.TabIndex = 35;
             this.label5.Text = "Address:";
             // 
@@ -201,9 +206,10 @@
             // checkBoxFree
             // 
             this.checkBoxFree.AutoSize = true;
-            this.checkBoxFree.Location = new System.Drawing.Point(286, 385);
+            this.checkBoxFree.Location = new System.Drawing.Point(322, 481);
+            this.checkBoxFree.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBoxFree.Name = "checkBoxFree";
-            this.checkBoxFree.Size = new System.Drawing.Size(57, 20);
+            this.checkBoxFree.Size = new System.Drawing.Size(68, 24);
             this.checkBoxFree.TabIndex = 38;
             this.checkBoxFree.Text = "Free";
             this.checkBoxFree.UseVisualStyleBackColor = true;
@@ -247,7 +253,7 @@
             // 
             // AcademiesPostSession
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(829, 682);
             this.Controls.Add(this.DatePickers);
@@ -267,6 +273,7 @@
             this.Controls.Add(this.labelPassword);
             this.Controls.Add(this.labelDescription);
             this.Controls.Add(this.labelSession);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "AcademiesPostSession";
             this.Style.MdiChild.IconHorizontalAlignment = System.Windows.Forms.HorizontalAlignment.Center;
             this.Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
