@@ -60,6 +60,11 @@ namespace FitnessApplication
             }
         }
 
+        private void DurationPicker_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private bool ReadSessionDetails()
         {
             Description = textBoxDescription.Text;

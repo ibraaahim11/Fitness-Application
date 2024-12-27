@@ -8,10 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Syncfusion.WinForms.Controls;
 
 namespace FitnessApplication
 {
-    public partial class Academies : Form
+    public partial class Academies : SfForm
     {
         // Controller obj
         Controller controller;
@@ -66,6 +67,11 @@ namespace FitnessApplication
         {
             PostSessionForm = new AcademiesPostSession(Username, ID);
             PostSessionForm.Show();
+        }
+
+        private void labelWelcomeAcademy_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

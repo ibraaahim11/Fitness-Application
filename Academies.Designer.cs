@@ -38,18 +38,20 @@
             this.labelWelcomeAcademy.AutoSize = true;
             this.labelWelcomeAcademy.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelWelcomeAcademy.ForeColor = System.Drawing.Color.IndianRed;
-            this.labelWelcomeAcademy.Location = new System.Drawing.Point(12, 9);
+            this.labelWelcomeAcademy.Location = new System.Drawing.Point(14, 11);
             this.labelWelcomeAcademy.Name = "labelWelcomeAcademy";
-            this.labelWelcomeAcademy.Size = new System.Drawing.Size(271, 38);
+            this.labelWelcomeAcademy.Size = new System.Drawing.Size(329, 46);
             this.labelWelcomeAcademy.TabIndex = 0;
             this.labelWelcomeAcademy.Text = "Welcome, Name";
+            this.labelWelcomeAcademy.Click += new System.EventHandler(this.labelWelcomeAcademy_Click);
             // 
             // buttonViewProfile
             // 
             this.buttonViewProfile.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonViewProfile.Location = new System.Drawing.Point(19, 92);
+            this.buttonViewProfile.Location = new System.Drawing.Point(21, 115);
+            this.buttonViewProfile.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonViewProfile.Name = "buttonViewProfile";
-            this.buttonViewProfile.Size = new System.Drawing.Size(206, 49);
+            this.buttonViewProfile.Size = new System.Drawing.Size(232, 61);
             this.buttonViewProfile.TabIndex = 1;
             this.buttonViewProfile.Text = "View Profile";
             this.buttonViewProfile.UseVisualStyleBackColor = true;
@@ -58,9 +60,10 @@
             // buttonPostSession
             // 
             this.buttonPostSession.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonPostSession.Location = new System.Drawing.Point(19, 178);
+            this.buttonPostSession.Location = new System.Drawing.Point(21, 222);
+            this.buttonPostSession.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.buttonPostSession.Name = "buttonPostSession";
-            this.buttonPostSession.Size = new System.Drawing.Size(206, 49);
+            this.buttonPostSession.Size = new System.Drawing.Size(232, 61);
             this.buttonPostSession.TabIndex = 2;
             this.buttonPostSession.Text = "Post Session";
             this.buttonPostSession.UseVisualStyleBackColor = true;
@@ -68,13 +71,16 @@
             // 
             // Academies
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(899, 558);
             this.Controls.Add(this.buttonPostSession);
             this.Controls.Add(this.buttonViewProfile);
             this.Controls.Add(this.labelWelcomeAcademy);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Academies";
+            this.Style.MdiChild.IconHorizontalAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             this.Text = "Academies";
             this.Load += new System.EventHandler(this.Academies_Load);
             this.ResumeLayout(false);

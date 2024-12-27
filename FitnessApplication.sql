@@ -61,10 +61,10 @@ Points int not null,
 Gender char(1) not null,
 FitnessGoalID int,
 DietID int,
-Username varchar(50) not null,
+Username varchar(50),
 
 Foreign Key (Username) References Users(Username)
-ON DELETE CASCADE
+ON DELETE SET NULL
 ON UPDATE NO ACTION,
 
 Foreign Key (FitnessGoalID) References FitnessGoals(GoalID)
@@ -109,6 +109,7 @@ CoachID int,
 Rating DECIMAL(2, 1),
 CONSTRAINT chk_coachedby_rating CHECK (Rating >= 0 AND Rating <= 5), -- Look for some way to limit ratings to be 0 - 5
 Ongoing BIT not null,
+Accepted BIT not null,
 Foreign Key (MemberID) References Members(MemberID)
 ON DELETE CASCADE
 ON UPDATE NO ACTION,
@@ -1010,35 +1011,35 @@ INSERT INTO MemberFeedback (FeedbackID, MemberID) VALUES
 INSERT INTO CoachFeedback (FeedbackID, CoachID) VALUES
 (5, 2);
 
-INSERT INTO CoachedBy(MemberID,CoachID,Rating,Ongoing)
+INSERT INTO CoachedBy(MemberID,CoachID,Rating,Ongoing,Accepted)
 VALUES
-(1,1,5,0),
-(1,2,3,0),
-(1,3,NULL,0),
-(1,4,5,1),
+(1,1,5,0,1),
+(1,2,3,0,1),
+(1,3,NULL,0,1),
+(1,4,5,1,1),
 
-(2,1,5,0),
-(2,5,NULL,0),
-(2,3,4,0),
-(2,4,5,1),
+(2,1,5,0,1),
+(2,5,NULL,0,1),
+(2,3,4,0,1),
+(2,4,5,1,1),
 
-(3,6,5,0),
-(3,7,3,0),
-(3,8,NULL,0),
+(3,6,5,0,1),
+(3,7,3,0,1),
+(3,8,NULL,0,1),
 
 
-(4,1,0,0),
-(4,2,NULL,0),
-(4,3,2,0),
-(4,12,NULL,1),
+(4,1,0,0,1),
+(4,2,NULL,0,1),
+(4,3,2,0,1),
+(4,12,NULL,1,1),
 
-(5,1,5,0),
+(5,1,5,0,1),
 
-(6,2,3,0),
-(6,3,NULL,0),
-(6,4,5,1),
+(6,2,3,0,1),
+(6,3,NULL,0,1),
+(6,4,5,1,1),
 
-(7,2,3,1)
+(7,2,3,1,1)
 
 INSERT INTO BadgesEarned(MemberID, CoachID, BadgeID, DateEarned) VALUES
 (1,1,17,'2024-01-15'),

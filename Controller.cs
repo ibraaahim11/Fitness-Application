@@ -7,6 +7,9 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 using System.Diagnostics;
+using static Syncfusion.Windows.Forms.Tools.TextBoxExt;
+using System.Security.Cryptography;
+using System.Xml.Linq;
 
 namespace DBapplication
 {
@@ -24,7 +27,7 @@ namespace DBapplication
         }
         // Academy Functions
         public int GetAcademyID(string username)
-        { 
+        {
             string query = $"SELECT AcademyID FROM Academies WHERE Username = '{username}'";
             return (int)dbMan.ExecuteScalar(query);
         }
@@ -33,6 +36,7 @@ namespace DBapplication
             string query = $"SELECT Name FROM Academies WHERE AcademyID = {ID}";
             return (string)dbMan.ExecuteScalar(query);
         }
+
         // Academy Profile Function
 
         // Profile part
@@ -120,7 +124,7 @@ namespace DBapplication
             // Session should not be empty
             int fullSession = 0;
             // new session id
-            int SessionID = GetCountSessionFromAcademy(academyId) + 1; 
+            int SessionID = GetCountSessionFromAcademy(academyId) + 1;
 
             string query = $"INSERT INTO Sessions (SessionID, Description, Price, Limit, Duration, FullSession, Location, Date, Time, AcademyID) " +
                            $"VALUES ({SessionID},'{description}', {price}, {limit}, '{duration}',{fullSession}, '{location}', '{date}', '{time}', {academyId})";
@@ -129,13 +133,191 @@ namespace DBapplication
         public int GetCountSessionFromAcademy(int ID)
         {
             string query = $"SELECT COUNT(*) FROM Sessions WHERE AcademyID = {ID}";
-            return (int) dbMan.ExecuteScalar(query);
+            return (int)dbMan.ExecuteScalar(query);
         }
 
+        //coach functionalities 
+        //getting all the coach info
+        public int GetCoachID(string username)
+        {
+            string query = $"SELECT CoachID FROM Coaches WHERE Username ='{username}'";
+            return (int)dbMan.ExecuteScalar(query);
+        }
+        public string GetCoachName(int ID)
+        {
+            string query = $"SELECT Fname FROM Coaches WHERE CoachID={ID}";
+            return (string)dbMan.ExecuteScalar(query);
+        }
 
+        public string GetCoachLastName(int ID)
+        {
+            string query = $"SELECT Lname FROM Coaches WHERE CoachID={ID}";
+            return (string)dbMan.ExecuteScalar(query);
+        }
 
+        public string GetGender(int ID)
+        {
+            string query = $"SELECT Gender FROM Coaches WHERE CoachID={ID}";
+            return (string)dbMan.ExecuteScalar(query);
+        }
 
+        public int GetCoachAge(int ID)
+        {
+            string query = $"SELECT Age FROM Coaches WHERE CoachID={ID}";
+            return (int)dbMan.ExecuteScalar(query);
 
+        }
 
+        public int GetMemberLimit(int ID)
+        {
+            string query = $"SELECT MemberLimit FROM Coaches WHERE CoachID={ID}";
+            return (int)dbMan.ExecuteScalar(query);
+        }
+
+        public string GetCoachPassword(string username)
+        {
+            string query = $"SELECT Password FROM Users WHERE Username = '{username}'";
+            return (string)dbMan.ExecuteScalar(query);
+        }
+
+        //to get all certificate info
+        public string GetCoachCertificateTitle(int ID)
+        {
+            string query = $"SELECT CertificateTitle FROM Coaches WHERE CoachID={ID}";
+            return (string)dbMan.ExecuteScalar(query);
+        }
+
+        public string GetCoachCertificateDateOfIssue(int ID)
+        {
+            string query = $"SELECT CertificateDateOfIssue FROM Coaches WHERE CoachID = {ID}";
+            object result = dbMan.ExecuteScalar(query);
+
+            DateTime certificateDate = (DateTime)result;
+            return certificateDate.ToString("yyyy-MM-dd"); // or any other desired forma
+
+        }
+        public string GetCoachCertificateIssuingBody(int ID)
+        {
+            string query = $"SELECT CertificateIssuingBody FROM Coaches WHERE CoachID = {ID}";
+            return (string)dbMan.ExecuteScalar(query);
+        }
+        public string GetCoachCertificateExpirationDate(int ID)
+        {
+            string query = $"SELECT CertificateExpirationDate FROM Coaches WHERE CoachID = {ID}";
+            object result = dbMan.ExecuteScalar(query);
+
+            DateTime certificateDate = (DateTime)result;
+            return certificateDate.ToString("yyyy-MM-dd"); // or any other desired forma
+        }
+
+        //view member 
+        //public int GetMemberID(string username)
+        //{
+        //    string query = $"SELECT MemberID FROM Members WHERE Username={username}";
+        //    return (int)dbMan.ExecuteScalar(query);
+        //}
+
+        public int GetMemberID(string username)
+        {
+            string query = $"SELECT MemberID FROM Members WHERE Username = '{username}'";
+            DataTable dt = dbMan.ExecuteReader(query);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                return Convert.ToInt32(dt.Rows[0]["MemberID"]);
+            }
+            else
+            {
+                throw new Exception("Username not found.");
+            }
+        }
+
+        public DataTable ViewMember(int ID)
+        {
+            string query = $"SELECT m.Fname, m.Lname, m.Age, m.Weight, m.Height, m.AllowedCalorieIntake, m.Streak, m.Points, m.Gender, fg.GoalName, d.DietName  " +
+                          $"FROM Members m  " +
+                          $"LEFT JOIN FitnessGoals fg ON m.FitnessGoalID = fg.GoalID  " +
+                          $"LEFT JOIN Diets d ON m.DietID = d.DietID WHERE m.MemberID = {ID}";
+            return dbMan.ExecuteReader(query);
+
+        }
+        public DataTable GetUsernamesofMembers(int ID)
+        {
+            string query = $"SELECT m.Username FROM Members m " +
+                           $"INNER JOIN CoachedBy cb ON m.MemberID = cb.MemberID " +
+                           $"WHERE cb.CoachID = {ID} AND cb.Ongoing = 1";
+            return dbMan.ExecuteReader(query);
+        }
+
+        public int GetMaxChallengeID()
+        {
+            string query = $"SELECT MAX(ChallengeID) AS MaxChallengeID FROM CoachChallenges ";
+            DataTable dt = dbMan.ExecuteReader(query);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                return Convert.ToInt32(dt.Rows[0]["MaxChallengeID"]);
+            }
+            else
+            {
+                throw new Exception("No Challenges found.");
+                return 0;
+
+            }
+
+        }
+
+        public int InsertCoachChallenge(string challengename,int points,string description,string startdate,string enddate,int coachid)
+        {
+            int challengeid = GetMaxChallengeID() + 1;
+
+            string query = $"INSERT INTO CoachChallenges (ChallengeID,Description,PointsRewarded,ChallengeName,StartDate,EndDate,CoachID)" +
+                           $" VALUES('{challengeid}','{description}','{points}','{challengename}','{startdate}','{enddate}','{coachid}')";
+            return dbMan.ExecuteNonQuery(query);
+        }
+
+        public DataTable GetAllCoachRequests(int ID)
+        {
+            string query = $"SELECT m.Username, m.Fname, m.Lname, m.Age, m.Weight, m.Height, m.Gender " + 
+                           $"FROM Members m INNER JOIN CoachedBy cb ON m.MemberID = cb.MemberID " + 
+                           $"WHERE cb.CoachID = {ID} AND cb.Accepted = 0;";
+            return dbMan.ExecuteReader(query);
+        }
+        
+        public int AcceptMember(string username, int coachid)
+        {
+            int memberid = GetMemberID(username);
+            string query = $"UPDATE CoachedBy SET Accepted = 1, Ongoing = 1 WHERE MemberID = {memberid} AND CoachID = {coachid}";
+            return dbMan.ExecuteNonQuery(query);
+
+        }
+        public int DeclineMember(string username, int coachid)
+        {
+            int memberid=GetMemberID(username);
+            string query = $"UPDATE CoachedBy SET Accepted = 0, Ongoing = 0 WHERE MemberID = {memberid} AND CoachID = {coachid}";
+            return dbMan.ExecuteNonQuery(query);
+
+        }
+
+        public int GetMaxMealID()
+        {
+            string query = $"SELECT MAX(MealID) AS MaxMealID FROM Meals ";
+            DataTable dt = dbMan.ExecuteReader(query);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                return Convert.ToInt32(dt.Rows[0]["MaxMealID"]);
+            }
+            else
+            {
+                throw new Exception("No Meals found.");
+                return 0;
+
+            }
+
+        }
+         
+        public DataTable GetMealTypes()
+        {
+            string query = $"SELECT DISTINCT MealType FROM Meals";
+            return dbMan.ExecuteReader(query);
+        }
     }
 }

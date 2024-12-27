@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Syncfusion.Licensing;
 
 namespace FitnessApplication
 {
@@ -16,7 +17,10 @@ namespace FitnessApplication
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Academies());
+            SyncfusionLicenseProvider.RegisterLicense("674975");
+            Application.Run(new Coach());
+           
+
         }
     }
 }
