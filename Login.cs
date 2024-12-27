@@ -53,7 +53,8 @@ namespace FitnessApplication
                             F.Show();
                             break;
                         case "academy":
-                            Form F2 = new Academies();
+                           
+                            Form F2 = new Academies(UsernameTB.Text, controllerobj.GetAcademyID(UsernameTB.Text));
                             F2.Show();
                             break;
                         case "member":
