@@ -36,14 +36,17 @@
             this.UsernameTB = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             this.PasswordTB = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             this.autoLabel4 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
-            this.MemberCB = new System.Windows.Forms.CheckBox();
-            this.AcademyCB = new System.Windows.Forms.CheckBox();
-            this.CoachCB = new System.Windows.Forms.CheckBox();
             this.EmptyAlert = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.IncorrectCred = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.ShowPass = new System.Windows.Forms.CheckBox();
+            this.Members = new Syncfusion.Windows.Forms.Tools.RadioButtonAdv();
+            this.Coach = new Syncfusion.Windows.Forms.Tools.RadioButtonAdv();
+            this.Academy = new Syncfusion.Windows.Forms.Tools.RadioButtonAdv();
             ((System.ComponentModel.ISupportInitialize)(this.UsernameTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PasswordTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Members)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Coach)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Academy)).BeginInit();
             this.SuspendLayout();
             // 
             // autoLabel1
@@ -132,36 +135,6 @@
             this.autoLabel4.TabIndex = 7;
             this.autoLabel4.Text = "Not registered?    Register as:";
             // 
-            // MemberCB
-            // 
-            this.MemberCB.AutoSize = true;
-            this.MemberCB.Location = new System.Drawing.Point(304, 337);
-            this.MemberCB.Name = "MemberCB";
-            this.MemberCB.Size = new System.Drawing.Size(79, 20);
-            this.MemberCB.TabIndex = 8;
-            this.MemberCB.Text = "Member";
-            this.MemberCB.UseVisualStyleBackColor = true;
-            // 
-            // AcademyCB
-            // 
-            this.AcademyCB.AutoSize = true;
-            this.AcademyCB.Location = new System.Drawing.Point(479, 337);
-            this.AcademyCB.Name = "AcademyCB";
-            this.AcademyCB.Size = new System.Drawing.Size(87, 20);
-            this.AcademyCB.TabIndex = 9;
-            this.AcademyCB.Text = "Academy";
-            this.AcademyCB.UseVisualStyleBackColor = true;
-            // 
-            // CoachCB
-            // 
-            this.CoachCB.AutoSize = true;
-            this.CoachCB.Location = new System.Drawing.Point(401, 337);
-            this.CoachCB.Name = "CoachCB";
-            this.CoachCB.Size = new System.Drawing.Size(68, 20);
-            this.CoachCB.TabIndex = 10;
-            this.CoachCB.Text = "Coach";
-            this.CoachCB.UseVisualStyleBackColor = true;
-            // 
             // EmptyAlert
             // 
             this.EmptyAlert.ForeColor = System.Drawing.Color.Blue;
@@ -194,17 +167,59 @@
             this.ShowPass.UseVisualStyleBackColor = true;
             this.ShowPass.CheckedChanged += new System.EventHandler(this.ShowPass_CheckedChanged);
             // 
+            // Members
+            // 
+            this.Members.AccessibilityEnabled = true;
+            this.Members.BeforeTouchSize = new System.Drawing.Size(104, 31);
+            this.Members.Font = new System.Drawing.Font("Arial Narrow", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Members.ForeColor = System.Drawing.Color.Red;
+            this.Members.ImageCheckBoxSize = new System.Drawing.Size(16, 16);
+            this.Members.Location = new System.Drawing.Point(314, 335);
+            this.Members.MetroColor = System.Drawing.Color.Red;
+            this.Members.Name = "Members";
+            this.Members.Size = new System.Drawing.Size(104, 31);
+            this.Members.TabIndex = 14;
+            this.Members.Text = "Member";
+            // 
+            // Coach
+            // 
+            this.Coach.AccessibilityEnabled = true;
+            this.Coach.BeforeTouchSize = new System.Drawing.Size(101, 31);
+            this.Coach.Font = new System.Drawing.Font("Arial Narrow", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Coach.ForeColor = System.Drawing.Color.Red;
+            this.Coach.ImageCheckBoxSize = new System.Drawing.Size(16, 16);
+            this.Coach.Location = new System.Drawing.Point(439, 335);
+            this.Coach.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(91)))));
+            this.Coach.Name = "Coach";
+            this.Coach.Size = new System.Drawing.Size(101, 31);
+            this.Coach.TabIndex = 15;
+            this.Coach.Text = "Coach";
+            // 
+            // Academy
+            // 
+            this.Academy.AccessibilityEnabled = true;
+            this.Academy.BeforeTouchSize = new System.Drawing.Size(150, 30);
+            this.Academy.Font = new System.Drawing.Font("Arial Narrow", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Academy.ForeColor = System.Drawing.Color.Red;
+            this.Academy.ImageCheckBoxSize = new System.Drawing.Size(16, 16);
+            this.Academy.Location = new System.Drawing.Point(546, 335);
+            this.Academy.MetroColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(89)))), ((int)(((byte)(91)))));
+            this.Academy.Name = "Academy";
+            this.Academy.Size = new System.Drawing.Size(150, 30);
+            this.Academy.TabIndex = 16;
+            this.Academy.Text = "Academy";
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Academy);
+            this.Controls.Add(this.Coach);
+            this.Controls.Add(this.Members);
             this.Controls.Add(this.ShowPass);
             this.Controls.Add(this.IncorrectCred);
             this.Controls.Add(this.EmptyAlert);
-            this.Controls.Add(this.CoachCB);
-            this.Controls.Add(this.AcademyCB);
-            this.Controls.Add(this.MemberCB);
             this.Controls.Add(this.autoLabel4);
             this.Controls.Add(this.PasswordTB);
             this.Controls.Add(this.UsernameTB);
@@ -219,6 +234,9 @@
             this.Text = "Login";
             ((System.ComponentModel.ISupportInitialize)(this.UsernameTB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PasswordTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Members)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Coach)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Academy)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,11 +252,11 @@
         private Syncfusion.Windows.Forms.Tools.TextBoxExt UsernameTB;
         private Syncfusion.Windows.Forms.Tools.TextBoxExt PasswordTB;
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel4;
-        private System.Windows.Forms.CheckBox MemberCB;
-        private System.Windows.Forms.CheckBox AcademyCB;
-        private System.Windows.Forms.CheckBox CoachCB;
         private Syncfusion.Windows.Forms.Tools.AutoLabel EmptyAlert;
         private Syncfusion.Windows.Forms.Tools.AutoLabel IncorrectCred;
         private System.Windows.Forms.CheckBox ShowPass;
+        private Syncfusion.Windows.Forms.Tools.RadioButtonAdv Members;
+        private Syncfusion.Windows.Forms.Tools.RadioButtonAdv Coach;
+        private Syncfusion.Windows.Forms.Tools.RadioButtonAdv Academy;
     }
 }
