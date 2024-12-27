@@ -53,6 +53,8 @@
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.labelPassword = new System.Windows.Forms.Label();
             this.checkBoxShowPassword = new System.Windows.Forms.CheckBox();
+            this.sfButtonDeleteAccount = new Syncfusion.WinForms.Controls.SfButton();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelName
@@ -295,11 +297,34 @@
             this.checkBoxShowPassword.UseVisualStyleBackColor = true;
             this.checkBoxShowPassword.CheckedChanged += new System.EventHandler(this.checkBoxShowPassword_CheckedChanged);
             // 
+            // sfButtonDeleteAccount
+            // 
+            this.sfButtonDeleteAccount.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
+            this.sfButtonDeleteAccount.Location = new System.Drawing.Point(37, 644);
+            this.sfButtonDeleteAccount.Name = "sfButtonDeleteAccount";
+            this.sfButtonDeleteAccount.Size = new System.Drawing.Size(168, 41);
+            this.sfButtonDeleteAccount.TabIndex = 26;
+            this.sfButtonDeleteAccount.Text = "Delete Account";
+            this.sfButtonDeleteAccount.Click += new System.EventHandler(this.sfButtonDeleteAccount_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.IndianRed;
+            this.label1.Location = new System.Drawing.Point(32, 591);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(176, 25);
+            this.label1.TabIndex = 28;
+            this.label1.Text = "Account Settings";
+            // 
             // AcademiesProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(861, 680);
+            this.ClientSize = new System.Drawing.Size(861, 735);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.sfButtonDeleteAccount);
             this.Controls.Add(this.checkBoxShowPassword);
             this.Controls.Add(this.textBoxPassword);
             this.Controls.Add(this.labelPassword);
@@ -326,6 +351,8 @@
             this.Controls.Add(this.labelAreaExpertise);
             this.Controls.Add(this.labelName);
             this.Name = "AcademiesProfile";
+            this.Style.MdiChild.IconHorizontalAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             this.Text = "Profile";
             this.Load += new System.EventHandler(this.AcademiesProfile_Load);
             this.ResumeLayout(false);
@@ -360,5 +387,7 @@
         private System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.Label labelPassword;
         private System.Windows.Forms.CheckBox checkBoxShowPassword;
+        private Syncfusion.WinForms.Controls.SfButton sfButtonDeleteAccount;
+        private System.Windows.Forms.Label label1;
     }
 }

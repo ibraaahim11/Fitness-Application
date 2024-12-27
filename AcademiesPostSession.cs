@@ -70,7 +70,7 @@ namespace FitnessApplication
             Date = DatePicker.Text;
             Time = TimePicker.Text;
             Duration = DurationPicker.Text;
-            if(Description == "" || Address == "" || Date == "" || Time == "" || Duration == "")
+            if(Description == "" || Address == "" || Date == "" || Time == "" || Duration == "" || (textBoxPrice.Text == "" && checkBoxFree.Checked == false))
             {
                 return false;
             }
@@ -106,6 +106,7 @@ namespace FitnessApplication
                     MessageBox.Show("Please enter an appropriate limit.");
                     return;
                 }
+
                 else
                 {
                     result = controller.AcademyInsertSession(Description, priceFloat, limit, Duration, Address, Date, Time, ID);

@@ -8,10 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Syncfusion.WinForms.Controls;
+using Syncfusion.Windows.Forms;
 
 namespace FitnessApplication
 {
-    public partial class AcademiesProfile : Form
+    public partial class AcademiesProfile : SfForm
     {
         // Controller obj
         Controller controller;
@@ -43,6 +45,40 @@ namespace FitnessApplication
         private void checkBoxShowPassword_CheckedChanged(object sender, EventArgs e)
         {
             textBoxPassword.UseSystemPasswordChar = !textBoxPassword.UseSystemPasswordChar;
+        }
+
+        private void sfButtonDeleteAccount_Click(object sender, EventArgs e)
+        {
+
+            MessageBoxAdv.MessageBoxStyle = MessageBoxAdv.Style.Metro;
+
+            // 3ayzo same colors like academy
+            MessageBoxAdv.MetroColorTable.BackColor = Color.White;        
+            MessageBoxAdv.MetroColorTable.ForeColor = Color.Black;       
+            MessageBoxAdv.MetroColorTable.BorderColor = Color.IndianRed;  
+            MessageBoxAdv.MetroColorTable.CaptionBarColor = Color.LightCoral; 
+            MessageBoxAdv.MetroColorTable.CaptionForeColor = Color.White;
+
+            DialogResult result = MessageBoxAdv.Show(this,
+                "Are you sure you want to delete your account?",
+                "Confirm Deletion",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+
+            if (result == DialogResult.Yes)
+            {
+                MessageBoxAdv.Show(this, "We are sad to see you go :(", "Account Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                controller.DeleteAcademy(ID);
+                controller.DeleteAcademyUser(Username);
+                BaseAcademyForm.Close();
+            }
+            else if (result == DialogResult.No)
+            {
+
+                MessageBoxAdv.Show(this, "Account deletion canceled.", "Action Canceled", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
         }
 
         private void buttonEditCertificate_Click(object sender, EventArgs e)
@@ -145,7 +181,23 @@ namespace FitnessApplication
 
         private void AcademiesProfile_Load(object sender, EventArgs e)
         {
+            // Sets the back color and fore color of the title bar.
+            this.Style.TitleBar.BackColor = Color.LightCoral;
+            this.Style.TitleBar.ForeColor = Color.White;
 
+
+            this.Style.TitleBar.CloseButtonForeColor = Color.White;
+            this.Style.TitleBar.MinimizeButtonForeColor = Color.White;
+            this.Style.TitleBar.MaximizeButtonForeColor = Color.White;
+
+
+            this.Style.TitleBar.CloseButtonHoverBackColor = Color.IndianRed;
+            this.Style.TitleBar.MinimizeButtonHoverBackColor = Color.IndianRed;
+            this.Style.TitleBar.MaximizeButtonHoverBackColor = Color.IndianRed;
+
+            this.Style.TitleBar.CloseButtonPressedBackColor = Color.Crimson;
+            this.Style.TitleBar.MaximizeButtonPressedBackColor = Color.Crimson;
+            this.Style.TitleBar.MinimizeButtonPressedBackColor = Color.Crimson;
         }
 
 

@@ -8,16 +8,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Syncfusion.WinForms.Controls;
 
 namespace FitnessApplication
 {
-    public partial class Academies : Form
+    public partial class Academies : SfForm
     {
         // Controller obj
         Controller controller;
         // Forms to open
         AcademiesProfile ProfileForm;
         AcademiesPostSession PostSessionForm;
+        AcademiesViewSessions ViewSessionsForm;
 
         // Basic Academy info for welcome screen
         int ID;
@@ -47,6 +49,27 @@ namespace FitnessApplication
             labelWelcomeAcademy.Text = $"Welcome, {Name}";
 
         }
+        private void Academies_Load(object sender, EventArgs e)
+        {
+            // Sets the back color and fore color of the title bar.
+            this.Style.TitleBar.BackColor = Color.LightCoral; 
+            this.Style.TitleBar.ForeColor = Color.White;      
+
+
+            this.Style.TitleBar.CloseButtonForeColor = Color.White;
+            this.Style.TitleBar.MinimizeButtonForeColor = Color.White;
+            this.Style.TitleBar.MaximizeButtonForeColor = Color.White;
+
+
+            this.Style.TitleBar.CloseButtonHoverBackColor = Color.IndianRed;  
+            this.Style.TitleBar.MinimizeButtonHoverBackColor = Color.IndianRed;
+            this.Style.TitleBar.MaximizeButtonHoverBackColor = Color.IndianRed;
+
+            this.Style.TitleBar.CloseButtonPressedBackColor = Color.Crimson; 
+            this.Style.TitleBar.MaximizeButtonPressedBackColor = Color.Crimson;
+            this.Style.TitleBar.MinimizeButtonPressedBackColor = Color.Crimson;
+
+        }
 
         private void buttonViewProfile_Click(object sender, EventArgs e)
         {
@@ -62,6 +85,22 @@ namespace FitnessApplication
         {
             PostSessionForm = new AcademiesPostSession(Username, ID);
             PostSessionForm.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ViewSessionsForm = new AcademiesViewSessions(Username, ID);
+            ViewSessionsForm.Show();
+        }
+
+        private void sfButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelWelcomeAcademy_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
