@@ -911,11 +911,11 @@ VALUES
 (1, 'Kickboxing training session for beginners', 30, 20, 0, '01:30:00', 'KickFit Academy Main Hall', '2024-12-05', '10:00:00', 1),
 (2, 'Advanced kickboxing techniques for experienced practitioners', 50, 15, 0, '01:45:00', 'KickFit Academy Main Hall', '2024-12-06', '12:00:00', 1),
 (1, 'Relaxing yoga session focusing on flexibility', 20, 25, 0, '01:00:00', 'ZenYoga Academy Studio A', '2024-12-07', '09:00:00', 2),
-(1, 'Intense powerlifting workout with expert coaching', 40, 10, 1, '02:00:00', 'StrengthX Academy Gym', '2024-12-08', '14:00:00', 4),
+(1, 'Intense powerlifting workout with expert coaching', 40, 2, 1, '02:00:00', 'StrengthX Academy Gym', '2024-12-08', '14:00:00', 4),
 (2, 'Strength and endurance training session', 35, 15, 0, '01:30:00', 'StrengthX Academy Gym', '2024-12-09', '16:00:00', 4),
 (1, 'Rock climbing training for beginners', 45, 12, 0, '02:00:00', 'RockClimb Pro Academy Boulder Room', '2024-12-10', '11:00:00', 3),
 (2, 'Advanced rock climbing techniques for experienced climbers', 60, 8, 0, '02:30:00', 'RockClimb Pro Academy Boulder Room', '2024-12-11', '14:00:00', 3),
-(1, 'Hot yoga session for strength and detox', 30, 20, 1, '01:30:00', 'Bikram Yoga Academy Studio 1', '2024-12-12', '17:00:00', 16),
+(1, 'Hot yoga session for strength and detox', 30, 20, 0, '01:30:00', 'Bikram Yoga Academy Studio 1', '2024-12-12', '17:00:00', 16),
 (1, 'Cycling training session for endurance athletes', 25, 20, 0, '01:30:00', 'PowerCycle Academy Outdoor Track', '2024-12-13', '08:00:00', 18),
 (2, 'Advanced cycling techniques for competitive riders', 40, 10, 0, '02:00:00', 'PowerCycle Academy Outdoor Track', '2024-12-14', '11:00:00', 18);
 
