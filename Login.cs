@@ -23,12 +23,12 @@ namespace FitnessApplication
             this.Text = "Login";
             this.StartPosition = FormStartPosition.CenterScreen;
 
-            this.Style.TitleBar.BackColor = Color.Red;
+            this.Style.TitleBar.BackColor = Color.DarkRed;
             this.Style.TitleBar.ForeColor = Color.White;
             this.Style.TitleBar.Height = 50;
             this.Style.TitleBar.Font = new Font("Arial", 14, FontStyle.Bold);
             this.Style.Border.Width = 2;
-            this.Style.Border.Color = Color.Red;
+            this.Style.Border.Color = Color.DarkRed;
         }
 
         private void LoginButton_Click(object sender, EventArgs e)
@@ -53,8 +53,13 @@ namespace FitnessApplication
                             F.Show();
                             break;
                         case "academy":
-                            Form F2 = new Academies();
-                            F2.Show();
+                            if (controllerobj.IsAcademyAccepted(UsernameTB.Text) == 0)
+                                MessageBox.Show("Your Academy is still under review");
+                            else
+                            {
+                                Form F2 = new Academies();
+                                F2.Show();
+                            }
                             break;
                         case "member":
                             Form F3 = new Members();
@@ -74,6 +79,25 @@ namespace FitnessApplication
                 PasswordTB.PasswordChar = '\0';
             else
                 PasswordTB.PasswordChar = '*';
+        }
+
+        private void Register_Click(object sender, EventArgs e)
+        {
+            if (Academy.Checked == true)
+            {
+                Form F = new AcademyRegister();
+                F.Show();
+            }
+            if (Member.Checked == true)
+            {
+                Form F = new MemberSignup();
+                F.Show();
+            }
+            if (Coach.Checked == true)
+            {
+                Form F = new CoachSignup();
+                F.Show();
+            }
         }
     }
 }

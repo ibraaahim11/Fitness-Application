@@ -56,6 +56,7 @@ namespace FitnessApplication
                     MessageBox.Show("Couldn't Accept Coach");
                 else
                     MessageBox.Show("Coach Accepted successfully");
+
                 NonAcceptedCoaches.DataSource = controllerobj.GetNonAcceptedCoachesData();
                 NonAcceptedCoaches.Refresh();
                 CoachIDCBox.DataSource = controllerobj.GetNonAcceptedCoachesData();

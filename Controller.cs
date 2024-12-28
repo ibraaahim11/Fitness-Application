@@ -8,6 +8,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 using System.Diagnostics;
 using System.Xml.Linq;
+using System.Windows.Forms.Design;
 
 namespace DBapplication
 {
@@ -369,6 +370,78 @@ namespace DBapplication
             {
                 return null;
             }
+        }
+        //////////////////////////////////////// 
+        ///                                  ///
+        ///            new functions         ///
+        ////////////////////////////////////////
+        public DataTable GetAllFeedbacks()
+        {
+            string query = "Select FeedbackID, Comment, Rating, TypeName, DatePosted FROM Feedback, FeedbackTypes where FeedbackTypeID = TypeID ";
+            return dbMan.ExecuteReader(query);  
+        }
+        public DataTable GetAllBadges()
+        {
+            string query = "select BadgeID, BadgeName, Description, PointsNeeded from Badges";
+            return dbMan.ExecuteReader(query);
+        }
+        public int AddBadge(string name, string description, int points)
+        {
+            string query;
+            if (points == 0)
+                query = $"insert into Badges values ('{name}', '{description}', null)";
+            else
+                query = $"insert into Badges values ('{name}', '{description}', {points})";
+            return dbMan.ExecuteNonQuery(query);
+        }
+        public int RemoveBadge(int id)
+        {
+            string query = $"delete from Badges where BadgeID = {id}";
+            return dbMan.ExecuteNonQuery(query);
+        }
+        public DataTable getAllHabits ()
+        {
+            string query = "select HabitID, HabitName, Description, Points from DailyHabits";
+            return dbMan.ExecuteReader(query);  
+        }
+        public int AddDailyHabit(string name, string description, int points)
+        {
+            string query;
+            if (description == "")
+                query = $"insert into DailyHabits values ('{name}', null, {points}, 3)";
+            else
+                query = $"insert into DailyHabits values ('{name}', '{description}', {points}, 2)";
+            return dbMan.ExecuteNonQuery(query);    
+        }
+        public int RemoveDailyHabit(int id)
+        {
+            string query = $"Delete from DailyHabits where HabitID = {id}";
+            return dbMan.ExecuteNonQuery(query);
+        }
+        public int IsAcademyAccepted(string username)
+        {
+            string query = $"select count(*) from Academies where Username = '{username}' and Accepted = 1";
+            return (int)dbMan.ExecuteScalar(query);
+        }
+        public int AddAcademy(string username, string name, string description, string areaofexperties, string certificatetitle, string certitficatedateofissue, string CertificateExpirationDate, string issueingbody)
+        {
+            string query = $"INSERT INTO Academies (Username, Name, Description, AreaOfExpertise, Accepted, CertificateTitle, CertificateDateOfIssue, CertificateExpirationDate, CertificateIssuingBody) VALUES ('{username}', '{name}', '{description}', '{areaofexperties}', 0, '{certificatetitle}', '{certitficatedateofissue}', '{CertificateExpirationDate}', '{issueingbody}')";
+            return dbMan.ExecuteNonQuery(query);    
+        }
+        public int AddUser(string username, string password, string type)
+        {
+            string query = $"insert into Users values ('{username}', '{password}', '{type}')";
+            return dbMan.ExecuteNonQuery(query);
+        }
+        public int AddMember(string username, string fname, string lname, int age, double weight, double height, char gender)
+        {
+            string query = $"INSERT INTO Members (Username, Fname, Lname, Age, Weight, Height, AllowedCalorieIntake, Streak, Points, Gender, FitnessGoalID, DietID) VALUES ('{username}', '{fname}', '{lname}', {age}, {weight}, {height}, null, 0, 0, '{gender}', null, null)";
+            return dbMan.ExecuteNonQuery(query);
+        }
+        public int AddCoach (string username, string fname, string lname, int age, char gender, string CertTitle, string CertDate, string CertExp, string CertBody)
+        {
+            string query = $"INSERT INTO Coaches (Username, Fname, Lname, Age, Gender, MemberLimit, Accepted, CertificateTitle, CertificateDateOfIssue, CertificateExpirationDate, CertificateIssuingBody) VALUES ('{username}', '{fname}', '{lname}', {age}, '{gender}', 0, 0, '{CertTitle}', '{CertDate}', '{CertExp}', '{CertBody}')";
+            return dbMan.ExecuteNonQuery(query);
         }
     }
 }

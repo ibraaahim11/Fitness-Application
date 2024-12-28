@@ -32,6 +32,8 @@
             this.ManageCoachRequests = new Syncfusion.WinForms.Controls.SfButton();
             this.ManageCoaches = new Syncfusion.WinForms.Controls.SfButton();
             this.CoachMemberOverview = new Syncfusion.WinForms.Controls.SfButton();
+            this.autoLabel2 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
+            this.ViewFeedback = new Syncfusion.WinForms.Controls.SfButton();
             this.SuspendLayout();
             // 
             // autoLabel1
@@ -91,11 +93,38 @@
             this.CoachMemberOverview.UseVisualStyleBackColor = false;
             this.CoachMemberOverview.Click += new System.EventHandler(this.CoachMemberOverview_Click);
             // 
+            // autoLabel2
+            // 
+            this.autoLabel2.Font = new System.Drawing.Font("Arial", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.autoLabel2.ForeColor = System.Drawing.Color.Green;
+            this.autoLabel2.Location = new System.Drawing.Point(566, 71);
+            this.autoLabel2.Name = "autoLabel2";
+            this.autoLabel2.Size = new System.Drawing.Size(132, 27);
+            this.autoLabel2.TabIndex = 8;
+            this.autoLabel2.Text = "Feedbacks";
+            // 
+            // ViewFeedback
+            // 
+            this.ViewFeedback.BackColor = System.Drawing.Color.DarkGreen;
+            this.ViewFeedback.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ViewFeedback.ForeColor = System.Drawing.Color.White;
+            this.ViewFeedback.Location = new System.Drawing.Point(516, 127);
+            this.ViewFeedback.Name = "ViewFeedback";
+            this.ViewFeedback.Size = new System.Drawing.Size(238, 42);
+            this.ViewFeedback.Style.BackColor = System.Drawing.Color.DarkGreen;
+            this.ViewFeedback.Style.ForeColor = System.Drawing.Color.White;
+            this.ViewFeedback.TabIndex = 9;
+            this.ViewFeedback.Text = "View Feedback";
+            this.ViewFeedback.UseVisualStyleBackColor = false;
+            this.ViewFeedback.Click += new System.EventHandler(this.ViewFeedback_Click);
+            // 
             // CoachMemManaging
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ViewFeedback);
+            this.Controls.Add(this.autoLabel2);
             this.Controls.Add(this.CoachMemberOverview);
             this.Controls.Add(this.ManageCoaches);
             this.Controls.Add(this.ManageCoachRequests);
@@ -114,5 +143,7 @@
         private Syncfusion.WinForms.Controls.SfButton ManageCoachRequests;
         private Syncfusion.WinForms.Controls.SfButton ManageCoaches;
         private Syncfusion.WinForms.Controls.SfButton CoachMemberOverview;
+        private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel2;
+        private Syncfusion.WinForms.Controls.SfButton ViewFeedback;
     }
 }

@@ -33,6 +33,8 @@
             this.ToCoachesAndMembers = new Syncfusion.WinForms.Controls.SfButton();
             this.AdminUsername = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.AddAdmin = new Syncfusion.WinForms.Controls.SfButton();
+            this.ManageBadges = new Syncfusion.WinForms.Controls.SfButton();
+            this.DailyHabits = new Syncfusion.WinForms.Controls.SfButton();
             this.SuspendLayout();
             // 
             // EditProfile
@@ -41,7 +43,7 @@
             this.EditProfile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.EditProfile.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.EditProfile.ForeColor = System.Drawing.Color.White;
-            this.EditProfile.Location = new System.Drawing.Point(23, 158);
+            this.EditProfile.Location = new System.Drawing.Point(23, 147);
             this.EditProfile.Name = "EditProfile";
             this.EditProfile.Size = new System.Drawing.Size(215, 48);
             this.EditProfile.Style.BackColor = System.Drawing.Color.DarkGreen;
@@ -93,7 +95,7 @@
             this.AddAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddAdmin.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddAdmin.ForeColor = System.Drawing.Color.White;
-            this.AddAdmin.Location = new System.Drawing.Point(23, 238);
+            this.AddAdmin.Location = new System.Drawing.Point(23, 246);
             this.AddAdmin.Name = "AddAdmin";
             this.AddAdmin.Size = new System.Drawing.Size(215, 48);
             this.AddAdmin.Style.BackColor = System.Drawing.Color.DarkGreen;
@@ -103,11 +105,43 @@
             this.AddAdmin.UseVisualStyleBackColor = false;
             this.AddAdmin.Click += new System.EventHandler(this.AddAdmin_Click);
             // 
+            // ManageBadges
+            // 
+            this.ManageBadges.BackColor = System.Drawing.Color.DarkGreen;
+            this.ManageBadges.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ManageBadges.ForeColor = System.Drawing.Color.White;
+            this.ManageBadges.Location = new System.Drawing.Point(272, 246);
+            this.ManageBadges.Name = "ManageBadges";
+            this.ManageBadges.Size = new System.Drawing.Size(215, 48);
+            this.ManageBadges.Style.BackColor = System.Drawing.Color.DarkGreen;
+            this.ManageBadges.Style.ForeColor = System.Drawing.Color.White;
+            this.ManageBadges.TabIndex = 14;
+            this.ManageBadges.Text = "Manage Badges";
+            this.ManageBadges.UseVisualStyleBackColor = false;
+            this.ManageBadges.Click += new System.EventHandler(this.ManageBadges_Click);
+            // 
+            // DailyHabits
+            // 
+            this.DailyHabits.BackColor = System.Drawing.Color.DarkGreen;
+            this.DailyHabits.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DailyHabits.ForeColor = System.Drawing.Color.White;
+            this.DailyHabits.Location = new System.Drawing.Point(272, 147);
+            this.DailyHabits.Name = "DailyHabits";
+            this.DailyHabits.Size = new System.Drawing.Size(215, 48);
+            this.DailyHabits.Style.BackColor = System.Drawing.Color.DarkGreen;
+            this.DailyHabits.Style.ForeColor = System.Drawing.Color.White;
+            this.DailyHabits.TabIndex = 15;
+            this.DailyHabits.Text = "View Daily Habits";
+            this.DailyHabits.UseVisualStyleBackColor = false;
+            this.DailyHabits.Click += new System.EventHandler(this.DailyHabits_Click);
+            // 
             // AdminUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(801, 447);
+            this.Controls.Add(this.DailyHabits);
+            this.Controls.Add(this.ManageBadges);
             this.Controls.Add(this.AddAdmin);
             this.Controls.Add(this.AdminUsername);
             this.Controls.Add(this.ToCoachesAndMembers);
@@ -130,5 +164,7 @@
         private Syncfusion.WinForms.Controls.SfButton ToCoachesAndMembers;
         private Syncfusion.Windows.Forms.Tools.AutoLabel AdminUsername;
         private Syncfusion.WinForms.Controls.SfButton AddAdmin;
+        private Syncfusion.WinForms.Controls.SfButton ManageBadges;
+        private Syncfusion.WinForms.Controls.SfButton DailyHabits;
     }
 }

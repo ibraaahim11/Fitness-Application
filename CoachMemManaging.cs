@@ -46,5 +46,11 @@ namespace FitnessApplication
             Form F = new CoachMemberOverview();
             F.Show();
         }
+
+        private void ViewFeedback_Click(object sender, EventArgs e)
+        {
+            Form F = new ViewFeedbacks();
+            F.Show();
+        }
     }
 }

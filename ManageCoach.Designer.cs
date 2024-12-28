@@ -36,16 +36,16 @@
             this.autoLabel2 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.autoLabel3 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
             this.autoLabel4 = new Syncfusion.Windows.Forms.Tools.AutoLabel();
-            this.MemberlimitTBox = new Syncfusion.Windows.Forms.Tools.IntegerTextBox();
             this.CoachIDCBox = new Syncfusion.WinForms.ListView.SfComboBox();
             this.CoachMemCount = new Syncfusion.Windows.Forms.Tools.IntegerTextBox();
             this.CoachRating = new Syncfusion.Windows.Forms.Tools.IntegerTextBox();
             this.EditMemberLimitB = new Syncfusion.WinForms.Controls.SfButton();
+            this.MemberLimitTBox = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             ((System.ComponentModel.ISupportInitialize)(this.AllAvaCoachesData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MemberlimitTBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CoachIDCBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CoachMemCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.CoachRating)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MemberLimitTBox)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
@@ -127,17 +127,6 @@
             this.autoLabel4.TabIndex = 22;
             this.autoLabel4.Text = "Edit Coach\'s Member Limit";
             // 
-            // MemberlimitTBox
-            // 
-            this.MemberlimitTBox.AccessibilityEnabled = true;
-            this.MemberlimitTBox.BeforeTouchSize = new System.Drawing.Size(100, 22);
-            this.MemberlimitTBox.IntegerValue = ((long)(0));
-            this.MemberlimitTBox.Location = new System.Drawing.Point(231, 317);
-            this.MemberlimitTBox.Name = "MemberlimitTBox";
-            this.MemberlimitTBox.Size = new System.Drawing.Size(100, 22);
-            this.MemberlimitTBox.TabIndex = 24;
-            this.MemberlimitTBox.Text = "0";
-            // 
             // CoachIDCBox
             // 
             this.CoachIDCBox.DropDownPosition = Syncfusion.WinForms.Core.Enums.PopupRelativeAlignment.Center;
@@ -152,26 +141,26 @@
             // CoachMemCount
             // 
             this.CoachMemCount.AccessibilityEnabled = true;
-            this.CoachMemCount.BeforeTouchSize = new System.Drawing.Size(100, 22);
+            this.CoachMemCount.BeforeTouchSize = new System.Drawing.Size(113, 22);
             this.CoachMemCount.Enabled = false;
+            this.CoachMemCount.ForeColor = System.Drawing.SystemColors.WindowText;
             this.CoachMemCount.IntegerValue = ((long)(0));
             this.CoachMemCount.Location = new System.Drawing.Point(435, 265);
             this.CoachMemCount.Name = "CoachMemCount";
             this.CoachMemCount.Size = new System.Drawing.Size(100, 22);
             this.CoachMemCount.TabIndex = 28;
-            this.CoachMemCount.Text = "0";
             // 
             // CoachRating
             // 
             this.CoachRating.AccessibilityEnabled = true;
-            this.CoachRating.BeforeTouchSize = new System.Drawing.Size(100, 22);
+            this.CoachRating.BeforeTouchSize = new System.Drawing.Size(113, 22);
             this.CoachRating.Enabled = false;
+            this.CoachRating.ForeColor = System.Drawing.SystemColors.WindowText;
             this.CoachRating.IntegerValue = ((long)(0));
             this.CoachRating.Location = new System.Drawing.Point(675, 265);
             this.CoachRating.Name = "CoachRating";
             this.CoachRating.Size = new System.Drawing.Size(100, 22);
             this.CoachRating.TabIndex = 29;
-            this.CoachRating.Text = "0";
             // 
             // EditMemberLimitB
             // 
@@ -188,16 +177,24 @@
             this.EditMemberLimitB.UseVisualStyleBackColor = false;
             this.EditMemberLimitB.Click += new System.EventHandler(this.EditMemberLimitB_Click);
             // 
+            // MemberLimitTBox
+            // 
+            this.MemberLimitTBox.BeforeTouchSize = new System.Drawing.Size(113, 22);
+            this.MemberLimitTBox.Location = new System.Drawing.Point(229, 316);
+            this.MemberLimitTBox.Name = "MemberLimitTBox";
+            this.MemberLimitTBox.Size = new System.Drawing.Size(113, 22);
+            this.MemberLimitTBox.TabIndex = 31;
+            // 
             // ManageCoach
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.MemberLimitTBox);
             this.Controls.Add(this.EditMemberLimitB);
             this.Controls.Add(this.CoachRating);
             this.Controls.Add(this.CoachMemCount);
             this.Controls.Add(this.CoachIDCBox);
-            this.Controls.Add(this.MemberlimitTBox);
             this.Controls.Add(this.autoLabel4);
             this.Controls.Add(this.autoLabel3);
             this.Controls.Add(this.autoLabel2);
@@ -211,10 +208,10 @@
             this.Style.MdiChild.IconVerticalAlignment = System.Windows.Forms.VisualStyles.VerticalAlignment.Center;
             this.Text = "ManageCoach";
             ((System.ComponentModel.ISupportInitialize)(this.AllAvaCoachesData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MemberlimitTBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CoachIDCBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CoachMemCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.CoachRating)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MemberLimitTBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -229,10 +226,10 @@
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel2;
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel3;
         private Syncfusion.Windows.Forms.Tools.AutoLabel autoLabel4;
-        private Syncfusion.Windows.Forms.Tools.IntegerTextBox MemberlimitTBox;
         private Syncfusion.WinForms.ListView.SfComboBox CoachIDCBox;
         private Syncfusion.Windows.Forms.Tools.IntegerTextBox CoachMemCount;
         private Syncfusion.Windows.Forms.Tools.IntegerTextBox CoachRating;
         private Syncfusion.WinForms.Controls.SfButton EditMemberLimitB;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt MemberLimitTBox;
     }
 }

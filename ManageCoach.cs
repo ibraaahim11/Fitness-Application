@@ -92,7 +92,7 @@ namespace FitnessApplication
                 MessageBox.Show("No Coach to edit");
             else
             {
-                if (int.TryParse(MemberlimitTBox.Text, out newLimit))
+                if (int.TryParse(MemberLimitTBox.Text, out newLimit))
                 {
                     if (newLimit < Convert.ToInt16(CoachMemCount.Text))
                         MessageBox.Show("Cannot Set a limit lower than the current member count for the coach");

@@ -58,5 +58,17 @@ namespace FitnessApplication
             Form F = new AddAdmin();
             F.Show();
         }
+
+        private void ManageBadges_Click(object sender, EventArgs e)
+        {
+            Form F = new ManageBadges();
+            F.Show();
+        }
+
+        private void DailyHabits_Click(object sender, EventArgs e)
+        {
+            Form F = new viewDailyHabit();
+            F.Show();
+        }
     }
 }

@@ -116,6 +116,12 @@
     <Compile Include="CoachMemManaging.Designer.cs">
       <DependentUpon>CoachMemManaging.cs</DependentUpon>
     </Compile>
+    <Compile Include="CoachSignup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CoachSignup.Designer.cs">
+      <DependentUpon>CoachSignup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controller.cs" />
     <Compile Include="DBManager.cs" />
     <Compile Include="Form1.cs">
@@ -148,6 +154,12 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManageBadges.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageBadges.Designer.cs">
+      <DependentUpon>ManageBadges.cs</DependentUpon>
+    </Compile>
     <Compile Include="ManageCoach.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,6 +185,12 @@
     <Compile Include="Members.Designer.cs">
       <DependentUpon>Members.cs</DependentUpon>
     </Compile>
+    <Compile Include="MemberSignup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MemberSignup.Designer.cs">
+      <DependentUpon>MemberSignup.cs</DependentUpon>
+    </Compile>
     <Compile Include="MembersProfile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -181,6 +199,21 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="viewDailyHabit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="viewDailyHabit.Designer.cs">
+      <DependentUpon>viewDailyHabit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewFeedbacks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewFeedbacks.Designer.cs">
+      <DependentUpon>ViewFeedbacks.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AcademyRegister.resx">
+      <DependentUpon>AcademyRegister.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddAdmin.resx">
       <DependentUpon>AddAdmin.cs</DependentUpon>
     </EmbeddedResource>
@@ -196,11 +229,17 @@
     <EmbeddedResource Include="CoachMemManaging.resx">
       <DependentUpon>CoachMemManaging.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CoachSignup.resx">
+      <DependentUpon>CoachSignup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageBadges.resx">
+      <DependentUpon>ManageBadges.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManageCoach.resx">
       <DependentUpon>ManageCoach.cs</DependentUpon>
@@ -223,6 +262,9 @@
     <EmbeddedResource Include="Members.resx">
       <DependentUpon>Members.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MemberSignup.resx">
+      <DependentUpon>MemberSignup.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MembersProfile.resx">
       <DependentUpon>MembersProfile.cs</DependentUpon>
     </EmbeddedResource>
@@ -235,6 +277,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="viewDailyHabit.resx">
+      <DependentUpon>viewDailyHabit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewFeedbacks.resx">
+      <DependentUpon>ViewFeedbacks.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
