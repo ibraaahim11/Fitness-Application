@@ -17,8 +17,9 @@ namespace FitnessApplication
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NMaF5cXmVCf1FpRmJGdld5fUVHYVZUTXxaS00DNHVRdkdnWH1cdnRRQmheV0B1Wkc=");
-        //    Application.Run(new Academies());
-           Application.Run(new Members());
+            //    Application.Run(new Academies());
+            string Username = "alice_johnson";
+            Application.Run(new Members(Username));
         }
     }
 }

@@ -62,7 +62,7 @@
             // 
             // memberusernametextbox
             // 
-            this.memberusernametextbox.BeforeTouchSize = new System.Drawing.Size(133, 26);
+            this.memberusernametextbox.BeforeTouchSize = new System.Drawing.Size(233, 26);
             this.memberusernametextbox.Location = new System.Drawing.Point(188, 65);
             this.memberusernametextbox.Name = "memberusernametextbox";
             this.memberusernametextbox.Size = new System.Drawing.Size(133, 26);
@@ -70,7 +70,7 @@
             // 
             // memberfirstnametextbox
             // 
-            this.memberfirstnametextbox.BeforeTouchSize = new System.Drawing.Size(133, 26);
+            this.memberfirstnametextbox.BeforeTouchSize = new System.Drawing.Size(233, 26);
             this.memberfirstnametextbox.Location = new System.Drawing.Point(188, 124);
             this.memberfirstnametextbox.Name = "memberfirstnametextbox";
             this.memberfirstnametextbox.Size = new System.Drawing.Size(133, 26);
@@ -78,7 +78,7 @@
             // 
             // memberlastnametextbox
             // 
-            this.memberlastnametextbox.BeforeTouchSize = new System.Drawing.Size(133, 26);
+            this.memberlastnametextbox.BeforeTouchSize = new System.Drawing.Size(233, 26);
             this.memberlastnametextbox.Location = new System.Drawing.Point(188, 187);
             this.memberlastnametextbox.Name = "memberlastnametextbox";
             this.memberlastnametextbox.Size = new System.Drawing.Size(133, 26);
@@ -86,7 +86,7 @@
             // 
             // memberagetextbox
             // 
-            this.memberagetextbox.BeforeTouchSize = new System.Drawing.Size(133, 26);
+            this.memberagetextbox.BeforeTouchSize = new System.Drawing.Size(233, 26);
             this.memberagetextbox.Location = new System.Drawing.Point(188, 250);
             this.memberagetextbox.Name = "memberagetextbox";
             this.memberagetextbox.Size = new System.Drawing.Size(133, 26);
@@ -94,7 +94,7 @@
             // 
             // memberweighttextbox
             // 
-            this.memberweighttextbox.BeforeTouchSize = new System.Drawing.Size(133, 26);
+            this.memberweighttextbox.BeforeTouchSize = new System.Drawing.Size(233, 26);
             this.memberweighttextbox.Location = new System.Drawing.Point(188, 321);
             this.memberweighttextbox.Name = "memberweighttextbox";
             this.memberweighttextbox.Size = new System.Drawing.Size(133, 26);
@@ -102,7 +102,7 @@
             // 
             // memberheighttextbox
             // 
-            this.memberheighttextbox.BeforeTouchSize = new System.Drawing.Size(133, 26);
+            this.memberheighttextbox.BeforeTouchSize = new System.Drawing.Size(233, 26);
             this.memberheighttextbox.Location = new System.Drawing.Point(188, 378);
             this.memberheighttextbox.Name = "memberheighttextbox";
             this.memberheighttextbox.Size = new System.Drawing.Size(133, 26);
@@ -185,16 +185,16 @@
             // 
             // memberpasswordtextbox
             // 
-            this.memberpasswordtextbox.BeforeTouchSize = new System.Drawing.Size(133, 26);
-            this.memberpasswordtextbox.Location = new System.Drawing.Point(583, 65);
+            this.memberpasswordtextbox.BeforeTouchSize = new System.Drawing.Size(177, 26);
+            this.memberpasswordtextbox.Location = new System.Drawing.Point(568, 65);
             this.memberpasswordtextbox.Name = "memberpasswordtextbox";
-            this.memberpasswordtextbox.Size = new System.Drawing.Size(152, 26);
+            this.memberpasswordtextbox.Size = new System.Drawing.Size(177, 26);
             this.memberpasswordtextbox.TabIndex = 19;
             this.memberpasswordtextbox.TextChanged += new System.EventHandler(this.memberpasswordtextbox_TextChanged);
             // 
             // membergendertextbox
             // 
-            this.membergendertextbox.BeforeTouchSize = new System.Drawing.Size(133, 26);
+            this.membergendertextbox.BeforeTouchSize = new System.Drawing.Size(233, 26);
             this.membergendertextbox.Location = new System.Drawing.Point(188, 438);
             this.membergendertextbox.Name = "membergendertextbox";
             this.membergendertextbox.Size = new System.Drawing.Size(133, 26);
@@ -218,6 +218,7 @@
             this.memberdeletebutton.Size = new System.Drawing.Size(171, 33);
             this.memberdeletebutton.TabIndex = 22;
             this.memberdeletebutton.Text = "Delete Account";
+            this.memberdeletebutton.Click += new System.EventHandler(this.memberdeletebutton_Click);
             // 
             // membershowPasswordcheckbox
             // 
@@ -233,10 +234,11 @@
             // memberfitnessgoalcombo
             // 
             this.memberfitnessgoalcombo.FormattingEnabled = true;
-            this.memberfitnessgoalcombo.Location = new System.Drawing.Point(583, 358);
+            this.memberfitnessgoalcombo.Location = new System.Drawing.Point(568, 366);
             this.memberfitnessgoalcombo.Name = "memberfitnessgoalcombo";
-            this.memberfitnessgoalcombo.Size = new System.Drawing.Size(152, 28);
+            this.memberfitnessgoalcombo.Size = new System.Drawing.Size(177, 28);
             this.memberfitnessgoalcombo.TabIndex = 25;
+            this.memberfitnessgoalcombo.SelectedIndexChanged += new System.EventHandler(this.memberfitnessgoalcombo_SelectedIndexChanged);
             // 
             // autoLabel9
             // 

@@ -13,6 +13,7 @@ using System.Collections;
 using System.Data.SqlClient;
 using FitnessApplication;
 using static System.ComponentModel.Design.ObjectSelectorEditor;
+using static Syncfusion.Windows.Forms.Tools.NavigationView;
 
 namespace DBapplication
 {
@@ -353,7 +354,9 @@ namespace DBapplication
             string query = $"UPDATE Members SET Points = Points + {pointsToAdd} WHERE MemberID = {ID}";
             return dbMan.ExecuteNonQuery(query);
 
+
         }
+
         // 4. Log Calories
         ///////////////////////////////////////////////
         //public int LogCalories(int ID, string Datetime , int caloriesConsumed)   
@@ -489,15 +492,15 @@ namespace DBapplication
         {
             int caloriess;
 
-            // Calculate BMR based on gender using an if condition
+           
             if (gender == 'M')
             {
-                // Male BMR calculation
+               
                 caloriess = (int)(88.362 + (13.397 * (double)weight) + (4.799 * (double)height) - (5.677 * age));
             }
             else if (gender == 'F')
             {
-                // Female BMR calculation
+               
                 caloriess = (int)(447.593 + (9.247 * (double)weight) + (3.098 * (double)height) - (4.330 * age));
             }
             else
@@ -516,12 +519,90 @@ namespace DBapplication
         }
         /////////////////////////////////////////////////////////////////////////////////////////////////
         ///new but also fih fo2 new///////////////////////////////////////////////////////////
-        ///
+        ///ibrahim ask
         public int GetMemberRankById(int memberId)
         {
             string query = $"SELECT 1 + (SELECT COUNT(*) FROM Members AS OtherMembers WHERE OtherMembers.Points > (SELECT Points FROM Members WHERE MemberID = {memberId}))";
             return Convert.ToInt32(dbMan.ExecuteScalar(query));
         }
+        public DataTable getbadgesearnedbyMember(int memberId)
+        {
+            string query = $"SELECT b.BadgeName, b.Description, b.PointsNeeded, be.DateEarned " +
+                           $"FROM Badges b, BadgesEarned be " +
+                           $"WHERE b.BadgeID = be.BadgeID AND be.MemberID = {memberId}";
 
+            return dbMan.ExecuteReader(query);
+        }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////for feedback//////////////////////////////////
+        public DataTable GetFeedbackTypes()
+        {
+            string query = "SELECT TypeID, TypeName FROM FeedbackTypes";
+            return dbMan.ExecuteReader(query);
+        }
+
+     
+        public int Insertfeedback(int Id, string feedbackText, int rating, int feedbackTypeId, string feedbackDate)
+        {
+         
+            string query1 = $"INSERT INTO Feedback (Comment, Rating, FeedbackTypeID, DatePosted) " +
+                                     $"VALUES ('{feedbackText}', {rating}, {feedbackTypeId}, '{feedbackDate}')";
+
+            dbMan.ExecuteNonQuery(query1);
+
+          
+            string getLastInsertedIdQuery = "SELECT MAX(FeedbackID) FROM Feedback";
+            int feedbackId = Convert.ToInt32(dbMan.ExecuteScalar(getLastInsertedIdQuery));
+
+            // inserting into MemberFeedback table //ask ibrahim abt identity (1,1)
+            string q2 = $"INSERT INTO MemberFeedback (FeedbackID, MemberID) VALUES ({feedbackId}, {Id});";
+            dbMan.ExecuteNonQuery(q2);
+
+            return feedbackId; 
+        }
+
+        public bool DoesMemberHaveCoach(int memberId)
+        {
+            string query = $"SELECT COUNT(*) FROM CoachedBy WHERE MemberID = {memberId} AND Ongoing = 1";
+            int count = Convert.ToInt32(dbMan.ExecuteScalar(query));
+            if (count > 0)
+            { return true; }
+            else { return false; }
+           
+        }
+
+        public int GetFeedbackTypeID(string feedbackTypeName)
+        {
+            string query = $"SELECT TypeID FROM FeedbackTypes WHERE TypeName = '{feedbackTypeName}'";
+            return Convert.ToInt32(dbMan.ExecuteScalar(query));
+        }
+        public int UpdateCoachedByRating(int memberId, decimal newRating)
+        {
+            
+            string query = $"UPDATE CoachedBy SET Rating = {newRating} WHERE MemberID = {memberId} AND Ongoing = {1}";
+
+           
+            return dbMan.ExecuteNonQuery(query);
+        }
+        public decimal GetAverageCaloriesIntake(int memberId)
+        {
+            string query = $"SELECT AVG(CaloriesConsumed) FROM MemberLogCalories WHERE MemberID = {memberId}";
+            return Convert.ToDecimal(dbMan.ExecuteScalar(query));
+        }
+        public decimal GetAverageCaloriesBurned(int memberId)
+        {
+            string query = $"SELECT AVG(CaloriesBurned) FROM MemberLogExercise WHERE MemberID = {memberId}";
+            return Convert.ToDecimal(dbMan.ExecuteScalar(query));
+        }
+        public bool DeleteMember(int memberId)
+        {
+            string query = $"DELETE FROM Members WHERE MemberID = {memberId}";
+            return dbMan.ExecuteNonQuery(query) > 0;
+        }
+        public bool DeleteUser(string username)
+        {
+            string query = $"DELETE FROM Users WHERE Username = '{username}'";
+            return dbMan.ExecuteNonQuery(query) > 0;
+        }
     }
 }

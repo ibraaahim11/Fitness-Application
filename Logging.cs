@@ -18,7 +18,7 @@ namespace FitnessApplication
     {
         Controller controller;
         Logging logingform;
-        //DateTimeLogged DATETIME,
+     
         int ID, ExerciseID, MinutesExercised, PointsAwarded;
             decimal CaloriesBurned;
         int caloriesentered;
@@ -26,7 +26,7 @@ namespace FitnessApplication
         string datetimetoinsert;
         int streak;
         int allowedcalories;
-
+        Members basemembersform;
         // For now as there is no login screen
         string Username = "alice_johnson";
         string Name;
@@ -125,11 +125,12 @@ namespace FitnessApplication
                 pointsawardedlabel1.Visible = true;
                 actualpointslabel.Visible = true;
             }
-            //   int updatedPoints = controller.UpdateMemberPoints(ID, PointsAwarded);
+                    
             //    MessageBox.Show("Exercise logged successfully! Points awarded: " + PointsAwarded.ToString());
             if (resultoflogexercise == 1 && resultoflogcalories != 1)
             {
                 MessageBox.Show("Exercise logged successfully! ");
+                controller.UpdateMemberPoints(ID, PointsAwarded);
 
                 memberminsexercisedtextbox.Text = "";
             }
@@ -141,6 +142,7 @@ namespace FitnessApplication
             else if(resultoflogexercise == 1 && resultoflogcalories == 1&& MinutesExercised!=0)
             {
                 MessageBox.Show(" Exercise and Calories logged successfully!.");
+                controller.UpdateMemberPoints(ID, PointsAwarded);
             }
             else
             {
@@ -148,12 +150,11 @@ namespace FitnessApplication
             }
          
 
-            //memberlogexercisescombo.SelectedIndex = 0;
-           // MinutesExercised = 0;
+            
 
         }
 
-        Members basemembersform;
+     
                    
        
      
@@ -209,7 +210,7 @@ namespace FitnessApplication
       
             datetimelog.Format = DateTimePickerFormat.Custom;
             datetimelog.CustomFormat = "yyyy-MM-dd HH:mm:ss";
-            // memberlogexercisescombo.ValueMember = "ExerciseID";
+         
             memberlogexercisescombo.SelectedIndex = -1;
             memberminsexercisedtextbox.Visible = false;
             minexerclabel.Visible = false;
@@ -233,9 +234,7 @@ namespace FitnessApplication
             prompttoenterminslabel.Visible = false;
 
             if (memberlogexercisescombo.SelectedIndex > -1) 
-            {         // get exerciseid from name
-                      // ExerciseID = controller.GetExerciseIDByName(memberlogexercisescombo.SelectedIndex.ToString());
-                      // Extract exercise ID from the ComboBox selection
+            {        
                 ExerciseID = controller.GetExerciseID(memberlogexercisescombo.SelectedValue.ToString());
                 memberminsexercisedtextbox.Visible = true;
                 prompttoenterminslabel.Visible=true;
@@ -245,7 +244,7 @@ namespace FitnessApplication
 
 
                 minexerclabel.Visible = true;
-                // ... (show exercise details and points section) ...
+              
 
             }
            
@@ -253,6 +252,40 @@ namespace FitnessApplication
         }
         private void Logging_Load(object sender, EventArgs e)
         {
+
+            // Set form background color to a pastel blue shade
+            this.BackColor = Color.FromArgb(220, 230, 240);
+
+            // Customize buttons
+            var buttons = new[] { memberviewstreakbutton, logbothbutton };
+            foreach (var button in buttons)
+            {
+                button.FlatStyle = FlatStyle.Flat;
+                button.FlatAppearance.BorderSize = 1;
+                button.FlatAppearance.BorderColor = Color.FromArgb(150, 170, 180); // Lighter blue border
+                button.FlatAppearance.MouseOverBackColor = Color.FromArgb(150, 170, 180); // Lighter blue hover color
+                button.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+                button.ForeColor = Color.White;
+                button.BackColor = Color.FromArgb(100, 120, 140); // Lighter blue button color
+            }
+
+            // Customize labels (autoLabels)
+            var labels = new[] { autoLabel1, autoLabel3, autoLabel8, minexerclabel, calorieslabel1, pointsawardedlabel1 };
+            foreach (var label in labels)
+            {
+                label.ForeColor = Color.FromArgb(50, 50, 50); // Darker gray text color
+            }
+
+            // Customize textboxes
+            var textboxes = new[] { memberlogcaloriestextbox, memberminsexercisedtextbox };
+            foreach (var textbox in textboxes)
+            {
+                textbox.BackColor = Color.FromArgb(200, 210, 220); // Lighter blue textbox background
+                textbox.ForeColor = Color.Black; // Black text for textbox
+            }
+
+            // Hide prompt label initially (assuming prompt label is prompttoenterminslabel)
+            prompttoenterminslabel.Visible = false;
 
 
         }
