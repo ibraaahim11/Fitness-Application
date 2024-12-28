@@ -9,33 +9,33 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DBapplication;
 using Syncfusion.WinForms.Controls;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace FitnessApplication
 {
-    public partial class ViewMember : SfForm
+    public partial class Statistics : SfForm
     {
-        ViewMember viewmember;
-        Statistics statistics;
         Controller controller;
         int ID;
         string username;
         Coach BaseCoachForm;
-        public ViewMember(int ID, string username, Coach BaseCoachForm)
+        public Statistics(int ID, string username, Coach BaseCoachForm)
         {
             InitializeComponent();
             controller = new Controller();
             this.ID = ID;
             this.username = username;
             this.BaseCoachForm = BaseCoachForm;
-            DataTable dt = controller.GetUsernamesofMembers(ID);
-            usernamecombo.DataSource = dt;
-            usernamecombo.DisplayMember = "Username";
-            usernamecombo.ValueMember = "Username";
-
+            //load most points
+            DataTable dt = controller.MembersWithHighestPoints(ID);
+            dataGridView1.DataSource = dt;
+            dataGridView1.Refresh();
+            //load most Badges
+            DataTable data=controller.MostBadges(ID);
+            dataGridView2.DataSource = data;
+            dataGridView2.Refresh();
         }
 
-        private void ViewMember_Load(object sender, EventArgs e)
+        private void Statistics_Load(object sender, EventArgs e)
         {
             Style.TitleBar.BackColor = Color.DodgerBlue;
             Style.TitleBar.ForeColor = Color.White;
@@ -65,52 +65,6 @@ namespace FitnessApplication
             Style.TitleBar.CloseButtonPressedBackColor = Color.RoyalBlue;
             Style.TitleBar.MaximizeButtonPressedBackColor = Color.RoyalBlue;
             Style.TitleBar.MinimizeButtonPressedBackColor = Color.RoyalBlue;
-        }
-
-        private void textBoxExt1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Viewbutton_Click(object sender, EventArgs e)
-        {
-            int memberID = controller.GetMemberID(usernamecombo.Text);
-            DataTable dt = controller.ViewMember(memberID); 
-            if (dt != null && dt.Rows.Count > 0) 
-            {
-                sfDataGrid1.DataSource = dt;
-                sfDataGrid1.Refresh();
-            } 
-            else 
-            {
-                MessageBox.Show("No data found for the selected member."); 
-            }
-        }
-
-        private void removebutton_Click(object sender, EventArgs e)
-        {
-            if (usernamecombo.Text == "")
-            {
-                MessageBox.Show("Please Select a Member");
-            }
-            else
-            {
-                int result=controller.RemoveMember(ID, usernamecombo.Text);
-                if (result == 1)
-                {
-                    MessageBox.Show("Member has been Removed Successfully");
-                }
-                else
-                {
-                    MessageBox.Show("An error occurred!");
-                }
-            }
-        }
-
-        private void sfButton1_Click(object sender, EventArgs e)
-        {
-            statistics = new Statistics(ID, username, BaseCoachForm);
-            statistics.Show();
         }
     }
 }

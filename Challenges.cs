@@ -17,14 +17,19 @@ namespace FitnessApplication
     public partial class Challenges : SfForm
     {
         Controller controller;
-        int points, coachId;
+        int points;
         string challengename, description, StartDate, EndDate;
 
-        public Challenges(int coachid)
+        int ID;
+        string username;
+        Coach BaseCoachForm;
+        public Challenges(int ID, string username, Coach BaseCoachForm)
         {
             InitializeComponent();
             controller = new Controller();
-            coachId = coachid;
+            this.ID = ID;
+            this.username = username;
+            this.BaseCoachForm = BaseCoachForm;
             startdatepicker.MinDate = DateTime.Today;
             startdatepicker.Value = DateTime.Now;
             enddatepicker.MinDate = DateTime.Today;
@@ -83,7 +88,7 @@ namespace FitnessApplication
                 }
                 else
                 {
-                    result = controller.InsertCoachChallenge(challengename,points,description,StartDate,EndDate,coachId);
+                    result = controller.InsertCoachChallenge(challengename,points,description,StartDate,EndDate,ID);
                 }
             }
             else
@@ -105,7 +110,34 @@ namespace FitnessApplication
 
         private void Challenges_Load(object sender, EventArgs e)
         {
+            Style.TitleBar.BackColor = Color.DodgerBlue;
+            Style.TitleBar.ForeColor = Color.White;
 
+            Style.TitleBar.CloseButtonForeColor = Color.White;
+            Style.TitleBar.MinimizeButtonForeColor = Color.White;
+            Style.TitleBar.MaximizeButtonForeColor = Color.White;
+
+            Style.TitleBar.CloseButtonHoverBackColor = Color.CornflowerBlue;
+            Style.TitleBar.MinimizeButtonHoverBackColor = Color.CornflowerBlue;
+            Style.TitleBar.MaximizeButtonHoverBackColor = Color.CornflowerBlue;
+
+            Style.TitleBar.CloseButtonPressedBackColor = Color.RoyalBlue;
+            Style.TitleBar.MaximizeButtonPressedBackColor = Color.RoyalBlue;
+            Style.TitleBar.MinimizeButtonPressedBackColor = Color.RoyalBlue;
+            Style.TitleBar.BackColor = Color.DodgerBlue;
+            Style.TitleBar.ForeColor = Color.White;
+
+            Style.TitleBar.CloseButtonForeColor = Color.White;
+            Style.TitleBar.MinimizeButtonForeColor = Color.White;
+            Style.TitleBar.MaximizeButtonForeColor = Color.White;
+
+            Style.TitleBar.CloseButtonHoverBackColor = Color.CornflowerBlue;
+            Style.TitleBar.MinimizeButtonHoverBackColor = Color.CornflowerBlue;
+            Style.TitleBar.MaximizeButtonHoverBackColor = Color.CornflowerBlue;
+
+            Style.TitleBar.CloseButtonPressedBackColor = Color.RoyalBlue;
+            Style.TitleBar.MaximizeButtonPressedBackColor = Color.RoyalBlue;
+            Style.TitleBar.MinimizeButtonPressedBackColor = Color.RoyalBlue;
         }
 
         private void label4_Click(object sender, EventArgs e)

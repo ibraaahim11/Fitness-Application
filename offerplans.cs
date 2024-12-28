@@ -9,34 +9,37 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DBapplication;
 using Syncfusion.WinForms.Controls;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace FitnessApplication
 {
-    public partial class ViewMember : SfForm
+    public partial class offerplans : SfForm
     {
-        ViewMember viewmember;
-        Statistics statistics;
         Controller controller;
         int ID;
         string username;
         Coach BaseCoachForm;
-        public ViewMember(int ID, string username, Coach BaseCoachForm)
+        public offerplans(int ID, string username, Coach BaseCoachForm)
         {
             InitializeComponent();
             controller = new Controller();
             this.ID = ID;
             this.username = username;
             this.BaseCoachForm = BaseCoachForm;
+            //get info of members
             DataTable dt = controller.GetUsernamesofMembers(ID);
-            usernamecombo.DataSource = dt;
-            usernamecombo.DisplayMember = "Username";
-            usernamecombo.ValueMember = "Username";
-
+            membercombo.DataSource = dt;
+            membercombo.DisplayMember = "Username";
+            membercombo.ValueMember = "Username";
+            //get info of exercises
+            DataTable data = controller.GetExerciseNames();
+            exercisecombo.DataSource = data;
+            exercisecombo.DisplayMember = "ExerciseName";
+            exercisecombo.ValueMember = "ExerciseName";
+           
         }
 
-        private void ViewMember_Load(object sender, EventArgs e)
-        {
+            private void offerplans_Load(object sender, EventArgs e)
+            {
             Style.TitleBar.BackColor = Color.DodgerBlue;
             Style.TitleBar.ForeColor = Color.White;
 
@@ -65,52 +68,36 @@ namespace FitnessApplication
             Style.TitleBar.CloseButtonPressedBackColor = Color.RoyalBlue;
             Style.TitleBar.MaximizeButtonPressedBackColor = Color.RoyalBlue;
             Style.TitleBar.MinimizeButtonPressedBackColor = Color.RoyalBlue;
+        
         }
 
-        private void textBoxExt1_TextChanged(object sender, EventArgs e)
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void Viewbutton_Click(object sender, EventArgs e)
+        private void offerbutton_Click(object sender, EventArgs e)
         {
-            int memberID = controller.GetMemberID(usernamecombo.Text);
-            DataTable dt = controller.ViewMember(memberID); 
-            if (dt != null && dt.Rows.Count > 0) 
+            DateTime date= DateTime.Now;
+            string datesuggested = date.ToString("yyyy-MM-dd");
+            int result, result_2;
+            if (exercisecombo.Text == "" || membercombo.Text == "" || caloriepicker.Value == 0)
             {
-                sfDataGrid1.DataSource = dt;
-                sfDataGrid1.Refresh();
-            } 
-            else 
-            {
-                MessageBox.Show("No data found for the selected member."); 
-            }
-        }
-
-        private void removebutton_Click(object sender, EventArgs e)
-        {
-            if (usernamecombo.Text == "")
-            {
-                MessageBox.Show("Please Select a Member");
+                MessageBox.Show("Please enter Valid Data");
             }
             else
             {
-                int result=controller.RemoveMember(ID, usernamecombo.Text);
-                if (result == 1)
+                result = controller.InsertSuggestedCalorie(membercombo.Text,ID,Convert.ToInt32(caloriepicker.Value),datesuggested);
+                result_2 = controller.InsertSuggestedExercises(membercombo.Text,ID,exercisecombo.Text,datesuggested);
+                if (result == 1 && result_2 == 1)
                 {
-                    MessageBox.Show("Member has been Removed Successfully");
+                    MessageBox.Show("Plan is Sent");
                 }
                 else
                 {
-                    MessageBox.Show("An error occurred!");
+                    MessageBox.Show("An error Occured");
                 }
             }
         }
-
-        private void sfButton1_Click(object sender, EventArgs e)
-        {
-            statistics = new Statistics(ID, username, BaseCoachForm);
-            statistics.Show();
-        }
-    }
+    } 
 }

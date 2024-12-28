@@ -32,6 +32,8 @@
             this.Viewbutton = new Syncfusion.WinForms.Controls.SfButton();
             this.usernamecombo = new System.Windows.Forms.ComboBox();
             this.sfDataGrid1 = new Syncfusion.WinForms.DataGrid.SfDataGrid();
+            this.removebutton = new Syncfusion.WinForms.Controls.SfButton();
+            this.sfButton1 = new Syncfusion.WinForms.Controls.SfButton();
             ((System.ComponentModel.ISupportInitialize)(this.sfDataGrid1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,11 +76,33 @@
             this.sfDataGrid1.TabIndex = 6;
             this.sfDataGrid1.Text = "sfDataGrid1";
             // 
+            // removebutton
+            // 
+            this.removebutton.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
+            this.removebutton.Location = new System.Drawing.Point(214, 95);
+            this.removebutton.Name = "removebutton";
+            this.removebutton.Size = new System.Drawing.Size(161, 46);
+            this.removebutton.TabIndex = 7;
+            this.removebutton.Text = "Remove Member";
+            this.removebutton.Click += new System.EventHandler(this.removebutton_Click);
+            // 
+            // sfButton1
+            // 
+            this.sfButton1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
+            this.sfButton1.Location = new System.Drawing.Point(849, 193);
+            this.sfButton1.Name = "sfButton1";
+            this.sfButton1.Size = new System.Drawing.Size(259, 111);
+            this.sfButton1.TabIndex = 8;
+            this.sfButton1.Text = "View All Members Statistics";
+            this.sfButton1.Click += new System.EventHandler(this.sfButton1_Click);
+            // 
             // ViewMember
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1208, 540);
+            this.Controls.Add(this.sfButton1);
+            this.Controls.Add(this.removebutton);
             this.Controls.Add(this.sfDataGrid1);
             this.Controls.Add(this.usernamecombo);
             this.Controls.Add(this.Viewbutton);
@@ -100,5 +124,7 @@
         private Syncfusion.WinForms.Controls.SfButton Viewbutton;
         private System.Windows.Forms.ComboBox usernamecombo;
         private Syncfusion.WinForms.DataGrid.SfDataGrid sfDataGrid1;
+        private Syncfusion.WinForms.Controls.SfButton removebutton;
+        private Syncfusion.WinForms.Controls.SfButton sfButton1;
     }
 }

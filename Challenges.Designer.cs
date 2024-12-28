@@ -49,7 +49,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Mongolian Baiti", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label1.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.label1.Location = new System.Drawing.Point(14, 47);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(235, 34);
@@ -60,7 +60,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label2.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.label2.Location = new System.Drawing.Point(40, 131);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(172, 25);
@@ -71,7 +71,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label3.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.label3.Location = new System.Drawing.Point(40, 211);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(175, 25);
@@ -83,7 +83,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label4.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.label4.Location = new System.Drawing.Point(649, 132);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(110, 25);
@@ -95,7 +95,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label5.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.label5.Location = new System.Drawing.Point(649, 227);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(103, 25);
@@ -109,7 +109,6 @@
             this.challengenametextbox.Name = "challengenametextbox";
             this.challengenametextbox.Size = new System.Drawing.Size(231, 26);
             this.challengenametextbox.TabIndex = 5;
-            this.challengenametextbox.Text = "textBoxExt1";
             // 
             // pointsrewarded
             // 
@@ -146,7 +145,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label6.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.label6.Location = new System.Drawing.Point(40, 293);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(123, 25);
@@ -160,7 +159,6 @@
             this.descriptiontextbox.Name = "descriptiontextbox";
             this.descriptiontextbox.Size = new System.Drawing.Size(371, 26);
             this.descriptiontextbox.TabIndex = 11;
-            this.descriptiontextbox.Text = "textBoxExt1";
             // 
             // Challenges
             // 

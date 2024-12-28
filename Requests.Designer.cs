@@ -58,6 +58,7 @@
             this.Declinebutton.Size = new System.Drawing.Size(165, 46);
             this.Declinebutton.TabIndex = 1;
             this.Declinebutton.Text = "Decline Request";
+            this.Declinebutton.Click += new System.EventHandler(this.Declinebutton_Click);
             // 
             // label1
             // 

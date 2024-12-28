@@ -9,34 +9,32 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DBapplication;
 using Syncfusion.WinForms.Controls;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace FitnessApplication
 {
-    public partial class ViewMember : SfForm
+    public partial class Feedback : SfForm
     {
-        ViewMember viewmember;
-        Statistics statistics;
         Controller controller;
         int ID;
         string username;
         Coach BaseCoachForm;
-        public ViewMember(int ID, string username, Coach BaseCoachForm)
+        public Feedback(int ID, string username, Coach BaseCoachForm)
         {
             InitializeComponent();
             controller = new Controller();
             this.ID = ID;
             this.username = username;
             this.BaseCoachForm = BaseCoachForm;
-            DataTable dt = controller.GetUsernamesofMembers(ID);
-            usernamecombo.DataSource = dt;
-            usernamecombo.DisplayMember = "Username";
-            usernamecombo.ValueMember = "Username";
-
+            //get feedback names
+            DataTable dt = controller.GetFeedbackTypes();
+            comboBox1.DataSource=dt;
+            comboBox1.DisplayMember = "TypeName";
+            comboBox1.ValueMember = "TypeName";
         }
 
-        private void ViewMember_Load(object sender, EventArgs e)
-        {
+            private void Feedback_Load(object sender, EventArgs e)
+            {
+
             Style.TitleBar.BackColor = Color.DodgerBlue;
             Style.TitleBar.ForeColor = Color.White;
 
@@ -67,50 +65,27 @@ namespace FitnessApplication
             Style.TitleBar.MinimizeButtonPressedBackColor = Color.RoyalBlue;
         }
 
-        private void textBoxExt1_TextChanged(object sender, EventArgs e)
+        private void Feedbackbutton_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void Viewbutton_Click(object sender, EventArgs e)
-        {
-            int memberID = controller.GetMemberID(usernamecombo.Text);
-            DataTable dt = controller.ViewMember(memberID); 
-            if (dt != null && dt.Rows.Count > 0) 
+            DateTime date= DateTime.Now;
+            string dateposted = date.ToString("yyyy-hh-dd");
+            int result;
+            if (comboBox1.Text == "" || textBoxExt1.Text == "" )
             {
-                sfDataGrid1.DataSource = dt;
-                sfDataGrid1.Refresh();
-            } 
-            else 
-            {
-                MessageBox.Show("No data found for the selected member."); 
-            }
-        }
-
-        private void removebutton_Click(object sender, EventArgs e)
-        {
-            if (usernamecombo.Text == "")
-            {
-                MessageBox.Show("Please Select a Member");
+                MessageBox.Show("Please enter all Information");
             }
             else
             {
-                int result=controller.RemoveMember(ID, usernamecombo.Text);
-                if (result == 1)
+                result = controller.InsertFeedback(textBoxExt1.Text,Convert.ToInt16(ratingControl1.Value),comboBox1.Text,dateposted);
+                if (result == 1) 
                 {
-                    MessageBox.Show("Member has been Removed Successfully");
+                    MessageBox.Show("Feedback Sent");
                 }
                 else
                 {
-                    MessageBox.Show("An error occurred!");
+                    MessageBox.Show("Error occured!");
                 }
             }
         }
-
-        private void sfButton1_Click(object sender, EventArgs e)
-        {
-            statistics = new Statistics(ID, username, BaseCoachForm);
-            statistics.Show();
-        }
     }
-}
+    }

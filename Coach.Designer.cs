@@ -34,12 +34,15 @@
             this.sfButton2 = new Syncfusion.WinForms.Controls.SfButton();
             this.requestsbutton = new Syncfusion.WinForms.Controls.SfButton();
             this.Postmealbutton = new Syncfusion.WinForms.Controls.SfButton();
+            this.awardbutton = new Syncfusion.WinForms.Controls.SfButton();
+            this.Offerbutton = new Syncfusion.WinForms.Controls.SfButton();
+            this.feedbackbutton = new Syncfusion.WinForms.Controls.SfButton();
             this.SuspendLayout();
             // 
             // Welcomelabel
             // 
             this.Welcomelabel.AutoSize = true;
-            this.Welcomelabel.ForeColor = System.Drawing.Color.DarkGreen;
+            this.Welcomelabel.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.Welcomelabel.Location = new System.Drawing.Point(30, 49);
             this.Welcomelabel.Margin = new System.Windows.Forms.Padding(9, 0, 9, 0);
             this.Welcomelabel.Name = "Welcomelabel";
@@ -97,11 +100,44 @@
             this.Postmealbutton.Text = "Post Meal";
             this.Postmealbutton.Click += new System.EventHandler(this.Postmealbutton_Click);
             // 
+            // awardbutton
+            // 
+            this.awardbutton.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
+            this.awardbutton.Location = new System.Drawing.Point(262, 215);
+            this.awardbutton.Name = "awardbutton";
+            this.awardbutton.Size = new System.Drawing.Size(202, 56);
+            this.awardbutton.TabIndex = 6;
+            this.awardbutton.Text = "Award Badges ";
+            this.awardbutton.Click += new System.EventHandler(this.awardbutton_Click);
+            // 
+            // Offerbutton
+            // 
+            this.Offerbutton.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
+            this.Offerbutton.Location = new System.Drawing.Point(546, 215);
+            this.Offerbutton.Name = "Offerbutton";
+            this.Offerbutton.Size = new System.Drawing.Size(236, 56);
+            this.Offerbutton.TabIndex = 7;
+            this.Offerbutton.Text = "Offer a Personalized Plan";
+            this.Offerbutton.Click += new System.EventHandler(this.Offerbutton_Click);
+            // 
+            // feedbackbutton
+            // 
+            this.feedbackbutton.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
+            this.feedbackbutton.Location = new System.Drawing.Point(821, 215);
+            this.feedbackbutton.Name = "feedbackbutton";
+            this.feedbackbutton.Size = new System.Drawing.Size(176, 56);
+            this.feedbackbutton.TabIndex = 8;
+            this.feedbackbutton.Text = "Feedback";
+            this.feedbackbutton.Click += new System.EventHandler(this.feedbackbutton_Click);
+            // 
             // Coach
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(28F, 50F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1924, 1050);
+            this.ClientSize = new System.Drawing.Size(1216, 650);
+            this.Controls.Add(this.feedbackbutton);
+            this.Controls.Add(this.Offerbutton);
+            this.Controls.Add(this.awardbutton);
             this.Controls.Add(this.Postmealbutton);
             this.Controls.Add(this.requestsbutton);
             this.Controls.Add(this.sfButton2);
@@ -131,5 +167,8 @@
         private Syncfusion.WinForms.Controls.SfButton sfButton2;
         private Syncfusion.WinForms.Controls.SfButton requestsbutton;
         private Syncfusion.WinForms.Controls.SfButton Postmealbutton;
+        private Syncfusion.WinForms.Controls.SfButton awardbutton;
+        private Syncfusion.WinForms.Controls.SfButton Offerbutton;
+        private Syncfusion.WinForms.Controls.SfButton feedbackbutton;
     }
 }

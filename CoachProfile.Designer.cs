@@ -77,7 +77,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Mongolian Baiti", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label1.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.label1.Location = new System.Drawing.Point(15, 35);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(110, 34);
@@ -86,69 +86,63 @@
             // 
             // fnametextbox
             // 
-            this.fnametextbox.BeforeTouchSize = new System.Drawing.Size(100, 26);
+            this.fnametextbox.BeforeTouchSize = new System.Drawing.Size(371, 26);
             this.fnametextbox.Location = new System.Drawing.Point(226, 150);
             this.fnametextbox.Name = "fnametextbox";
             this.fnametextbox.ReadOnly = true;
             this.fnametextbox.Size = new System.Drawing.Size(100, 26);
             this.fnametextbox.TabIndex = 1;
-            this.fnametextbox.Text = "textBoxExt1";
             // 
             // lnametextbox
             // 
-            this.lnametextbox.BeforeTouchSize = new System.Drawing.Size(100, 26);
+            this.lnametextbox.BeforeTouchSize = new System.Drawing.Size(371, 26);
             this.lnametextbox.Location = new System.Drawing.Point(226, 211);
             this.lnametextbox.Name = "lnametextbox";
             this.lnametextbox.ReadOnly = true;
             this.lnametextbox.Size = new System.Drawing.Size(100, 26);
             this.lnametextbox.TabIndex = 2;
-            this.lnametextbox.Text = "textBoxExt2";
             // 
             // coachidtextbox
             // 
-            this.coachidtextbox.BeforeTouchSize = new System.Drawing.Size(100, 26);
+            this.coachidtextbox.BeforeTouchSize = new System.Drawing.Size(371, 26);
             this.coachidtextbox.Location = new System.Drawing.Point(226, 273);
             this.coachidtextbox.Name = "coachidtextbox";
             this.coachidtextbox.ReadOnly = true;
             this.coachidtextbox.Size = new System.Drawing.Size(100, 26);
             this.coachidtextbox.TabIndex = 3;
-            this.coachidtextbox.Text = "dr";
             // 
             // gendertextbox
             // 
-            this.gendertextbox.BeforeTouchSize = new System.Drawing.Size(100, 26);
+            this.gendertextbox.BeforeTouchSize = new System.Drawing.Size(371, 26);
             this.gendertextbox.Location = new System.Drawing.Point(226, 330);
             this.gendertextbox.Name = "gendertextbox";
             this.gendertextbox.ReadOnly = true;
             this.gendertextbox.Size = new System.Drawing.Size(100, 26);
             this.gendertextbox.TabIndex = 4;
-            this.gendertextbox.Text = "textBoxExt4";
             // 
             // memberlimittextbox
             // 
-            this.memberlimittextbox.BeforeTouchSize = new System.Drawing.Size(100, 26);
+            this.memberlimittextbox.BeforeTouchSize = new System.Drawing.Size(371, 26);
             this.memberlimittextbox.Location = new System.Drawing.Point(226, 386);
             this.memberlimittextbox.Name = "memberlimittextbox";
             this.memberlimittextbox.ReadOnly = true;
             this.memberlimittextbox.Size = new System.Drawing.Size(100, 26);
             this.memberlimittextbox.TabIndex = 5;
-            this.memberlimittextbox.Text = "textBoxExt5";
             // 
             // titletextbox
             // 
-            this.titletextbox.BeforeTouchSize = new System.Drawing.Size(100, 26);
+            this.titletextbox.BeforeTouchSize = new System.Drawing.Size(371, 26);
             this.titletextbox.Location = new System.Drawing.Point(920, 111);
             this.titletextbox.Name = "titletextbox";
             this.titletextbox.ReadOnly = true;
             this.titletextbox.Size = new System.Drawing.Size(229, 26);
             this.titletextbox.TabIndex = 6;
-            this.titletextbox.Text = "textBoxExt6";
             // 
             // fnamelabel
             // 
             this.fnamelabel.AutoSize = true;
             this.fnamelabel.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fnamelabel.ForeColor = System.Drawing.Color.DarkGreen;
+            this.fnamelabel.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.fnamelabel.Location = new System.Drawing.Point(16, 151);
             this.fnamelabel.Name = "fnamelabel";
             this.fnamelabel.Size = new System.Drawing.Size(124, 25);
@@ -159,7 +153,7 @@
             // 
             this.lnamlabel.AutoSize = true;
             this.lnamlabel.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnamlabel.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lnamlabel.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.lnamlabel.Location = new System.Drawing.Point(16, 212);
             this.lnamlabel.Name = "lnamlabel";
             this.lnamlabel.Size = new System.Drawing.Size(123, 25);
@@ -170,7 +164,7 @@
             // 
             this.coachidlabel.AutoSize = true;
             this.coachidlabel.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.coachidlabel.ForeColor = System.Drawing.Color.DarkGreen;
+            this.coachidlabel.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.coachidlabel.Location = new System.Drawing.Point(15, 274);
             this.coachidlabel.Name = "coachidlabel";
             this.coachidlabel.Size = new System.Drawing.Size(105, 25);
@@ -181,7 +175,7 @@
             // 
             this.genderlabel.AutoSize = true;
             this.genderlabel.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.genderlabel.ForeColor = System.Drawing.Color.DarkGreen;
+            this.genderlabel.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.genderlabel.Location = new System.Drawing.Point(15, 331);
             this.genderlabel.Name = "genderlabel";
             this.genderlabel.Size = new System.Drawing.Size(83, 25);
@@ -192,7 +186,7 @@
             // 
             this.memberlimitlabel.AutoSize = true;
             this.memberlimitlabel.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.memberlimitlabel.ForeColor = System.Drawing.Color.DarkGreen;
+            this.memberlimitlabel.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.memberlimitlabel.Location = new System.Drawing.Point(15, 387);
             this.memberlimitlabel.Name = "memberlimitlabel";
             this.memberlimitlabel.Size = new System.Drawing.Size(157, 25);
@@ -203,7 +197,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Mongolian Baiti", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label7.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.label7.Location = new System.Drawing.Point(672, 46);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(170, 34);
@@ -215,7 +209,7 @@
             // 
             this.titlelabel.AutoSize = true;
             this.titlelabel.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titlelabel.ForeColor = System.Drawing.Color.DarkGreen;
+            this.titlelabel.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.titlelabel.Location = new System.Drawing.Point(673, 110);
             this.titlelabel.Name = "titlelabel";
             this.titlelabel.Size = new System.Drawing.Size(197, 25);
@@ -226,7 +220,7 @@
             // 
             this.Usernamelabel.AutoSize = true;
             this.Usernamelabel.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Usernamelabel.ForeColor = System.Drawing.Color.DarkGreen;
+            this.Usernamelabel.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.Usernamelabel.Location = new System.Drawing.Point(15, 100);
             this.Usernamelabel.Name = "Usernamelabel";
             this.Usernamelabel.Size = new System.Drawing.Size(109, 25);
@@ -235,19 +229,18 @@
             // 
             // usernametextbox
             // 
-            this.usernametextbox.BeforeTouchSize = new System.Drawing.Size(100, 26);
+            this.usernametextbox.BeforeTouchSize = new System.Drawing.Size(371, 26);
             this.usernametextbox.Location = new System.Drawing.Point(226, 99);
             this.usernametextbox.Name = "usernametextbox";
             this.usernametextbox.ReadOnly = true;
             this.usernametextbox.Size = new System.Drawing.Size(152, 26);
             this.usernametextbox.TabIndex = 15;
-            this.usernametextbox.Text = "textBoxExt7";
             // 
             // datelabel
             // 
             this.datelabel.AutoSize = true;
             this.datelabel.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.datelabel.ForeColor = System.Drawing.Color.DarkGreen;
+            this.datelabel.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.datelabel.Location = new System.Drawing.Point(673, 178);
             this.datelabel.Name = "datelabel";
             this.datelabel.Size = new System.Drawing.Size(145, 25);
@@ -259,7 +252,7 @@
             // 
             this.expirationlabel.AutoSize = true;
             this.expirationlabel.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.expirationlabel.ForeColor = System.Drawing.Color.DarkGreen;
+            this.expirationlabel.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.expirationlabel.Location = new System.Drawing.Point(673, 247);
             this.expirationlabel.Name = "expirationlabel";
             this.expirationlabel.Size = new System.Drawing.Size(165, 25);
@@ -271,7 +264,7 @@
             // 
             this.issuinglabel.AutoSize = true;
             this.issuinglabel.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.issuinglabel.ForeColor = System.Drawing.Color.DarkGreen;
+            this.issuinglabel.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.issuinglabel.Location = new System.Drawing.Point(673, 310);
             this.issuinglabel.Name = "issuinglabel";
             this.issuinglabel.Size = new System.Drawing.Size(137, 25);
@@ -281,42 +274,39 @@
             // 
             // datetextbox
             // 
-            this.datetextbox.BeforeTouchSize = new System.Drawing.Size(100, 26);
+            this.datetextbox.BeforeTouchSize = new System.Drawing.Size(371, 26);
             this.datetextbox.Location = new System.Drawing.Point(920, 178);
             this.datetextbox.Name = "datetextbox";
             this.datetextbox.ReadOnly = true;
             this.datetextbox.Size = new System.Drawing.Size(100, 26);
             this.datetextbox.TabIndex = 19;
-            this.datetextbox.Text = "textBoxExt8";
             // 
             // expirationtextbox
             // 
-            this.expirationtextbox.BeforeTouchSize = new System.Drawing.Size(100, 26);
+            this.expirationtextbox.BeforeTouchSize = new System.Drawing.Size(371, 26);
             this.expirationtextbox.Location = new System.Drawing.Point(920, 247);
             this.expirationtextbox.Name = "expirationtextbox";
             this.expirationtextbox.ReadOnly = true;
             this.expirationtextbox.Size = new System.Drawing.Size(100, 26);
             this.expirationtextbox.TabIndex = 20;
-            this.expirationtextbox.Text = "textBoxExt9";
             // 
             // issuingtextbox
             // 
-            this.issuingtextbox.BeforeTouchSize = new System.Drawing.Size(100, 26);
+            this.issuingtextbox.BeforeTouchSize = new System.Drawing.Size(371, 26);
             this.issuingtextbox.Location = new System.Drawing.Point(920, 310);
             this.issuingtextbox.Name = "issuingtextbox";
             this.issuingtextbox.ReadOnly = true;
             this.issuingtextbox.Size = new System.Drawing.Size(229, 26);
             this.issuingtextbox.TabIndex = 21;
-            this.issuingtextbox.Text = "textBoxExt10";
             // 
             // updateprofilebutton
             // 
             this.updateprofilebutton.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
-            this.updateprofilebutton.ForeColor = System.Drawing.Color.DarkGreen;
+            this.updateprofilebutton.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.updateprofilebutton.Location = new System.Drawing.Point(20, 538);
             this.updateprofilebutton.Name = "updateprofilebutton";
             this.updateprofilebutton.Size = new System.Drawing.Size(250, 62);
-            this.updateprofilebutton.Style.ForeColor = System.Drawing.Color.DarkGreen;
+            this.updateprofilebutton.Style.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.updateprofilebutton.TabIndex = 22;
             this.updateprofilebutton.Text = "Update Profile Information";
             this.updateprofilebutton.Click += new System.EventHandler(this.updateprofilebutton_Click);
@@ -324,20 +314,21 @@
             // confirmprofilebutton
             // 
             this.confirmprofilebutton.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
-            this.confirmprofilebutton.ForeColor = System.Drawing.Color.DarkGreen;
+            this.confirmprofilebutton.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.confirmprofilebutton.Location = new System.Drawing.Point(20, 618);
             this.confirmprofilebutton.Name = "confirmprofilebutton";
             this.confirmprofilebutton.Size = new System.Drawing.Size(250, 62);
-            this.confirmprofilebutton.Style.ForeColor = System.Drawing.Color.DarkGreen;
+            this.confirmprofilebutton.Style.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.confirmprofilebutton.TabIndex = 23;
             this.confirmprofilebutton.Text = "Confirm Profile Updates ";
             this.confirmprofilebutton.Visible = false;
+            this.confirmprofilebutton.Click += new System.EventHandler(this.confirmprofilebutton_Click);
             // 
             // agelabel
             // 
             this.agelabel.AutoSize = true;
             this.agelabel.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.agelabel.ForeColor = System.Drawing.Color.DarkGreen;
+            this.agelabel.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.agelabel.Location = new System.Drawing.Point(15, 442);
             this.agelabel.Name = "agelabel";
             this.agelabel.Size = new System.Drawing.Size(52, 25);
@@ -347,22 +338,21 @@
             // 
             // agetextbox
             // 
-            this.agetextbox.BeforeTouchSize = new System.Drawing.Size(100, 26);
+            this.agetextbox.BeforeTouchSize = new System.Drawing.Size(371, 26);
             this.agetextbox.Location = new System.Drawing.Point(226, 441);
             this.agetextbox.Name = "agetextbox";
             this.agetextbox.ReadOnly = true;
             this.agetextbox.Size = new System.Drawing.Size(100, 26);
             this.agetextbox.TabIndex = 25;
-            this.agetextbox.Text = "textBoxExt11";
             // 
             // sfButton1
             // 
             this.sfButton1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
-            this.sfButton1.ForeColor = System.Drawing.Color.DarkGreen;
+            this.sfButton1.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.sfButton1.Location = new System.Drawing.Point(678, 372);
             this.sfButton1.Name = "sfButton1";
             this.sfButton1.Size = new System.Drawing.Size(278, 64);
-            this.sfButton1.Style.ForeColor = System.Drawing.Color.DarkGreen;
+            this.sfButton1.Style.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.sfButton1.TabIndex = 26;
             this.sfButton1.Text = "Update Certificate Information";
             this.sfButton1.Click += new System.EventHandler(this.sfButton1_Click);
@@ -370,20 +360,21 @@
             // confirmcertificatebutton
             // 
             this.confirmcertificatebutton.Font = new System.Drawing.Font("Segoe UI Semibold", 9F);
-            this.confirmcertificatebutton.ForeColor = System.Drawing.Color.DarkGreen;
+            this.confirmcertificatebutton.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.confirmcertificatebutton.Location = new System.Drawing.Point(678, 478);
             this.confirmcertificatebutton.Name = "confirmcertificatebutton";
             this.confirmcertificatebutton.Size = new System.Drawing.Size(278, 65);
-            this.confirmcertificatebutton.Style.ForeColor = System.Drawing.Color.DarkGreen;
+            this.confirmcertificatebutton.Style.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.confirmcertificatebutton.TabIndex = 27;
             this.confirmcertificatebutton.Text = "Confirm Certificate Updates";
             this.confirmcertificatebutton.Visible = false;
+            this.confirmcertificatebutton.Click += new System.EventHandler(this.confirmcertificatebutton_Click);
             // 
             // passwordlabel
             // 
             this.passwordlabel.AutoSize = true;
             this.passwordlabel.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordlabel.ForeColor = System.Drawing.Color.DarkGreen;
+            this.passwordlabel.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.passwordlabel.Location = new System.Drawing.Point(17, 497);
             this.passwordlabel.Name = "passwordlabel";
             this.passwordlabel.Size = new System.Drawing.Size(103, 25);
@@ -392,7 +383,8 @@
             // 
             // passwordtextbox
             // 
-            this.passwordtextbox.BeforeTouchSize = new System.Drawing.Size(100, 26);
+            this.passwordtextbox.BeforeTouchSize = new System.Drawing.Size(371, 26);
+            this.passwordtextbox.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.passwordtextbox.Location = new System.Drawing.Point(226, 496);
             this.passwordtextbox.Name = "passwordtextbox";
             this.passwordtextbox.PasswordChar = '*';
@@ -405,7 +397,7 @@
             // 
             this.passwordcheckbox.AutoSize = true;
             this.passwordcheckbox.Font = new System.Drawing.Font("Mongolian Baiti", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.passwordcheckbox.ForeColor = System.Drawing.Color.DarkGreen;
+            this.passwordcheckbox.ForeColor = System.Drawing.Color.CornflowerBlue;
             this.passwordcheckbox.Location = new System.Drawing.Point(385, 496);
             this.passwordcheckbox.Name = "passwordcheckbox";
             this.passwordcheckbox.Size = new System.Drawing.Size(189, 29);

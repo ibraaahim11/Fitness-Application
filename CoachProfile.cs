@@ -26,6 +26,49 @@ namespace FitnessApplication
         int age, memberlimit;
 
         string CertificateTitle, CertificateIssuingBody, CertificateDateOfIssue, CertificateExpirationDate;
+        
+        public CoachProfile(int ID, string username, Coach BaseCoachForm)
+        {
+            InitializeComponent();
+            controller = new Controller();
+            this.ID = ID;
+            this.username = username;
+            this.BaseCoachForm = BaseCoachForm;
+            LoadProfile();
+        }
+
+        private void CoachProfile_Load(object sender, EventArgs e)
+        {
+            Style.TitleBar.BackColor = Color.DodgerBlue;
+            Style.TitleBar.ForeColor = Color.White;
+
+            Style.TitleBar.CloseButtonForeColor = Color.White;
+            Style.TitleBar.MinimizeButtonForeColor = Color.White;
+            Style.TitleBar.MaximizeButtonForeColor = Color.White;
+
+            Style.TitleBar.CloseButtonHoverBackColor = Color.CornflowerBlue;
+            Style.TitleBar.MinimizeButtonHoverBackColor = Color.CornflowerBlue;
+            Style.TitleBar.MaximizeButtonHoverBackColor = Color.CornflowerBlue;
+
+            Style.TitleBar.CloseButtonPressedBackColor = Color.RoyalBlue;
+            Style.TitleBar.MaximizeButtonPressedBackColor = Color.RoyalBlue;
+            Style.TitleBar.MinimizeButtonPressedBackColor = Color.RoyalBlue;
+            Style.TitleBar.BackColor = Color.DodgerBlue;
+            Style.TitleBar.ForeColor = Color.White;
+
+            Style.TitleBar.CloseButtonForeColor = Color.White;
+            Style.TitleBar.MinimizeButtonForeColor = Color.White;
+            Style.TitleBar.MaximizeButtonForeColor = Color.White;
+
+            Style.TitleBar.CloseButtonHoverBackColor = Color.CornflowerBlue;
+            Style.TitleBar.MinimizeButtonHoverBackColor = Color.CornflowerBlue;
+            Style.TitleBar.MaximizeButtonHoverBackColor = Color.CornflowerBlue;
+
+            Style.TitleBar.CloseButtonPressedBackColor = Color.RoyalBlue;
+            Style.TitleBar.MaximizeButtonPressedBackColor = Color.RoyalBlue;
+            Style.TitleBar.MinimizeButtonPressedBackColor = Color.RoyalBlue;
+        }
+
 
         private void passwordcheckbox_CheckedChanged(object sender, EventArgs e)
         {
@@ -46,6 +89,32 @@ namespace FitnessApplication
             confirmprofilebutton.Visible = true;
         }
 
+        private void confirmcertificatebutton_Click(object sender, EventArgs e)
+        {
+            // Read data
+            CertificateTitle = titletextbox.Text; CertificateIssuingBody = issuingtextbox.Text;
+            CertificateDateOfIssue = datetextbox.Text; CertificateExpirationDate = expirationtextbox.Text;
+
+            // Check if fields empty
+            if (CertificateTitle == "" || CertificateIssuingBody == "" || CertificateDateOfIssue == "" || CertificateExpirationDate == "")
+            {
+                MessageBox.Show("Do not leave any fields empty.");
+                return;
+            }
+            // Update Certificate
+            int result = controller.UpdateAcademyCertificate(ID, CertificateTitle, CertificateDateOfIssue, CertificateIssuingBody, CertificateExpirationDate);
+
+            if (result == 1)
+            {
+                MessageBox.Show("Certificate Updated Successfully.");
+                // Return to original state
+                confirmcertificatebutton.Visible = false;
+
+                titletextbox.ReadOnly = true; issuingtextbox.ReadOnly = true; datetextbox.ReadOnly = true;
+                expirationtextbox.ReadOnly = true;
+            }
+        }
+
         private void sfButton1_Click(object sender, EventArgs e)
         {
             titletextbox.ReadOnly = false; datetextbox.ReadOnly=false; expirationtextbox.ReadOnly=false; 
@@ -53,26 +122,53 @@ namespace FitnessApplication
             confirmcertificatebutton.Visible = true;
         }
 
+        private void confirmprofilebutton_Click(object sender, EventArgs e)
+        {
+           
+            Fname = fnametextbox.Text; Lname = lnametextbox.Text; ID = Convert.ToInt32(coachidtextbox.Text);
+            gender = gendertextbox.Text; memberlimit = Convert.ToInt32(memberlimittextbox.Text); age=Convert.ToInt32(agetextbox.Text); password = passwordtextbox.Text;
+            // Old username will be used to update new username
+            string NewUsername = usernametextbox.Text;
+            // Check if fields empty
+            if (Fname == "" || Lname == "" || gender == "" || username == "" || password == "" || ID==0 || age==0 )
+            {
+                MessageBox.Show("Do not leave any fields empty.");
+                return;
+            }
+            // Update profile
+            int resultBasicInfo = controller.UpdateCoachProfile(Fname,Lname,ID,gender,age);
+            int resultUsernamePassword = controller.UpdateUsernamePasswordCoach(username, NewUsername, password);
+
+            if (resultBasicInfo == 1 && resultUsernamePassword == 1)
+            {
+                MessageBox.Show("Profile Updated Successfully.");
+                // Return to original state
+                confirmprofilebutton.Visible = false;
+
+                fnametextbox.ReadOnly = true; lnametextbox.ReadOnly = true; coachidtextbox.ReadOnly = true; gendertextbox.ReadOnly = true;
+                memberlimittextbox.ReadOnly = true; agetextbox.ReadOnly = true; passwordtextbox.ReadOnly = true; usernametextbox.ReadOnly = true;
+
+               
+                BaseCoachForm.UpdateData(NewUsername);
+            }
+            else if (resultBasicInfo != 1 && resultUsernamePassword != 1)
+            {
+                MessageBox.Show("Profile could not be updated.");
+                return;
+            }
+            else if (resultUsernamePassword != 1)
+            {
+                MessageBox.Show("Username is already taken.");
+                return;
+            }
+
+        }
+
         private void agelabel_Click(object sender, EventArgs e)
         {
 
         }
-
-        public CoachProfile(int ID, string username, Coach BaseCoachForm)
-        {
-            InitializeComponent();
-            controller = new Controller();
-            this.ID = ID;
-            this.username = username;
-            this.BaseCoachForm = BaseCoachForm;
-            LoadProfile();
-        }
-
-        private void CoachProfile_Load(object sender, EventArgs e)
-        {
-
-        }
-
+       
         private void label7_Click(object sender, EventArgs e)
         {
 
