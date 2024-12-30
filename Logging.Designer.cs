@@ -75,18 +75,18 @@
             // 
             // memberlogcaloriestextbox
             // 
-            this.memberlogcaloriestextbox.BeforeTouchSize = new System.Drawing.Size(233, 26);
-            this.memberlogcaloriestextbox.Location = new System.Drawing.Point(417, 121);
+            this.memberlogcaloriestextbox.BeforeTouchSize = new System.Drawing.Size(146, 26);
+            this.memberlogcaloriestextbox.Location = new System.Drawing.Point(395, 121);
             this.memberlogcaloriestextbox.Name = "memberlogcaloriestextbox";
-            this.memberlogcaloriestextbox.Size = new System.Drawing.Size(100, 26);
+            this.memberlogcaloriestextbox.Size = new System.Drawing.Size(146, 26);
             this.memberlogcaloriestextbox.TabIndex = 6;
             // 
             // memberlogexercisescombo
             // 
             this.memberlogexercisescombo.FormattingEnabled = true;
-            this.memberlogexercisescombo.Location = new System.Drawing.Point(407, 192);
+            this.memberlogexercisescombo.Location = new System.Drawing.Point(395, 192);
             this.memberlogexercisescombo.Name = "memberlogexercisescombo";
-            this.memberlogexercisescombo.Size = new System.Drawing.Size(121, 28);
+            this.memberlogexercisescombo.Size = new System.Drawing.Size(146, 28);
             this.memberlogexercisescombo.TabIndex = 7;
             this.memberlogexercisescombo.SelectedIndexChanged += new System.EventHandler(this.memberlogexercisescombo_SelectedIndexChanged);
             // 
@@ -101,7 +101,7 @@
             // 
             // memberminsexercisedtextbox
             // 
-            this.memberminsexercisedtextbox.BeforeTouchSize = new System.Drawing.Size(233, 26);
+            this.memberminsexercisedtextbox.BeforeTouchSize = new System.Drawing.Size(146, 26);
             this.memberminsexercisedtextbox.Location = new System.Drawing.Point(349, 262);
             this.memberminsexercisedtextbox.Name = "memberminsexercisedtextbox";
             this.memberminsexercisedtextbox.Size = new System.Drawing.Size(233, 26);

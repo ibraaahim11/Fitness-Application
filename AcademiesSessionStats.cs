@@ -1,27 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using DBapplication;
+using Syncfusion.WinForms.Controls;
+using System;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Syncfusion.WinForms.Controls;
-using Syncfusion.Windows.Forms;
-using DBapplication;
-using Syncfusion.Windows.Forms.Chart;
+
 namespace FitnessApplication
 {
     public partial class AcademiesSessionStats : SfForm
     {
-        String Username;
-        int AcademyID, SessionID;
+        private String Username;
+        private int AcademyID, SessionID;
+
         // Controller
-        Controller controller;
+        private Controller controller;
 
         // Stats
-        int NumAttending;
+        private int NumAttending;
+
         public AcademiesSessionStats(string Username, int AcademyID, int SessionID)
         {
             InitializeComponent();
@@ -32,8 +27,6 @@ namespace FitnessApplication
             Update_Form();
             PopulateMemberAgeChart();
             PopulateGenderPieChart();
-
-
         }
 
         private void AcademiesSessionStats_Load(object sender, EventArgs e)
@@ -42,11 +35,9 @@ namespace FitnessApplication
             this.Style.TitleBar.BackColor = Color.LightCoral;
             this.Style.TitleBar.ForeColor = Color.White;
 
-
             this.Style.TitleBar.CloseButtonForeColor = Color.White;
             this.Style.TitleBar.MinimizeButtonForeColor = Color.White;
             this.Style.TitleBar.MaximizeButtonForeColor = Color.White;
-
 
             this.Style.TitleBar.CloseButtonHoverBackColor = Color.IndianRed;
             this.Style.TitleBar.MinimizeButtonHoverBackColor = Color.IndianRed;
@@ -56,6 +47,7 @@ namespace FitnessApplication
             this.Style.TitleBar.MaximizeButtonPressedBackColor = Color.Crimson;
             this.Style.TitleBar.MinimizeButtonPressedBackColor = Color.Crimson;
         }
+
         private void Load_Info()
         {
             NumAttending = controller.GetNumberOfMembersAttendingSession(SessionID, AcademyID);
@@ -66,17 +58,14 @@ namespace FitnessApplication
             labelNumMembersAttending.Text = NumAttending.ToString();
         }
 
-
         private void chartControl1_Click(object sender, EventArgs e)
         {
-
         }
 
         // Bar chart adding data
 
-        private void PopulateMemberAgeChart()       
+        private void PopulateMemberAgeChart()
         {
-
             DataTable query_result = controller.GetMembersAgeGroupOfSession(SessionID, AcademyID);
             if (query_result != null)
             {
@@ -87,29 +76,20 @@ namespace FitnessApplication
                         (int)query_result.Rows[i]["Age"],
                         (int)query_result.Rows[i]["NumberOfMembers"]
                     );
-
-
-
                 }
 
                 chartMembersAge.ChartAreas[0].AxisX.Title = "Age";
                 chartMembersAge.ChartAreas[0].AxisY.Title = "Number Attending";
 
                 chartMembersAge.ChartAreas[0].AxisY.Interval = 1;  // Set the interval for y-axis
-
-
             }
-            
-
-
         }
+
         private void PopulateGenderPieChart()
         {
-
             DataTable query_result = controller.GetMembersGenderGroupOfSession(SessionID, AcademyID);
             if (query_result != null)
             {
-
                 int maleCount = 0;
                 int femaleCount = 0;
 
@@ -117,7 +97,6 @@ namespace FitnessApplication
                 {
                     string gender = (string)query_result.Rows[i]["Gender"];
                     int numberOfMembers = (int)query_result.Rows[i]["NumberOfMembers"];
-
 
                     if (gender == "M")
                     {
@@ -129,13 +108,10 @@ namespace FitnessApplication
                     }
                 }
 
-
                 chartGender.Series["Gender"].Points.Clear();
-
 
                 if (maleCount != 0)
                 {
-
                     chartGender.Series["Gender"].Points.AddXY("Male", maleCount);
                     chartGender.Series["Gender"].Points[0].Color = System.Drawing.Color.LightSkyBlue;
                 }
@@ -153,17 +129,8 @@ namespace FitnessApplication
                 labelNumMales.Text = maleCount.ToString();
                 labelNumFemales.Text = femaleCount.ToString();
 
-
-
-
                 chartGender.Series["Gender"].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-
-
             }
         }
-
-
-
-
     }
 }

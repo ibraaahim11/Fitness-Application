@@ -1,26 +1,23 @@
 ﻿using DBapplication;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Syncfusion.WinForms.Controls;
 using Syncfusion.Windows.Forms;
+using Syncfusion.WinForms.Controls;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace FitnessApplication
 {
     public partial class AcademiesPostSession : SfForm
     {
-        Controller controller;
+        private Controller controller;
+
         // Data of user
-        string Username; int ID;
+        private string Username; private int ID;
+
         // Data of form
-        string Description, Address, Date, Time, Duration;
-        int limit; float priceFloat;
+        private string Description, Address, Date, Time, Duration;
+
+        private int limit; private float priceFloat;
 
         public AcademiesPostSession(string Username, int ID)
         {
@@ -48,7 +45,6 @@ namespace FitnessApplication
 
         private void numericUpDownLimit_ValueChanged(object sender, EventArgs e)
         {
-
         }
 
         private void textBoxPrice_TextChanged(object sender, EventArgs e)
@@ -71,7 +67,6 @@ namespace FitnessApplication
             {
                 if (limit <= 0)
                 {
-
                     MessageBoxAdv.Show(this,
                         "Please enter an appropriate limit.",
                         "Error",
@@ -79,7 +74,6 @@ namespace FitnessApplication
                         MessageBoxIcon.Warning);
                     return;
                 }
-
                 else
                 {
                     result = controller.AcademyInsertSession(Description, priceFloat, limit, Duration, Address, Date, Time, ID);
@@ -87,7 +81,6 @@ namespace FitnessApplication
             }
             else
             {
-
                 MessageBoxAdv.Show(this,
                     "Do not leave any fields empty.",
                     "No changes",
@@ -98,7 +91,6 @@ namespace FitnessApplication
 
             if (result == 1)
             {
-
                 MessageBoxAdv.Show(this,
                     "Session posted successfully.",
                     "Session Posted",
@@ -109,7 +101,6 @@ namespace FitnessApplication
             }
             else
             {
-
                 MessageBoxAdv.Show(this,
                     "Session could not be posted.",
                     "Error",
@@ -122,13 +113,13 @@ namespace FitnessApplication
         {
             Description = textBoxDescription.Text;
             Address = textBoxAddress.Text;
-            limit = (int) numericUpDownLimit.Value;
+            limit = (int)numericUpDownLimit.Value;
             // priceFloat already stored
 
             Date = DatePickers.DateTimeText;
             Time = TimePicker.Text;
             Duration = DurationPicker.Text;
-            if(Description == "" || Address == "" || Date == "" || Time == "" || Duration == "" || (textBoxPrice.Text == "" && checkBoxFree.Checked == false))
+            if (Description == "" || Address == "" || Date == "" || Time == "" || Duration == "" || (textBoxPrice.Text == "" && checkBoxFree.Checked == false))
             {
                 return false;
             }
@@ -137,6 +128,7 @@ namespace FitnessApplication
                 return true;
             }
         }
+
         private void ResetSessionDetails()
         {
             textBoxAddress.Text = string.Empty;
@@ -149,12 +141,7 @@ namespace FitnessApplication
 
             TimePicker.Value = DateTime.Now;
             DatePickers.Value = DateTime.Now;
-
-
         }
-
-
-
 
         private void AcademiesPostSession_Load(object sender, EventArgs e)
         {
@@ -162,11 +149,9 @@ namespace FitnessApplication
             this.Style.TitleBar.BackColor = Color.LightCoral;
             this.Style.TitleBar.ForeColor = Color.White;
 
-
             this.Style.TitleBar.CloseButtonForeColor = Color.White;
             this.Style.TitleBar.MinimizeButtonForeColor = Color.White;
             this.Style.TitleBar.MaximizeButtonForeColor = Color.White;
-
 
             this.Style.TitleBar.CloseButtonHoverBackColor = Color.IndianRed;
             this.Style.TitleBar.MinimizeButtonHoverBackColor = Color.IndianRed;
@@ -175,18 +160,8 @@ namespace FitnessApplication
             this.Style.TitleBar.CloseButtonPressedBackColor = Color.Crimson;
             this.Style.TitleBar.MaximizeButtonPressedBackColor = Color.Crimson;
             this.Style.TitleBar.MinimizeButtonPressedBackColor = Color.Crimson;
-
-
-
-
-
-
-
-
-
-
-
         }
+
         public static void ConfigureMessageBoxAdv()
         {
             MessageBoxAdv.MessageBoxStyle = MessageBoxAdv.Style.Metro;
@@ -200,11 +175,7 @@ namespace FitnessApplication
             metroColorTable.YesButtonBackColor = Color.LightCoral;
             metroColorTable.NoButtonBackColor = Color.LightCoral;
 
-
             MessageBoxAdv.MetroColorTable = metroColorTable;
         }
-
-
     }
-
 }

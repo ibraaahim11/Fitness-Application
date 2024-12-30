@@ -1,53 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.Eventing.Reader;
-using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DBapplication;
-using Microsoft.SqlServer.Server;
+﻿using DBapplication;
 using Syncfusion.Windows.Forms;
 using Syncfusion.WinForms.Controls;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using System;
+using System.Data;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace FitnessApplication
 {
     public partial class AcademySessions : SfForm
     {
-        string Username; int ID;
-        DataTable Sessions;
-        int sessionID;
-        int AcademyID;
-        int current_session_index;
-        int seats_left;
-        int maxSessionsIndex;
-        bool EditMode = false;
-        int NumMembersAttending;
-        bool Full;
-        AcademiesViewSessions BaseSessionsForm;
-        string UserType;
+        private string Username; private int ID;
+        private DataTable Sessions;
+        private int sessionID;
+        private int AcademyID;
+        private int current_session_index;
+        private int seats_left;
+        private int maxSessionsIndex;
+        private bool EditMode = false;
+        private int NumMembersAttending;
+        private bool Full;
+        private AcademiesViewSessions BaseSessionsForm;
+        private string UserType;
 
-        bool MemberEditMode = false;
+        private bool MemberEditMode = false;
 
         // Data of form
-        string Description, Address, Date, Time, Duration;
-        int limit; float priceFloat;
+        private string Description, Address, Date, Time, Duration;
 
-        Controller controller;
+        private int limit; private float priceFloat;
+
+        private Controller controller;
 
         // Forms
-        AcademiesSessionStats StatsForm;
+        private AcademiesSessionStats StatsForm;
+
         public AcademySessions(string Username, int ID, DataTable Sessions, int StartingIndex, AcademiesViewSessions BaseSessionsForm, string UserType)
         {
             InitializeComponent();
             controller = new Controller();
-            this.Username = Username; this.ID= ID;
+            this.Username = Username; this.ID = ID;
             this.Sessions = Sessions; this.UserType = UserType;
             maxSessionsIndex = Sessions.Rows.Count - 1;
             current_session_index = StartingIndex;
@@ -56,12 +48,8 @@ namespace FitnessApplication
 
             ConfigureMessageBoxAdv();
 
-
-
-
             Update_Sessions_Num_Label();
             Load_Session();
-
 
             if (UserType != "academy")
             {
@@ -74,30 +62,20 @@ namespace FitnessApplication
                 sfButtonReserve.Visible = true;
                 numericUpDownNumSeats.Visible = true;
                 labelseats.Visible = true;
-
-
-
-
             }
-
-
-
         }
 
         private void AcademySessions_Load(object sender, EventArgs e)
         {
-
             // Sets the back color and fore color of the title bar.
             if (UserType == "academy")
             {
                 Style.TitleBar.BackColor = Color.LightCoral;
                 Style.TitleBar.ForeColor = Color.White;
 
-
                 Style.TitleBar.CloseButtonForeColor = Color.White;
                 Style.TitleBar.MinimizeButtonForeColor = Color.White;
                 Style.TitleBar.MaximizeButtonForeColor = Color.White;
-
 
                 Style.TitleBar.CloseButtonHoverBackColor = Color.IndianRed;
                 Style.TitleBar.MinimizeButtonHoverBackColor = Color.IndianRed;
@@ -109,59 +87,56 @@ namespace FitnessApplication
             }
             else
             {
-               Style.TitleBar.BackColor = Color.LightGreen;
-               Style.TitleBar.ForeColor = Color.ForestGreen;
+                Style.TitleBar.BackColor = Color.LightGreen;
+                Style.TitleBar.ForeColor = Color.ForestGreen;
 
-               Style.TitleBar.CloseButtonForeColor = Color.ForestGreen;
-               Style.TitleBar.MinimizeButtonForeColor = Color.ForestGreen;
-               Style.TitleBar.MaximizeButtonForeColor = Color.ForestGreen;
+                Style.TitleBar.CloseButtonForeColor = Color.ForestGreen;
+                Style.TitleBar.MinimizeButtonForeColor = Color.ForestGreen;
+                Style.TitleBar.MaximizeButtonForeColor = Color.ForestGreen;
 
-               Style.TitleBar.CloseButtonHoverBackColor = Color.MediumSeaGreen;
-               Style.TitleBar.MinimizeButtonHoverBackColor = Color.MediumSeaGreen;
-               Style.TitleBar.MaximizeButtonHoverBackColor = Color.MediumSeaGreen;
+                Style.TitleBar.CloseButtonHoverBackColor = Color.MediumSeaGreen;
+                Style.TitleBar.MinimizeButtonHoverBackColor = Color.MediumSeaGreen;
+                Style.TitleBar.MaximizeButtonHoverBackColor = Color.MediumSeaGreen;
 
-               Style.TitleBar.CloseButtonPressedBackColor = Color.SeaGreen;
-               Style.TitleBar.MaximizeButtonPressedBackColor = Color.SeaGreen;
-               Style.TitleBar.MinimizeButtonPressedBackColor = Color.SeaGreen;
+                Style.TitleBar.CloseButtonPressedBackColor = Color.SeaGreen;
+                Style.TitleBar.MaximizeButtonPressedBackColor = Color.SeaGreen;
+                Style.TitleBar.MinimizeButtonPressedBackColor = Color.SeaGreen;
             }
         }
 
-
         private void Load_Session()
         {
-
             sfButtonCancelReservEditing.Visible = false;
             labelReservationExists.Visible = false;
             sfButtonReserve.Enabled = true;
             numericUpDownNumSeats.Enabled = true;
 
-            sessionID = (int) Sessions.Rows[current_session_index]["SessionID"];
+            sessionID = (int)Sessions.Rows[current_session_index]["SessionID"];
             AcademyID = (int)Sessions.Rows[current_session_index]["AcademyID"];
 
             textBoxDescription.Text = Sessions.Rows[current_session_index]["Description"].ToString();
             textBoxAddress.Text = Sessions.Rows[current_session_index]["Location"].ToString();
             numericUpDownLimit.Value = (int)Sessions.Rows[current_session_index]["Limit"];
-            limit = (int) numericUpDownLimit.Value;
+            limit = (int)numericUpDownLimit.Value;
             textBoxPrice.Text = Sessions.Rows[current_session_index]["Price"].ToString();
-
 
             checkBoxFree.Checked = textBoxPrice.Text == "EGP 0.00";
 
             DatePickers.Text = Sessions.Rows[current_session_index]["Date"].ToString();
-            DatePickers.Value = (System.DateTime) Sessions.Rows[current_session_index]["Date"];
+            DatePickers.Value = (System.DateTime)Sessions.Rows[current_session_index]["Date"];
             DurationPicker.Text = Sessions.Rows[current_session_index]["Duration"].ToString();
             TimePicker.Text = Sessions.Rows[current_session_index]["Time"].ToString();
 
             NumMembersAttending = controller.GetNumberOfMembersAttendingSession(sessionID, AcademyID);
 
-            Full = controller.IsSessionFull(sessionID,AcademyID);
+            Full = controller.IsSessionFull(sessionID, AcademyID);
 
             labelStatus.Text = "Status:";
-            if(DatePickers.Value > DateTime.Now)
+            if (DatePickers.Value > DateTime.Now)
             {
                 labelStatus.Text += " Done";
             }
-            else if(Full)
+            else if (Full)
             {
                 labelStatus.Text += " Full";
             }
@@ -171,7 +146,6 @@ namespace FitnessApplication
             }
 
             seats_left = controller.GetSeatsLeft(sessionID, AcademyID);
-
 
             labelStatus.Text += $" ({seats_left} seats left!)";
 
@@ -185,9 +159,9 @@ namespace FitnessApplication
                 sfButtonReserve.Enabled = true;
                 numericUpDownNumSeats.Enabled = true;
             }
-            if (UserType == "member" )
+            if (UserType == "member")
             {
-                if(controller.ReservationExists(sessionID,ID,AcademyID))
+                if (controller.ReservationExists(sessionID, ID, AcademyID))
                 {
                     labelReservationExists.Visible = true;
                     sfButtonReserve.Enabled = false;
@@ -207,25 +181,19 @@ namespace FitnessApplication
                     sfButtonDeleteReservation.Visible = false;
                     MemberEditMode = false;
                 }
-
-
             }
-
-
         }
+
         private void Update_Sessions_Num_Label()
         {
             autoLabelNumSession.Text = $"Session #{current_session_index + 1} of {maxSessionsIndex + 1}";
         }
 
-
-
         private void sfButtonNextSession_Click(object sender, EventArgs e)
         {
-            if(EditMode)
+            if (EditMode)
             {
-                sfButtonCancelEditing_Click( sender,  e);
-
+                sfButtonCancelEditing_Click(sender, e);
             }
             current_session_index++;
             if (current_session_index > maxSessionsIndex)
@@ -240,7 +208,6 @@ namespace FitnessApplication
             if (EditMode)
             {
                 sfButtonCancelEditing_Click(sender, e);
-
             }
             current_session_index--;
             if (current_session_index < 0) { current_session_index = 0; }
@@ -250,12 +217,10 @@ namespace FitnessApplication
 
         private void autoLabelNumSession_Click(object sender, EventArgs e)
         {
-
         }
 
         private void textBoxExt1_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void textBoxExtSearchSession_Click(object sender, EventArgs e)
@@ -265,25 +230,20 @@ namespace FitnessApplication
 
         private void textBoxExtSearchSession_Enter(object sender, EventArgs e)
         {
-
         }
-
 
         private void textBoxExtSearchSession_MouseEnter(object sender, EventArgs e)
         {
-
         }
 
         private void textBoxExtSearchSession_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char) 13)
+            if (e.KeyChar == (char)13)
             {
                 if (EditMode)
                 {
                     sfButtonCancelEditing_Click(sender, e);
-
                 }
-
 
                 int num_session;
                 if (int.TryParse(textBoxExtSearchSession.Text, out num_session))
@@ -294,10 +254,7 @@ namespace FitnessApplication
                     }
                     else if (num_session > maxSessionsIndex + 1)
                     {
-
                         current_session_index = maxSessionsIndex;
-
-
                     }
                     else
                     {
@@ -325,23 +282,20 @@ namespace FitnessApplication
 
         private void sfButton1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void sfButton2_Click(object sender, EventArgs e)
         {
-
             DialogResult result = MessageBoxAdv.Show(this,
                 "Are you sure you want to delete this session?",
                 "Confirm Deletion",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning);
 
-
             if (result == DialogResult.Yes)
             {
                 int query_result = controller.DeleteSession(sessionID, ID);
-                if(query_result == 1)
+                if (query_result == 1)
                 {
                     MessageBoxAdv.Show(this, "Session has been deleted.", "Session deleted ", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -350,29 +304,28 @@ namespace FitnessApplication
                 }
                 else
                 {
-                    MessageBoxAdv.Show("Session could not be deleted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);  
-                }    
+                    MessageBoxAdv.Show("Session could not be deleted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else if (result == DialogResult.No)
             {
-
                 MessageBoxAdv.Show(this, "Session deletion canceled.", "Action Canceled", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void textBoxPrice_TextChanged(object sender, EventArgs e)
         {
-            if(textBoxPrice.Text != "EGP 0.00")
+            if (textBoxPrice.Text != "EGP 0.00")
             {
                 checkBoxFree.Checked = false;
             }
             else
-                { checkBoxFree.Checked = true; }
+            { checkBoxFree.Checked = true; }
         }
 
         private void checkBoxFree_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBoxFree.Checked)
+            if (checkBoxFree.Checked)
             {
                 textBoxPrice.Text = "EGP 0.00";
             }
@@ -380,7 +333,6 @@ namespace FitnessApplication
 
         private void DoneEditing()
         {
-            
             EditMode = false;
             sfButtonEdit.Visible = true;
             sfButtonCancelEditing.Visible = false;
@@ -391,17 +343,13 @@ namespace FitnessApplication
             checkBoxFree.Enabled = false;
             DatePickers.Enabled = false;
             DurationPicker.Enabled = false; TimePicker.Enabled = false;
-
-
         }
 
         private void sfButtonStats_Click(object sender, EventArgs e)
         {
             if (NumMembersAttending == 0)
             {
-
                 MessageBoxAdv.Show("You have no members attending.", "No Members", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             }
             else
             {
@@ -416,10 +364,9 @@ namespace FitnessApplication
             if (MemberEditMode)
             {
                 controller.DeleteReservation(sessionID, ID, AcademyID);
-                
             }
 
-            if (num_seats + controller.GetNumberOfMembersAttendingSession(sessionID,AcademyID) > limit)
+            if (num_seats + controller.GetNumberOfMembersAttendingSession(sessionID, AcademyID) > limit)
             {
                 MessageBoxAdv.Show("Not enough capacity.", "Reservation Failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -427,7 +374,7 @@ namespace FitnessApplication
             else
             {
                 int result = controller.ReserveSession(ID, sessionID, AcademyID, num_seats);
-                if(result == 1)
+                if (result == 1)
                 {
                     MessageBoxAdv.Show($"You have reserved {num_seats} places.", "Reservation Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -436,14 +383,12 @@ namespace FitnessApplication
                     MessageBoxAdv.Show("Error occurred while reserving", "Reservation Failure", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if(controller.GetSeatsTaken(sessionID,AcademyID) ==  limit)
+                if (controller.GetSeatsTaken(sessionID, AcademyID) == limit)
                 {
                     controller.MarkSessionAsFull(sessionID, AcademyID);
                 }
                 Load_Session();
-
             }
-
         }
 
         private void sfButtonEditReservation_Click(object sender, EventArgs e)
@@ -454,7 +399,6 @@ namespace FitnessApplication
             numericUpDownNumSeats.Value = 1;
             sfButtonEditReservation.Visible = false;
             sfButtonCancelReservEditing.Visible = true;
-
         }
 
         private void sfButtonDeleteReservation_Click(object sender, EventArgs e)
@@ -465,19 +409,18 @@ namespace FitnessApplication
             sfButtonEditReservation.Enabled = false;
             sfButtonDeleteReservation.Enabled = false;
             labelReservationExists.Visible = false;
-            controller.MarkSessionAsNotFull(sessionID,AcademyID);
+            controller.MarkSessionAsNotFull(sessionID, AcademyID);
 
-            sfButtonReserve.Enabled=true;
-            numericUpDownNumSeats.Enabled=true;
+            sfButtonReserve.Enabled = true;
+            numericUpDownNumSeats.Enabled = true;
             Load_Session();
         }
 
         private void sfButtonCancelReservEditing_Click(object sender, EventArgs e)
         {
             Load_Session();
-            sfButtonCancelReservEditing.Visible=false;
-            sfButtonEditReservation.Visible=true;
-
+            sfButtonCancelReservEditing.Visible = false;
+            sfButtonEditReservation.Visible = true;
         }
 
         private void sfButtonCancelEditing_Click(object sender, EventArgs e)
@@ -486,13 +429,11 @@ namespace FitnessApplication
             DoneEditing();
         }
 
-
         private bool ReadSessionDetails()
         {
             Description = textBoxDescription.Text;
             Address = textBoxAddress.Text;
             limit = (int)numericUpDownLimit.Value;
-            
 
             Date = DatePickers.DateTimeText;
             Time = TimePicker.Text;
@@ -506,6 +447,7 @@ namespace FitnessApplication
                 return true;
             }
         }
+
         private void sfButtonUpload_Click(object sender, EventArgs e)
         {
             int result;
@@ -513,7 +455,6 @@ namespace FitnessApplication
             {
                 if (limit <= 0)
                 {
-
                     MessageBoxAdv.Show(this,
                         "Please enter an appropriate limit.",
                         "Error",
@@ -523,29 +464,23 @@ namespace FitnessApplication
                 }
                 if (limit < NumMembersAttending)
                 {
-
                     MessageBoxAdv.Show(this,
                         $"There are already {NumMembersAttending} members attending.",
                         "Error",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning);
                     return;
-
-
                 }
-
                 else
                 {
                     string priceWithoutEGP = textBoxPrice.Text.Substring(3);
                     float.TryParse(priceWithoutEGP, out float priceFloat);
 
-
-                    result = controller.AcademyUpdateSession(sessionID,ID, Description, priceFloat, limit, Duration, Address, Date, Time);
+                    result = controller.AcademyUpdateSession(sessionID, ID, Description, priceFloat, limit, Duration, Address, Date, Time);
                 }
             }
             else
             {
-
                 MessageBoxAdv.Show(this,
                     "Do not leave any fields empty.",
                     "No changes",
@@ -556,7 +491,6 @@ namespace FitnessApplication
 
             if (result == 1)
             {
-
                 MessageBoxAdv.Show(this,
                     "Session updated successfully",
                     "Profile Updated",
@@ -567,7 +501,6 @@ namespace FitnessApplication
 
                 BaseSessionsForm.ShowResults(current_session_index);
                 this.Close();
-
             }
             else
             {
@@ -575,9 +508,8 @@ namespace FitnessApplication
             }
         }
 
-        public  void ConfigureMessageBoxAdv()
+        public void ConfigureMessageBoxAdv()
         {
-
             if (UserType == "academy")
             {
                 MessageBoxAdv.MessageBoxStyle = MessageBoxAdv.Style.Metro;
@@ -590,7 +522,6 @@ namespace FitnessApplication
                 metroColorTable.OKButtonBackColor = Color.LightCoral;
                 metroColorTable.YesButtonBackColor = Color.LightCoral;
                 metroColorTable.NoButtonBackColor = Color.LightCoral;
-
 
                 MessageBoxAdv.MetroColorTable = metroColorTable;
             }
@@ -608,11 +539,7 @@ namespace FitnessApplication
                 metroColorTable.NoButtonBackColor = Color.MediumSeaGreen;
 
                 MessageBoxAdv.MetroColorTable = metroColorTable;
-
             }
-
         }
     }
-
-
 }

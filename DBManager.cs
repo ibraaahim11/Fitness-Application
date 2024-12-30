@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace DBapplication
 {
     public class DBManager
     {
-        static string DB_Connection_String = @"Data Source=ROZANA\SQLEXPRESS;Initial Catalog=""Fitness Application"";Integrated Security=True";
-        SqlConnection myConnection;
+        private static string DB_Connection_String = @"Data Source=IBRAHIMLAPTOP\SQLEXPRESS;Initial Catalog=""Fitness Application"";Integrated Security=True;Encrypt=False";
+        private SqlConnection myConnection;
 
         public DBManager()
         {
@@ -94,8 +91,6 @@ namespace DBapplication
                 Console.WriteLine(e.Message);
             }
         }
-
-
     }
 }
 ;

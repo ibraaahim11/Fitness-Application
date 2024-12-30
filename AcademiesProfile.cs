@@ -1,31 +1,28 @@
 ﻿using DBapplication;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Syncfusion.WinForms.Controls;
 using Syncfusion.Windows.Forms;
+using Syncfusion.WinForms.Controls;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace FitnessApplication
 {
     public partial class AcademiesProfile : SfForm
     {
         // Controller obj
-        Controller controller;
-        // Forms to open
-        AcademiesProfile ProfileForm;
-        // Basic Academy info for welcome screen
-        int ID;
-        string Username, Name, Description, AreaOfExpertise, Password;
+        private Controller controller;
 
-        string CertificateTitle, CertificateIssuingBody, CertificateDateOfIssue, CertificateExpirationDate;
-        Academies BaseAcademyForm;
-        
+        // Forms to open
+        private AcademiesProfile ProfileForm;
+
+        // Basic Academy info for welcome screen
+        private int ID;
+
+        private string Username, Name, Description, AreaOfExpertise, Password;
+
+        private string CertificateTitle, CertificateIssuingBody, CertificateDateOfIssue, CertificateExpirationDate;
+        private Academies BaseAcademyForm;
+
         // Base academy form taken in order to be update username when needed
         public AcademiesProfile(int ID, string Username, Academies BaseAcademyForm)
         {
@@ -43,7 +40,6 @@ namespace FitnessApplication
 
         private void textBoxPassword_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void checkBoxShowPassword_CheckedChanged(object sender, EventArgs e)
@@ -59,7 +55,6 @@ namespace FitnessApplication
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning);
 
-
             if (result == DialogResult.Yes)
             {
                 MessageBoxAdv.MetroColorTable.OKButtonBackColor = Color.LightCoral;
@@ -67,23 +62,23 @@ namespace FitnessApplication
                 controller.DeleteAcademy(ID);
                 controller.DeleteAcademyUser(Username);
                 BaseAcademyForm.Close();
+                this.Close();
+
+                
             }
             else if (result == DialogResult.No)
             {
-
                 MessageBoxAdv.Show(this, "Account deletion canceled.", "Action Canceled", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
         }
 
         private void textBoxDescription_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void DatePickers_Click(object sender, EventArgs e)
         {
-            sfDateTimeOfExpiration.MinDateTime =  (System.DateTime) sfDateTimeOfIssue.Value;
+            sfDateTimeOfExpiration.MinDateTime = (System.DateTime)sfDateTimeOfIssue.Value;
         }
 
         private void sfDateTimeOfIssue_ValueChanged(object sender, Syncfusion.WinForms.Input.Events.DateTimeValueChangedEventArgs e)
@@ -93,12 +88,11 @@ namespace FitnessApplication
 
         private void tabPageAdv1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void buttonEditCertificate_Click(object sender, EventArgs e)
         {
-            textBoxTitle.ReadOnly = false; textBoxIssuingBody.ReadOnly = false; 
+            textBoxTitle.ReadOnly = false; textBoxIssuingBody.ReadOnly = false;
 
             buttonConfirmCertificate.Visible = true;
 
@@ -108,11 +102,11 @@ namespace FitnessApplication
         private void buttonConfirmCertificate_Click(object sender, EventArgs e)
         {
             // Read data
-           CertificateTitle = textBoxTitle.Text; CertificateIssuingBody = textBoxIssuingBody.Text;
-           CertificateDateOfIssue = sfDateTimeOfIssue.DateTimeText; CertificateExpirationDate = sfDateTimeOfExpiration.DateTimeText;
+            CertificateTitle = textBoxTitle.Text; CertificateIssuingBody = textBoxIssuingBody.Text;
+            CertificateDateOfIssue = sfDateTimeOfIssue.DateTimeText; CertificateExpirationDate = sfDateTimeOfExpiration.DateTimeText;
 
             // Check if fields empty
-            if (CertificateTitle == "" || CertificateIssuingBody == "" || CertificateDateOfIssue == ""|| CertificateExpirationDate == "")
+            if (CertificateTitle == "" || CertificateIssuingBody == "" || CertificateDateOfIssue == "" || CertificateExpirationDate == "")
             {
                 MessageBoxAdv.Show(this,
                     "Do not leave any fields empty.",
@@ -123,11 +117,10 @@ namespace FitnessApplication
             }
 
             // Update Certificate
-            int result = controller.UpdateAcademyCertificate(ID,CertificateTitle,CertificateDateOfIssue,CertificateIssuingBody,CertificateExpirationDate);
-            
+            int result = controller.UpdateAcademyCertificate(ID, CertificateTitle, CertificateDateOfIssue, CertificateIssuingBody, CertificateExpirationDate);
+
             if (result == 1)
             {
-
                 MessageBoxAdv.Show(this,
                     "Certificate updated successfully",
                     "Certificate Updated",
@@ -139,40 +132,34 @@ namespace FitnessApplication
                 textBoxTitle.ReadOnly = true; textBoxIssuingBody.ReadOnly = true;
                 sfDateTimeOfExpiration.Enabled = false;
                 sfDateTimeOfIssue.Enabled = false;
-
-
-                
             }
             else
             {
-
                 MessageBoxAdv.Show(this,
                     "Certificate could not be updated.",
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
                 return;
-                
             }
         }
 
         private void buttonEditProfile_Click(object sender, EventArgs e)
         {
-            textBoxName.ReadOnly = false ; textBoxDescription.ReadOnly = false; textBoxAOE.ReadOnly = false ;
-            textBoxPassword.ReadOnly = false ; textBoxUsername.ReadOnly = false ;
-            buttonConfirmProfileChanges.Visible = true ;
-
+            textBoxName.ReadOnly = false; textBoxDescription.ReadOnly = false; textBoxAOE.ReadOnly = false;
+            textBoxPassword.ReadOnly = false; textBoxUsername.ReadOnly = false;
+            buttonConfirmProfileChanges.Visible = true;
         }
 
         private void buttonConfirmChanges_Click(object sender, EventArgs e)
         {
             // Read data
-            Name = textBoxName.Text ; Description = textBoxDescription.Text ; AreaOfExpertise = textBoxAOE.Text ;
-            Password = textBoxPassword.Text ;
+            Name = textBoxName.Text; Description = textBoxDescription.Text; AreaOfExpertise = textBoxAOE.Text;
+            Password = textBoxPassword.Text;
             // Old username will be used to update new username
-            string NewUsername = textBoxUsername.Text ;
+            string NewUsername = textBoxUsername.Text;
             // Check if fields empty
-            if (Name == "" || Description == ""|| AreaOfExpertise == "" || NewUsername == "" || Password == "")
+            if (Name == "" || Description == "" || AreaOfExpertise == "" || NewUsername == "" || Password == "")
             {
                 DialogResult result = MessageBoxAdv.Show(this,
                     "Do not leave any fields empty.",
@@ -187,7 +174,6 @@ namespace FitnessApplication
 
             if (resultBasicInfo == 1 && resultUsernamePassword == 1)
             {
-
                 DialogResult result = MessageBoxAdv.Show(this,
                     "Profile updated successfully",
                     "Profile Updated",
@@ -195,16 +181,16 @@ namespace FitnessApplication
                     MessageBoxIcon.Information);
 
                 // Return to original state
-                buttonConfirmProfileChanges.Visible=false;
+                buttonConfirmProfileChanges.Visible = false;
 
-                textBoxName.ReadOnly = true ; textBoxDescription.ReadOnly = true ; textBoxAOE.ReadOnly=true;
-                textBoxUsername.ReadOnly = true ; textBoxPassword.ReadOnly = true ;
+                textBoxName.ReadOnly = true; textBoxDescription.ReadOnly = true; textBoxAOE.ReadOnly = true;
+                textBoxUsername.ReadOnly = true; textBoxPassword.ReadOnly = true;
 
                 // The base academy form should have its data updated
                 BaseAcademyForm.UpdateData(NewUsername);
                 Username = NewUsername;
             }
-            else if(resultBasicInfo != 1 && resultUsernamePassword != 1)
+            else if (resultBasicInfo != 1 && resultUsernamePassword != 1)
             {
                 MessageBox.Show("Profile could not be updated.");
                 return;
@@ -214,13 +200,10 @@ namespace FitnessApplication
                 MessageBox.Show("Username is already taken.");
                 return;
             }
-
-
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void AcademiesProfile_Load(object sender, EventArgs e)
@@ -229,11 +212,9 @@ namespace FitnessApplication
             this.Style.TitleBar.BackColor = Color.LightCoral;
             this.Style.TitleBar.ForeColor = Color.White;
 
-
             this.Style.TitleBar.CloseButtonForeColor = Color.White;
             this.Style.TitleBar.MinimizeButtonForeColor = Color.White;
             this.Style.TitleBar.MaximizeButtonForeColor = Color.White;
-
 
             this.Style.TitleBar.CloseButtonHoverBackColor = Color.IndianRed;
             this.Style.TitleBar.MinimizeButtonHoverBackColor = Color.IndianRed;
@@ -243,7 +224,6 @@ namespace FitnessApplication
             this.Style.TitleBar.MaximizeButtonPressedBackColor = Color.Crimson;
             this.Style.TitleBar.MinimizeButtonPressedBackColor = Color.Crimson;
         }
-
 
         public void LoadProfile()
         {
@@ -265,13 +245,10 @@ namespace FitnessApplication
             textBoxAOE.Text = AreaOfExpertise;
             textBoxPassword.Text = Password;
 
-
             textBoxTitle.Text = CertificateTitle;
             textBoxIssuingBody.Text = CertificateIssuingBody;
             sfDateTimeOfIssue.Text = CertificateDateOfIssue;
             sfDateTimeOfExpiration.Text = CertificateExpirationDate;
-
-
         }
 
         // same colors as academies
@@ -286,7 +263,7 @@ namespace FitnessApplication
             metroColorTable.CaptionForeColor = Color.White;
             metroColorTable.OKButtonBackColor = Color.LightCoral;
             metroColorTable.YesButtonBackColor = Color.LightCoral;
-            metroColorTable.NoButtonBackColor =  Color.LightCoral;
+            metroColorTable.NoButtonBackColor = Color.LightCoral;
 
             MessageBoxAdv.MetroColorTable = metroColorTable;
         }

@@ -1,37 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DBapplication;
+﻿using DBapplication;
 using Syncfusion.Windows.Forms;
 using Syncfusion.WinForms.Controls;
+using System;
+using System.Data;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace FitnessApplication
 {
     public partial class AcademiesViewSessions : SfForm
     {
-        string Username; int ID; string UserType;
+        private string Username; private int ID; private string UserType;
 
-        AcademySessions SessionsForm;
+        private AcademySessions SessionsForm;
 
-        string[] sortingOptions = { "Oldest", "Newest" };
+        private string[] sortingOptions = { "Oldest", "Newest" };
 
-        string[] limitOptions = { "None", "5", "10", "15", "20" };
-        Controller controller;
+        private string[] limitOptions = { "None", "5", "10", "15", "20" };
+        private Controller controller;
+
         public AcademiesViewSessions(string Username, int ID, string UserType)
         {
             InitializeComponent();
             this.ID = ID; this.Username = Username;
-            this.UserType   = UserType;
+            this.UserType = UserType;
 
             controller = new Controller();
             ConfigureMessageBoxAdv();
-
 
             // Add later if fey wa2t: string[] sortingOptions = { "Oldest", "Newest", "Most Attendees", "Least Attendees" };
             sfComboBoxSortBy.DataSource = sortingOptions;
@@ -39,7 +34,6 @@ namespace FitnessApplication
 
             sfComboBoxLimit.DataSource = limitOptions;
             sfComboBoxLimit.SelectedIndex = 0;
-
         }
 
         private void AcademiesViewSessions_Load(object sender, EventArgs e)
@@ -50,11 +44,9 @@ namespace FitnessApplication
                 this.Style.TitleBar.BackColor = Color.LightCoral;
                 this.Style.TitleBar.ForeColor = Color.White;
 
-
                 this.Style.TitleBar.CloseButtonForeColor = Color.White;
                 this.Style.TitleBar.MinimizeButtonForeColor = Color.White;
                 this.Style.TitleBar.MaximizeButtonForeColor = Color.White;
-
 
                 this.Style.TitleBar.CloseButtonHoverBackColor = Color.IndianRed;
                 this.Style.TitleBar.MinimizeButtonHoverBackColor = Color.IndianRed;
@@ -80,11 +72,8 @@ namespace FitnessApplication
                 this.Style.TitleBar.CloseButtonPressedBackColor = Color.SeaGreen;
                 this.Style.TitleBar.MaximizeButtonPressedBackColor = Color.SeaGreen;
                 this.Style.TitleBar.MinimizeButtonPressedBackColor = Color.SeaGreen;
-
-
             }
         }
-
 
         public void ShowResults(int StartingIndex)
         {
@@ -105,24 +94,22 @@ namespace FitnessApplication
             {
                 Sessions = controller.GetAcademySessions(ID, SortBy, LimitInt);
             }
-            else 
+            else
             {
                 Sessions = controller.GetAllSessions(SortBy, LimitInt);
             }
 
             if (Sessions == null)
             {
-
                 MessageBoxAdv.Show(this, "No sessions posted.", "No Sessions", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-
                 SessionsForm = new AcademySessions(Username, ID, Sessions, StartingIndex, this, UserType);
                 SessionsForm.Show();
-
             }
         }
+
         private void sfButtonShow_Click(object sender, EventArgs e)
         {
             ShowResults(0);
@@ -130,7 +117,6 @@ namespace FitnessApplication
 
         public void ConfigureMessageBoxAdv()
         {
-
             if (UserType == "academy")
             {
                 MessageBoxAdv.MessageBoxStyle = MessageBoxAdv.Style.Metro;
@@ -143,7 +129,6 @@ namespace FitnessApplication
                 metroColorTable.OKButtonBackColor = Color.LightCoral;
                 metroColorTable.YesButtonBackColor = Color.LightCoral;
                 metroColorTable.NoButtonBackColor = Color.LightCoral;
-
 
                 MessageBoxAdv.MetroColorTable = metroColorTable;
             }
@@ -161,9 +146,7 @@ namespace FitnessApplication
                 metroColorTable.NoButtonBackColor = Color.MediumSeaGreen;
 
                 MessageBoxAdv.MetroColorTable = metroColorTable;
-
             }
-
         }
     }
 }

@@ -1,36 +1,31 @@
 ﻿using DBapplication;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Syncfusion.WinForms.Controls;
-using Syncfusion.Windows.Forms.Tools;
 using Syncfusion.Windows.Forms;
+using Syncfusion.WinForms.Controls;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace FitnessApplication
 {
     public partial class Academies : SfForm
     {
         // Controller obj
-        Controller controller;
+        private Controller controller;
+
         // Forms to open
-        AcademiesProfile ProfileForm;
-        AcademiesPostSession PostSessionForm;
-        AcademiesViewSessions ViewSessionsForm;
-        AcademiesOverallStats OverallStatsForm;
+        private AcademiesProfile ProfileForm;
 
+        private AcademiesPostSession PostSessionForm;
+        private AcademiesViewSessions ViewSessionsForm;
+        private AcademiesOverallStats OverallStatsForm;
 
-        int ID;
+        private int ID;
 
-        string Username;
-        string Name;
+        private string Username;
+        private string Name;
+        Login BaseLoginForm;
 
-        public Academies(string Username, int ID)
+        public Academies(string Username, int ID, Login b)
         {
             InitializeComponent();
             // Initializing controller
@@ -39,33 +34,32 @@ namespace FitnessApplication
             this.ID = ID;
             LoadAcademyInfo();
             ConfigureMessageBoxAdv();
-
-
+            BaseLoginForm = b;
         }
+
         public void UpdateData(string NewUsername)
         {
             Username = NewUsername;
             LoadAcademyInfo();
         }
+
         private void LoadAcademyInfo()
         {
             // For now username is set since there is no login.
             ID = controller.GetAcademyID(Username);
             Name = controller.GetAcademyName(ID);
             labelWelcomeAcademy.Text = $"Welcome, {Name}";
-
         }
+
         private void Academies_Load(object sender, EventArgs e)
         {
             // Sets the back color and fore color of the title bar.
             this.Style.TitleBar.BackColor = Color.LightCoral;
             this.Style.TitleBar.ForeColor = Color.White;
 
-
             this.Style.TitleBar.CloseButtonForeColor = Color.White;
             this.Style.TitleBar.MinimizeButtonForeColor = Color.White;
             this.Style.TitleBar.MaximizeButtonForeColor = Color.White;
-
 
             this.Style.TitleBar.CloseButtonHoverBackColor = Color.IndianRed;
             this.Style.TitleBar.MinimizeButtonHoverBackColor = Color.IndianRed;
@@ -74,8 +68,6 @@ namespace FitnessApplication
             this.Style.TitleBar.CloseButtonPressedBackColor = Color.Crimson;
             this.Style.TitleBar.MaximizeButtonPressedBackColor = Color.Crimson;
             this.Style.TitleBar.MinimizeButtonPressedBackColor = Color.Crimson;
-
-
         }
 
         private void buttonViewProfile_Click(object sender, EventArgs e)
@@ -84,8 +76,6 @@ namespace FitnessApplication
             ProfileForm = new AcademiesProfile(ID, Username, this);
 
             ProfileForm.Show();
-
-
         }
 
         private void buttonPostSession_Click(object sender, EventArgs e)
@@ -102,12 +92,10 @@ namespace FitnessApplication
 
         private void sfButton1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void tabControlAdv1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
 
         private void buttonOverallStats_Click(object sender, EventArgs e)
@@ -115,10 +103,9 @@ namespace FitnessApplication
             int numSessions = controller.GetNumberOfSessions(ID);
             int numTotalMembers = controller.GetTotalMembersAttendedAcademy(ID);
 
-            if(numSessions <= 0)
+            if (numSessions <= 0)
             {
                 MessageBoxAdv.Show("You have no sessions posted.", "No Sessions", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
             }
             else if (numTotalMembers <= 0)
             {
@@ -129,11 +116,8 @@ namespace FitnessApplication
                 OverallStatsForm = new AcademiesOverallStats(Username, ID);
                 OverallStatsForm.Show();
             }
-
-
-                
-
         }
+
         public static void ConfigureMessageBoxAdv()
         {
             MessageBoxAdv.MessageBoxStyle = MessageBoxAdv.Style.Metro;
@@ -147,10 +131,14 @@ namespace FitnessApplication
             metroColorTable.YesButtonBackColor = Color.LightCoral;
             metroColorTable.NoButtonBackColor = Color.LightCoral;
 
-
             MessageBoxAdv.MetroColorTable = metroColorTable;
+        }
+
+        private void buttonLogout_Click(object sender, EventArgs e)
+        {
+
+            BaseLoginForm.refreshlogin();
+            Close();
         }
     }
 }
-    
-

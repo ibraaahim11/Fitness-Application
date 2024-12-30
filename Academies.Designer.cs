@@ -33,6 +33,7 @@
             this.buttonPostSession = new System.Windows.Forms.Button();
             this.buttonViewSession = new System.Windows.Forms.Button();
             this.buttonOverallStats = new System.Windows.Forms.Button();
+            this.buttonLogout = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelWelcomeAcademy
@@ -90,11 +91,23 @@
             this.buttonOverallStats.UseVisualStyleBackColor = true;
             this.buttonOverallStats.Click += new System.EventHandler(this.buttonOverallStats_Click);
             // 
+            // buttonLogout
+            // 
+            this.buttonLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonLogout.Location = new System.Drawing.Point(156, 475);
+            this.buttonLogout.Name = "buttonLogout";
+            this.buttonLogout.Size = new System.Drawing.Size(206, 49);
+            this.buttonLogout.TabIndex = 5;
+            this.buttonLogout.Text = "Logout";
+            this.buttonLogout.UseVisualStyleBackColor = true;
+            this.buttonLogout.Click += new System.EventHandler(this.buttonLogout_Click);
+            // 
             // Academies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(541, 653);
+            this.Controls.Add(this.buttonLogout);
             this.Controls.Add(this.buttonOverallStats);
             this.Controls.Add(this.buttonViewProfile);
             this.Controls.Add(this.buttonViewSession);
@@ -118,5 +131,6 @@
         private System.Windows.Forms.Button buttonPostSession;
         private System.Windows.Forms.Button buttonViewSession;
         private System.Windows.Forms.Button buttonOverallStats;
+        private System.Windows.Forms.Button buttonLogout;
     }
 }

@@ -1,38 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.Eventing.Reader;
-using System.Drawing;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DBapplication;
-using Microsoft.SqlServer.Server;
+﻿using DBapplication;
 using Syncfusion.Windows.Forms;
 using Syncfusion.WinForms.Controls;
-using static System.Net.Mime.MediaTypeNames;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using System;
+using System.Data;
+using System.Drawing;
 
 namespace FitnessApplication
 {
     public partial class MemberMealPlans : SfForm
     {
+        private DataTable Meals;
 
-        DataTable Meals;
+        private int current_meal_index;
 
-        int current_meal_index;
-
-        int maxMealsIndex;
+        private int maxMealsIndex;
 
         // Data of form
-        string Description, Address, Date, Time, Duration;
-        int limit; float priceFloat;
+        private string Description, Address, Date, Time, Duration;
 
+        private int limit; private float priceFloat;
 
-        Controller controller;
+        private Controller controller;
 
         public MemberMealPlans(DataTable Meals)
         {
@@ -47,35 +35,28 @@ namespace FitnessApplication
 
             Update_Meals_Num_Label();
             Load_Meal();
-
         }
 
         private void MemberMealPlans_Load(object sender, EventArgs e)
         {
+            Style.TitleBar.BackColor = Color.LightGreen;
+            Style.TitleBar.ForeColor = Color.ForestGreen;
 
+            Style.TitleBar.CloseButtonForeColor = Color.ForestGreen;
+            Style.TitleBar.MinimizeButtonForeColor = Color.ForestGreen;
+            Style.TitleBar.MaximizeButtonForeColor = Color.ForestGreen;
 
-                Style.TitleBar.BackColor = Color.LightGreen;
-                Style.TitleBar.ForeColor = Color.ForestGreen;
+            Style.TitleBar.CloseButtonHoverBackColor = Color.MediumSeaGreen;
+            Style.TitleBar.MinimizeButtonHoverBackColor = Color.MediumSeaGreen;
+            Style.TitleBar.MaximizeButtonHoverBackColor = Color.MediumSeaGreen;
 
-                Style.TitleBar.CloseButtonForeColor = Color.ForestGreen;
-                Style.TitleBar.MinimizeButtonForeColor = Color.ForestGreen;
-                Style.TitleBar.MaximizeButtonForeColor = Color.ForestGreen;
-
-                Style.TitleBar.CloseButtonHoverBackColor = Color.MediumSeaGreen;
-                Style.TitleBar.MinimizeButtonHoverBackColor = Color.MediumSeaGreen;
-                Style.TitleBar.MaximizeButtonHoverBackColor = Color.MediumSeaGreen;
-
-                Style.TitleBar.CloseButtonPressedBackColor = Color.SeaGreen;
-                Style.TitleBar.MaximizeButtonPressedBackColor = Color.SeaGreen;
-                Style.TitleBar.MinimizeButtonPressedBackColor = Color.SeaGreen;
-
+            Style.TitleBar.CloseButtonPressedBackColor = Color.SeaGreen;
+            Style.TitleBar.MaximizeButtonPressedBackColor = Color.SeaGreen;
+            Style.TitleBar.MinimizeButtonPressedBackColor = Color.SeaGreen;
         }
-
 
         private void Load_Meal()
         {
-
-
             string MealName = Meals.Rows[current_meal_index]["MealName"].ToString();
             string Username = Meals.Rows[current_meal_index]["Username"].ToString();
             string Steps = Meals.Rows[current_meal_index]["Steps"].ToString();
@@ -105,15 +86,8 @@ namespace FitnessApplication
             labelCalories.Text = $"{Calories} Calories Per Serving";
 
             labelType.Text = $"For {MealType}";
-
-
-
-
-
-
-
-
         }
+
         private void Update_Meals_Num_Label()
         {
             autoLabelNumMeal.Text = $"Meal #{current_meal_index + 1} of {maxMealsIndex + 1}";
@@ -133,46 +107,28 @@ namespace FitnessApplication
             if (current_meal_index > maxMealsIndex)
             { current_meal_index = maxMealsIndex; }
 
-           Load_Meal();
+            Load_Meal();
             Update_Meals_Num_Label();
         }
 
-
-
-
-
-
-
-
         private void labelCarbs_Click(object sender, EventArgs e)
         {
-
         }
-
-
-
-
 
         public void ConfigureMessageBoxAdv()
         {
+            MessageBoxAdv.MessageBoxStyle = MessageBoxAdv.Style.Metro;
+            var metroColorTable = MessageBoxAdv.MetroColorTable;
+            metroColorTable.BackColor = Color.White;
+            metroColorTable.ForeColor = Color.DarkOliveGreen;
+            metroColorTable.BorderColor = Color.ForestGreen;
+            metroColorTable.CaptionBarColor = Color.MediumSeaGreen;
+            metroColorTable.CaptionForeColor = Color.White;
+            metroColorTable.OKButtonBackColor = Color.MediumSeaGreen;
+            metroColorTable.YesButtonBackColor = Color.MediumSeaGreen;
+            metroColorTable.NoButtonBackColor = Color.MediumSeaGreen;
 
-
-                MessageBoxAdv.MessageBoxStyle = MessageBoxAdv.Style.Metro;
-                var metroColorTable = MessageBoxAdv.MetroColorTable;
-                metroColorTable.BackColor = Color.White;
-                metroColorTable.ForeColor = Color.DarkOliveGreen;
-                metroColorTable.BorderColor = Color.ForestGreen;
-                metroColorTable.CaptionBarColor = Color.MediumSeaGreen;
-                metroColorTable.CaptionForeColor = Color.White;
-                metroColorTable.OKButtonBackColor = Color.MediumSeaGreen;
-                metroColorTable.YesButtonBackColor = Color.MediumSeaGreen;
-                metroColorTable.NoButtonBackColor = Color.MediumSeaGreen;
-
-                MessageBoxAdv.MetroColorTable = metroColorTable;
-
-
+            MessageBoxAdv.MetroColorTable = metroColorTable;
         }
     }
-
-
 }
