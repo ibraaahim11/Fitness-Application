@@ -26,6 +26,7 @@
     <li><a href="#preview">Preview</a></li>
     <li><a href="#prerequisites">Prerequisites</a></li>
     <li><a href="#installation">Installation</a></li>
+    <li><a href="#demo-users">Demo Users</a></li>
     <li><a href="#license">License</a></li>
   </ol>
 </details>
@@ -208,7 +209,7 @@ dotnet --version
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 🔑 Demo Users
+### <a id="demo-users"></a>Demo Users
 
 You can log in with any of the following demo accounts (all use password `password123`):
 
